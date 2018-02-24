@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { red, Sizes } from '../../constants';
@@ -23,10 +24,10 @@ export const Logo = ({ size }) => (
     <tbody>
       <tr>
         <FirstTD size={ size }>
-          <Title size={ size }>es</Title>
+          <Link to="/"><Title size={ size }>es</Title></Link>
         </FirstTD>
         <td>
-          <Title size={ size }>projecte</Title>
+          <Link to="/"><Title size={ size }>projecte</Title></Link>
         </td>
       </tr>
       <tr>
