@@ -7,6 +7,6 @@ const Span = styled.span`
 
 export const Icon = ({ onClick, type }) => (
   <Span onClick={ onClick }>
-    <i class={ `fas fa-${type}` }></i>
+    <i className={ `fas fa-${type}` }></i>
   </Span>
 );
