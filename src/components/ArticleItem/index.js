@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { red } from '../../constants';
+import { grey, red } from '../../constants';
 
 const Container = styled.article`
   padding: 2em 0;
@@ -37,10 +37,13 @@ const ContentContainer = styled.div`
 const Title = styled.h3`
   font-weight: normal;
   font-size: 1.5em;
+  &:hover {
+    color: ${red};
+  }
 `;
 
 const MetadataContainer = styled.div`
-  color: ${red};
+  color: ${grey};
   font-size: 0.8em;
   margin: 2em 0;
 `;

@@ -45,7 +45,6 @@ export class Articles extends Component {
   }
 
   render() {
-    console.log(this.state.articles);
     return (
       this.state.articles.map((article) =>
         <ArticleItem key={ article.id } article={ article } />

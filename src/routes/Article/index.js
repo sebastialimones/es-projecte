@@ -29,7 +29,10 @@ export class Article extends Component {
       .then((api) => api.getByUID('article', this.props.match.params.uid))
       .then((article) => {
         this.setState({
-          article: article.data,
+          article: {
+            ...article.data,
+            tags: article.tags,
+          },
         })
       })
       .catch((error) => {
@@ -39,12 +42,13 @@ export class Article extends Component {
   }
 
   render() {
-    if (!this.state.article) {
+    const { article } = this.state;
+    if (!article) {
       return false;
     }
 
     return (
-      <ArticleComponent article={ this.state.article } />
+      <ArticleComponent article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
     );
   }
 }

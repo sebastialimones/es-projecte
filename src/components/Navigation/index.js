@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { red } from '../../constants';
+
 const List = styled.ul`
   link-style: none;
   padding: 0;
@@ -10,6 +12,9 @@ const List = styled.ul`
 const ListItem = styled.li`
   display: inline;
   margin: 0.5em;
+  &:hover {
+    color: ${red};
+  }
 `;
 
 export const Navigation = () => (
