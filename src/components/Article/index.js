@@ -2,6 +2,7 @@ import PrismicDOM from 'prismic-dom';
 import React from 'react';
 import styled from 'styled-components';
 
+import { ReadingTime } from '../ReadingTime';
 import { grey } from '../../constants';
 
 const Container = styled.div`
@@ -14,10 +15,6 @@ const MetadataContainer = styled.div`
   color: ${grey};
   font-size: 0.8em;
   margin: 1em 0 2em 0;
-`;
-
-const Time = styled.p`
-  text-transform: uppercase;
 `;
 
 const Content = styled.div`
@@ -33,7 +30,7 @@ export const Article = ({ article, isPost }) => (
       [
         <Title key="title">{ PrismicDOM.RichText.asText(article.titol) }</Title>,
         <MetadataContainer key="metadata">
-          <Time>{ `temps de lectura: 6 min` }</Time>
+          <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
         </MetadataContainer>
       ]
     }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { FormattedDate } from '../FormattedDate';
+import { ReadingTime } from '../ReadingTime';
 import { grey, red } from '../../constants';
 
 const Container = styled.article`
@@ -49,10 +50,6 @@ const MetadataContainer = styled.div`
   margin: 2em 0;
 `;
 
-const Time = styled.p`
-  text-transform: uppercase;
-`;
-
 const DateContainer = styled.p`
   margin-top: 0.2em;
 `;
@@ -77,7 +74,7 @@ export const ArticleItem = ({ article }) => (
     <ContentContainer>
       <Link to={ `/articles/${article.uid}` }><Title>{ PrismicDOM.RichText.asText(article.titol) }</Title></Link>
       <MetadataContainer>
-        <Time>{ `temps de lectura: 6 min` }</Time>
+        <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
         <DateContainer><FormattedDate date={ article.data_publicacio } /></DateContainer>
       </MetadataContainer>
       <ShortContent>{ PrismicDOM.RichText.asText(article.contingut) }</ShortContent>
