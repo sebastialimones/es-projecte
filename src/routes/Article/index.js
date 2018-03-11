@@ -1,5 +1,7 @@
+import PrismicDOM from 'prismic-dom';
 import Prismic from 'prismic-javascript';
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { Article as ArticleComponent } from '../../components/Article';
 
@@ -47,8 +49,12 @@ export class Article extends Component {
       return false;
     }
 
-    return (
-      <ArticleComponent article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
-    );
+    return [
+      <Helmet key="helmet">
+        <meta name="description" content={ PrismicDOM.RichText.asText(article.titol) } />
+        <meta name="og:image" content={ article.imatge_principal.url} />
+      </Helmet>,
+      <ArticleComponent key="route" article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
+    ];
   }
 }
