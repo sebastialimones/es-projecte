@@ -1,5 +1,7 @@
+import PrismicDOM from 'prismic-dom';
 import Prismic from 'prismic-javascript';
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { Article as ArticleComponent } from '../../components/Article';
 
@@ -29,7 +31,10 @@ export class Article extends Component {
       .then((api) => api.getByUID('article', this.props.match.params.uid))
       .then((article) => {
         this.setState({
-          article: article.data,
+          article: {
+            ...article.data,
+            tags: article.tags,
+          },
         })
       })
       .catch((error) => {
@@ -39,12 +44,17 @@ export class Article extends Component {
   }
 
   render() {
-    if (!this.state.article) {
+    const { article } = this.state;
+    if (!article) {
       return false;
     }
 
-    return (
-      <ArticleComponent article={ this.state.article } />
-    );
+    return [
+      <Helmet key="helmet">
+        <meta name="description" content={ PrismicDOM.RichText.asText(article.titol) } />
+        <meta name="og:image" content={ article.imatge_principal.url} />
+      </Helmet>,
+      <ArticleComponent key="route" article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
+    ];
   }
 }

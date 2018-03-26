@@ -6,14 +6,18 @@ import { Articles } from './Articles';
 import { Home } from './Home';
 import { Layout } from './Layout';
 
+const renderWithLayout = (Component) => (props) => (
+  <Layout { ...props }>
+    <Component { ...props } />
+  </Layout>
+);
+
 export const Routes = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={ Home } />
-      <Layout>
-        <Route exact path="/articles" component={ Articles } />
-        <Route exact path="/articles/:uid" component={ Article } />
-      </Layout>
+      <Route exact path="/articles/:uid" component={ renderWithLayout(Article) } />
+      <Route exact path="/articles" component={ renderWithLayout(Articles) } />
     </Switch>
   </Router>
 );

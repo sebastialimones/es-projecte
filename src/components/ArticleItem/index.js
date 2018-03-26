@@ -3,7 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { red } from '../../constants';
+import { FormattedDate } from '../FormattedDate';
+import { ReadingTime } from '../ReadingTime';
+import { grey, red } from '../../constants';
+import media from '../../constants/media';
 
 const Container = styled.article`
   padding: 2em 0;
@@ -19,6 +22,7 @@ const ImageContainer = styled.div`
   float: left;
   height: 14em;
   width: 40%;
+  ${media.smallScreen`width: 100%;`}
 `;
 
 const Image = styled.div`
@@ -32,21 +36,24 @@ const ContentContainer = styled.div`
   float: left;
   margin-left: 2em;
   width: 50%;
+  ${media.smallScreen`
+    margin: 1em 0 0 0;
+    width: 100%;
+  `}
 `;
 
 const Title = styled.h3`
   font-weight: normal;
   font-size: 1.5em;
+  &:hover {
+    color: ${red};
+  }
 `;
 
 const MetadataContainer = styled.div`
-  color: ${red};
+  color: ${grey};
   font-size: 0.8em;
   margin: 2em 0;
-`;
-
-const Time = styled.p`
-  text-transform: uppercase;
 `;
 
 const DateContainer = styled.p`
@@ -73,8 +80,8 @@ export const ArticleItem = ({ article }) => (
     <ContentContainer>
       <Link to={ `/articles/${article.uid}` }><Title>{ PrismicDOM.RichText.asText(article.titol) }</Title></Link>
       <MetadataContainer>
-        <Time>{ `temps de lectura: 6 min` }</Time>
-        <DateContainer>{ article.data_publicacio }</DateContainer>
+        <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
+        <DateContainer><FormattedDate date={ article.data_publicacio } /></DateContainer>
       </MetadataContainer>
       <ShortContent>{ PrismicDOM.RichText.asText(article.contingut) }</ShortContent>
     </ContentContainer>

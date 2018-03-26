@@ -2,6 +2,7 @@ import PrismicDOM from 'prismic-dom';
 import React from 'react';
 import styled from 'styled-components';
 
+import { ReadingTime } from '../ReadingTime';
 import { grey } from '../../constants';
 
 const Container = styled.div`
@@ -13,15 +14,7 @@ const Title = styled.h1``
 const MetadataContainer = styled.div`
   color: ${grey};
   font-size: 0.8em;
-  margin: 2em 0;
-`;
-
-const Time = styled.p`
-  text-transform: uppercase;
-`;
-
-const DateContainer = styled.p`
-  margin-top: 0.2em;
+  margin: 1em 0 2em 0;
 `;
 
 const Content = styled.div`
@@ -30,13 +23,17 @@ const Content = styled.div`
   }
 `;
 
-export const Article = ({ article }) => (
+export const Article = ({ article, isPost }) => (
   <Container>
-    <Title>{ PrismicDOM.RichText.asText(article.titol) }</Title>
-    <MetadataContainer>
-      <Time>{ `temps de lectura: 6 min` }</Time>
-      <DateContainer>{ article.data_publicacio }</DateContainer>
-    </MetadataContainer>
+    {
+      isPost &&
+      [
+        <Title key="title">{ PrismicDOM.RichText.asText(article.titol) }</Title>,
+        <MetadataContainer key="metadata">
+          <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
+        </MetadataContainer>
+      ]
+    }
     <Content dangerouslySetInnerHTML={ { __html: PrismicDOM.RichText.asHtml(article.contingut) } } />
   </Container>
 )

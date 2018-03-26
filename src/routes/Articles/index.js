@@ -1,5 +1,6 @@
 import Prismic from 'prismic-javascript';
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { ArticleItem } from '../../components/ArticleItem';
 
@@ -45,11 +46,12 @@ export class Articles extends Component {
   }
 
   render() {
-    console.log(this.state.articles);
-    return (
-      this.state.articles.map((article) =>
-        <ArticleItem key={ article.id } article={ article } />
-      )
-    );
+    return [
+      <Helmet key="helmet">
+        <meta name="description" content="Articles Es Projecte" />
+      </Helmet>,
+    ].concat(this.state.articles.map((article) =>
+      <ArticleItem key={ article.id } article={ article } />
+    ));
   }
 }
