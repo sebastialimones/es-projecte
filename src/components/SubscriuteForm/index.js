@@ -12,7 +12,7 @@ const Form = styled.form`
 const Submit = styled.input.attrs({
   type: 'submit',
 })`
-  background-color: #000;
+  background-color: ${({ disabled }) => disabled ? '#ddd' : '#000'};
   border-radius: 30px;
   color: #fff;
   font-family: inherit;
@@ -72,7 +72,7 @@ export const SubscriuteForm = (props) => (
       <TextEmail placeholder="E-mail" onChange={ props.handleEmailChange } value={ props.email } />
     </Row>
     <Row>
-      <Submit type="submit" value="Ho vull rebre" />
+      <Submit type="submit" value="Ho vull rebre" disabled={ props.email.length === 0 } />
     </Row>
   </Form>
 );

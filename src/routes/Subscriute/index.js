@@ -58,7 +58,7 @@ export class Subscriute extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const config = {
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(this.state.contact),
       method: 'POST',
     };
     fetch('https://hooks.zapier.com/hooks/catch/3113594/k0li3h/', config)
