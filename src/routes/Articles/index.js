@@ -27,7 +27,7 @@ export class Articles extends Component {
             Prismic.Predicates.at('document.type', 'article'),
             Prismic.Predicates.at('document.tags', ['post']),
           ],
-          { orderings : '[my.blog_post.data_publicacio desc]' }
+          { orderings : '[my.article.data_publicacio desc]' }
         )
       )
       .then((response) => {
