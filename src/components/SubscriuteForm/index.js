@@ -63,7 +63,7 @@ const TextEmail = styled.input.attrs({
 
 export const SubscriuteForm = (props) => (
   <Form onSubmit={ props.handleSubmit }>
-    <SubTitle>Subscri-te per rebre les noves publicacions</SubTitle>
+    <SubTitle>Subscriu-te per rebre les noves publicacions</SubTitle>
     <Row>
       <TextInput placeholder="Nom" onChange={ props.handleFirstNameChange } value={ props.firstName } />
       <TextInput placeholder="Cognom" onChange={ props.handleLastNameChange } value={ props.lastName } />
