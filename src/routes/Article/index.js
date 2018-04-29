@@ -34,6 +34,7 @@ export class Article extends Component {
           article: {
             ...article.data,
             tags: article.tags,
+            uid: article.uid,
           },
         })
       })
@@ -51,8 +52,12 @@ export class Article extends Component {
 
     return [
       <Helmet key="helmet">
-        <meta name="description" content={ PrismicDOM.RichText.asText(article.titol) } />
-        <meta name="og:image" content={ article.imatge_principal.url} />
+        { /* Facbook metadata */ }
+        <meta property="og:url" content={ `http://www.esprojecte.io/articles/${article.uid}` } />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={ PrismicDOM.RichText.asText(article.titol) } />
+        <meta property="og:description" content={ PrismicDOM.RichText.asText(article.contingut).slice(0, 100) + '...' } />
+        <meta property="og:image" content={ article.imatge_principal.url} />
       </Helmet>,
       <ArticleComponent key="route" article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
     ];
