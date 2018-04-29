@@ -1,16 +1,14 @@
 import PrismicDOM from 'prismic-dom';
-import Prismic from 'prismic-javascript';
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 
 import { Article as ArticleComponent } from '../../components/Article';
+import store from '../../store';
 
-export class Article extends Component {
+const { dispatch } = store;
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+class ArticleRoute extends Component {
 
   componentDidMount() {
     this.fetchArticle(this.props.match.params.uid);
@@ -18,41 +16,22 @@ export class Article extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.match.params.uid !== nextProps.match.params.uid) {
-      this.setState({ article: undefined }, () => {
-        this.fetchArticle(nextProps.match.params.uid);
-      });
+      this.fetchArticle(nextProps.match.params.uid);
     }
   }
 
   fetchArticle = (uid) => {
-    const apiEndpoint = 'https://esprojecte.prismic.io/api/v2';
-    Prismic
-      .getApi(apiEndpoint)
-      .then((api) => api.getByUID('article', this.props.match.params.uid))
-      .then((article) => {
-        this.setState({
-          article: {
-            ...article.data,
-            tags: article.tags,
-            uid: article.uid,
-          },
-        })
-      })
-      .catch((error) => {
-        console.log('in da error');
-        console.log(error);
-      });
+    dispatch.articles.getOne(uid);
   }
 
   render() {
-    const { article } = this.state;
+    const { article } = this.props;
     if (!article) {
       return false;
     }
 
     return [
       <Helmet key="helmet">
-        { /* Facbook metadata */ }
         <meta property="og:url" content={ `http://www.esprojecte.io/articles/${article.uid}` } />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={ PrismicDOM.RichText.asText(article.titol) } />
@@ -63,3 +42,9 @@ export class Article extends Component {
     ];
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  article: state.articles[ownProps.match.params.uid],
+});
+
+export const Article = connect(mapStateToProps)(ArticleRoute);

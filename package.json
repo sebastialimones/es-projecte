@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rematch/core": "^0.6.0",
     "luxon": "^0.5.3",
     "prismic-dom": "^2.0.6",
     "prismic-javascript": "^1.5.0-beta.1",
@@ -10,6 +11,7 @@
     "react-dock": "^0.2.4",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "reading-time": "^1.1.0",
