@@ -37,6 +37,8 @@ class ArticleRoute extends Component {
         <meta property="og:title" content={ PrismicDOM.RichText.asText(article.titol) } />
         <meta property="og:description" content={ PrismicDOM.RichText.asText(article.contingut).slice(0, 100) + '...' } />
         <meta property="og:image" content={ article.imatge_principal.url} />
+        <meta property="og:image:width" content="375" />
+        <meta property="og:image:height" content="224" />
       </Helmet>,
       <ArticleComponent key="route" article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
     ];
