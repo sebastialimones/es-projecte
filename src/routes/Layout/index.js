@@ -1,11 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Container } from '../../components/Container';
-import { Header } from '../../components/Header';
+import { Footer, height as footerHeight } from '../../components/Footer';
+import { Header, height as headerHeight } from '../../components/Header';
+
+const InnerContainer = styled.section`
+  height: calc(100% - ${headerHeight} - ${footerHeight});
+  min-height: calc(100vh - ${headerHeight} - ${footerHeight});
+  overflow: auto;
+`
 
 export const Layout = ({ children }) => (
   <Container>
     <Header />
-    { children }
+    <InnerContainer>
+      { children }
+    </InnerContainer>
+    <Footer />
   </Container>
 );

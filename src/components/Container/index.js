@@ -7,4 +7,5 @@ export const Container = styled.div`
   width: 70%;
   ${media.mediumScreen`width: 90%;`}
   ${media.smallScreen`width: 95%;`}
+  min-height: 100vh;
 `;

@@ -8,7 +8,8 @@ import { lightGrey } from '../../constants';
 import media from '../../constants/media';
 
 const Container = styled.div`
-  margin: 4em auto 0 auto;
+  margin: 0 auto 0 auto;
+  padding-top: 4em;
   width: 70%;
   ${media.mediumScreen`width: 100%;`}
 `;
