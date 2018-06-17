@@ -30,6 +30,8 @@ const mapStateToPros = (state) => ({
     .map((uid) => state.articles[uid])
     .sort((article1, article2) =>
       DateTime.fromISO(article1.data_publicacio) < DateTime.fromISO(article2.data_publicacio)
+      ? 1
+      : -1
     )
 })
 

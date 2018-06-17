@@ -1,9 +1,18 @@
+import { DateTime } from 'luxon';
 import React from 'react';
 import styled from 'styled-components';
 
-import background from './sky_bird.jpg';
 import { Logo } from '../../components/Logo';
 import { Navigation } from '../../components/Navigation';
+
+const backgrounds = [
+  `background: rgb(0,201,255);
+  background: linear-gradient(90deg, rgba(0,201,255,1) 0%, rgba(146,254,157,1) 100%);`,
+];
+
+const randomNumberWeekday = DateTime.local().weekday % backgrounds.length;
+
+const background = backgrounds[randomNumberWeekday];
 
 const Container = styled.div`
   align-items: center;
@@ -11,8 +20,7 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
   width: 100%;
-  background: url(${background}) center center fixed;
-  background-size: cover;
+  ${background}
 `;
 
 const Content = styled.div`
