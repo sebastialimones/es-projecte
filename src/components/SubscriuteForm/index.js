@@ -72,7 +72,7 @@ export const SubscriuteForm = (props) => (
       <TextEmail placeholder="E-mail" onChange={ props.handleEmailChange } value={ props.email } />
     </Row>
     <Row>
-      <Submit type="submit" value="Ho vull rebre" disabled={ props.email.length === 0 } />
+      <Submit type="submit" value="Vull suscriure'm" disabled={ props.email.length === 0 } />
     </Row>
   </Form>
 );

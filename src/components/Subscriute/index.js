@@ -20,10 +20,6 @@ const Content = styled.div`
   padding: 2em;
 `;
 
-const Message = styled.p`
-  margin-top: 1em;
-`;
-
 const componentMap = {
   editing: SubscriuteForm,
   error: ErrorMessage,
@@ -37,7 +33,6 @@ export const Subscriute = (props) => {
       <Content>
         <Component { ...props } />
       </Content>
-      <Message>* Me compromet a posar un botó de unsubscribe gran. Serà més difícil donar-se d'alta que donar-se de baixa.</Message>
     </Container>
   );
 };

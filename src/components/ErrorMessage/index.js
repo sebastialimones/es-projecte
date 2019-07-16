@@ -10,6 +10,6 @@ const SubTitle = styled.h4`
 
 export const ErrorMessage = () => (
   <SubTitle>
-    Pareix que algo no ha anat del tot bé. Podries refrescar i tornar a provar?
+    Pareix que algo no ha anat del tot bé. Podries refrescar i tornar a provar-ho?
   </SubTitle>
 );
