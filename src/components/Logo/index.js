@@ -6,7 +6,7 @@ import { Sizes } from '../../constants';
 import media from '../../constants/media';
 
 const FirstTD = styled.td`
-  padding-right: ${({ size }) => size === Sizes.S ? '0.5em' : '2em'};
+  padding-right: ${({ size }) => size === Sizes.S ? '0.5em' : '1.8em'};
 `;
 
 const Title = styled.h1`
@@ -41,7 +41,7 @@ export const Logo = ({ size }) => (
           : <td />
         }
         <td colSpan={ Sizes.S === size ? "2" : "1" }>
-          <SubTitle>{ `eines per a l'adultesa` }</SubTitle>
+          <SubTitle>{ `` }</SubTitle>
         </td>
       </tr>
     </tbody>
