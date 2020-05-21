@@ -19,9 +19,9 @@ const ListItem = styled.li`
 
 export const Navigation = () => (
   <List>
-    <ListItem><Link to="/articles">Articles</Link></ListItem>
+    <ListItem><Link to="/">Articles</Link></ListItem>
     <ListItem><Link to="/articles/projecte">Projecte</Link></ListItem>
-    <ListItem><Link to="/articles/qui-som">Qui som</Link></ListItem>
+    <ListItem><Link to="/articles/qui-som">Qui som?</Link></ListItem>
     <ListItem><Link to="/subscriute">Subscriu-te</Link></ListItem>
   </List>
 );

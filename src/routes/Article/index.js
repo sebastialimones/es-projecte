@@ -10,6 +10,7 @@ const { dispatch } = store;
 
 class ArticleRoute extends Component {
 
+
   componentDidMount() {
     this.fetchArticle(this.props.match.params.uid);
   }
@@ -40,7 +41,7 @@ class ArticleRoute extends Component {
         <meta property="og:image:width" content="375" />
         <meta property="og:image:height" content="224" />
       </Helmet>,
-      <ArticleComponent key="route" article={ article } isPost={ article.tags.indexOf('projecte') === -1 && article.tags.indexOf('qui-som') === -1 } />
+      <ArticleComponent key="route" article={ article } isPost={ !article.tags.indexOf('projecte') && !article.tags.indexOf('qui-som') } />
     ];
   }
 }
