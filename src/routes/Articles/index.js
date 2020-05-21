@@ -15,16 +15,18 @@ class ArticlesRoute extends Component {
   }
 
   render() {
+    console.log(this.props.articles)
     return [
       <Helmet key="helmet">
         <meta name="og:description" content="Articles Es Projecte" />
       </Helmet>,
-    ].concat(this.props.articles.map((article) =>
+    ].concat(this.props.articles
+      .filter((article) => !article.tags.indexOf('post'))
+      .map((article) =>
       <ArticleItem key={ article.uid } article={ article } />
     ));
   }
 }
-
 const mapStateToPros = (state) => ({
   articles: Object.keys(state.articles)
     .map((uid) => state.articles[uid])

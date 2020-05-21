@@ -26,7 +26,8 @@ export const articles = {
           [
             Prismic.Predicates.at('document.type', 'article'),
             Prismic.Predicates.at('document.tags', ['post']),
-          ]
+          ],
+          { pageSize : 100 },
         );
         const articles = response.results.map(parseArticle);
         this.addList(articles);
