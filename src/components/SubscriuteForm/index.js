@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import media from '../../constants/media';
+import { darkRed, red } from '../../constants';
 
 const Form = styled.form`
   align-items: center;
@@ -12,7 +13,7 @@ const Form = styled.form`
 const Submit = styled.input.attrs({
   type: 'submit',
 })`
-  background-color: ${({ disabled }) => disabled ? '#ddd' : '#000'};
+  background-color: ${({ disabled }) => disabled ? `${darkRed}` : `${red}` };
   border-radius: 30px;
   color: #fff;
   font-family: inherit;
@@ -45,7 +46,6 @@ const Row = styled.div`
 const TextInput = styled.input.attrs({
   type: 'text',
 })`
-  border: none;
   font-size: 0.8em;
   padding: 0.5em;
   ${media.mediumScreen`width: 100%;`}
@@ -54,7 +54,6 @@ const TextInput = styled.input.attrs({
 const TextEmail = styled.input.attrs({
   type: 'email',
 })`
-  border: none;
   font-size: 0.8em;
   padding: 0.5em;
   width: 20em;

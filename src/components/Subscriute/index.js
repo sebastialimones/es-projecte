@@ -15,8 +15,9 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: ${lightGrey};
-  border-radius: 2px;
+  border-style: solid;
+  border-width: thin;
+  border-color: ${lightGrey};
   padding: 2em;
 `;
 
