@@ -19,6 +19,12 @@ export const Subscriute = () => {
     setLastName(e.currentTarget.value);
   }
 
+  const clearInputs = () => {
+    setEmail('');
+    setfirstName('');
+    setLastName('');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const config = {
@@ -33,15 +39,11 @@ export const Subscriute = () => {
     console.log(config)
     fetch('https://hooks.zapier.com/hooks/catch/3113594/k0li3h/', config)
       .then(() => {
-        setEmail(''),
-        setfirstName(''),
-        setLastName(''),
+        clearInputs();
         setStatus('success')
       })
       .catch((e) => {
-        setEmail(''),
-        setfirstName(''),
-        setLastName(''),
+        clearInputs();
         setStatus('error')
       })
   }
