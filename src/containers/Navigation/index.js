@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { withRouter, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Icon } from '../../components/Icon';
@@ -18,45 +18,40 @@ const LargeScreen = styled.div`
   ${media.smallScreen`display: none;`}
 `;
 
-class Nav extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isVisible: false,
+export const Nav = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [route, setRoute] = useState()
+  const match = useRouteMatch();
+  
+  useEffect(() => {
+    if(route !== match){
+        setIsVisible( false );
     }
+    setRoute(match)
+  },[match])
+
+  const toggleVisibility = () => {
+    setIsVisible( !isVisible );
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.match !== prevProps.match) {
-      this.setState({ isVisible: false });
-    }
-  }
+  return (
+    [
+    <SmallScreen key="small">
+      <div>
+        {
+          !isVisible && <Icon onClick={ toggleVisibility } type="bars" />
+        }
+        <MobileNavigation
+          isVisible={ isVisible }
+          toggleVisibility={ toggleVisibility }
+        />
+      </div>
+    </SmallScreen>,
+    <LargeScreen key="large">
+      <DesktopNavigation />
+    </LargeScreen>
+  ]);
+};
 
-  render() {
-    return [
-      <SmallScreen key="small">
-        <div>
-          {
-            !this.state.isVisible && <Icon onClick={ this.toggleVisibility } type="bars" />
-          }
-          <MobileNavigation
-            isVisible={ this.state.isVisible }
-            toggleVisibility={ this.toggleVisibility }
-          />
-        </div>
-      </SmallScreen>,
-      <LargeScreen key="large">
-        <DesktopNavigation />
-      </LargeScreen>
-    ];
-  }
-
-  toggleVisibility = () => {
-    this.setState({ isVisible: !this.state.isVisible });
-  }
-}
 
 export const Navigation = withRouter(Nav);
-

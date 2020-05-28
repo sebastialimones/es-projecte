@@ -15,7 +15,6 @@ class ArticlesRoute extends Component {
   }
 
   render() {
-    console.log(this.props.articles)
     return [
       <Helmet key="helmet">
         <meta name="og:description" content="Articles Es Projecte" />
