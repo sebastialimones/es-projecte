@@ -16,6 +16,8 @@ class ArticleRoute extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.match.params.uid)
+
     if (this.props.match.params.uid !== nextProps.match.params.uid) {
       this.fetchArticle(nextProps.match.params.uid);
     }
