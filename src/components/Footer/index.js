@@ -16,7 +16,8 @@ const Container = styled.footer`
 
 const StyledLink = styled(Link)`
   text-decoration: underline;
-  font-size: 10px;
+  font-size: 1em;
+  ${media.smallScreen`font-size: 10px;`}
   color: red;
 `;
 
