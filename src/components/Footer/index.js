@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { blueFarnam } from '../../constants/index'
+import media from '../../constants/media'
 
 export const height = '3em';
 
@@ -15,13 +16,14 @@ const Container = styled.footer`
 
 const StyledLink = styled(Link)`
   text-decoration: underline;
-  font-size: 1em;
+  font-size: 10px;
   color: red;
 `;
 
 const Text = styled.p`
   margin-right: 1rem;
   text-align: center;
+  ${media.smallScreen`font-size: 10px;`}
 `;
 
 export const Footer = () => (
