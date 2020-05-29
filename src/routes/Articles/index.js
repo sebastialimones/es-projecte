@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
@@ -8,24 +8,23 @@ import store from '../../store';
 
 const { dispatch } = store;
 
-class ArticlesRoute extends Component {
+export const ArticlesRoute = ({ articles }) => {
 
-  componentDidMount() {
+  useEffect(() => {
     dispatch.articles.getList();
-  }
+  },[])
 
-  render() {
-    return [
-      <Helmet key="helmet">
-        <meta name="og:description" content="Articles Es Projecte" />
-      </Helmet>,
-    ].concat(this.props.articles
-      .filter((article) => !article.tags.indexOf('post'))
-      .map((article) =>
-      <ArticleItem key={ article.uid } article={ article } />
-    ));
-  }
+  return [
+    <Helmet key="helmet">
+      <meta name="og:description" content="Articles Es Projecte" />
+    </Helmet>,
+  ].concat(articles
+    .filter((article) => !article.tags.indexOf('post'))
+    .map((article) =>
+    <ArticleItem key={ article.uid } article={ article } />
+  ));
 }
+
 const mapStateToPros = (state) => ({
   articles: Object.keys(state.articles)
     .map((uid) => state.articles[uid])
