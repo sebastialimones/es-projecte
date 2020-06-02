@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { TimelineMax, Power2 } from 'gsap';
 
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
@@ -9,15 +10,31 @@ export const height = '5.5em';
 
 const Container = styled.header`
   align-items: center;
-  border-bottom: 2px solid ${red};
   display: flex;
   height: ${height};
   justify-content: space-between;
 `;
 
-export const Header = () => (
-  <Container>
-    <Logo size={ Sizes.S } />
-    <Navigation />
-  </Container>
-);
+const RedLine = styled.div`
+  border-top: 2px solid ${red};
+`;
+
+export const Header = () => {
+  const redLineRef = useRef(null);
+  const tl = new TimelineMax();
+
+  useEffect( () => {
+    tl.fromTo(redLineRef.current, 1.5, { x: "-100%", opacity: 0}, { x: "0%", ease: Power2.easeInOut, opacity: 1} )    
+  },
+  []);
+
+  return (
+    <React.Fragment>
+      <Container >
+        <Logo size={ Sizes.S } />
+        <Navigation />
+      </Container>
+      <RedLine ref={ redLineRef } />
+    </React.Fragment>
+  )
+};
