@@ -6,7 +6,7 @@
     "@rematch/core": "^0.6.0",
     "gsap": "3.3.0",
     "luxon": "^0.5.3",
-    "prismic-dom": "^2.0.6",
+    "prismic-dom": "2.1.0",
     "prismic-javascript": "^1.5.0-beta.1",
     "react": "16.8.6",
     "react-dock": "^0.2.4",
@@ -14,14 +14,27 @@
     "react-helmet": "6.0.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "5.1.2",
-    "react-scripts": "1.1.1",
-    "reading-time": "^1.1.0",
-    "styled-components": "^5.0.0-beta.3"
+    "react-scripts": "3.4.1",
+    "reading-time": "1.1.0",
+    "styled-components": "^5.0.0-beta.3",
+    "vanilla-rough-notation": "^0.2.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
