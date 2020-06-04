@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@rematch/core": "^0.6.0",
-    "gsap": "3.3.0",
+    "a11y-react-emoji": "^1.1.2",
+    "gsap": "^3.3.0",
     "luxon": "^0.5.3",
     "prismic-dom": "2.1.0",
     "prismic-javascript": "^1.5.0-beta.1",

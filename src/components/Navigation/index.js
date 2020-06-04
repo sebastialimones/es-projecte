@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { red } from '../../constants';
 
 const List = styled.ul`
-  link-style: none;
   padding: 0;
 `;
 
