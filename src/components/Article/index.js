@@ -33,6 +33,10 @@ const Content = styled.div`
 
 export const Article = ({ article, isPost }) => {
   useScrollToTop();
+  const contentHTML = PrismicDOM.RichText.asHtml(article.contingut)
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"');
 
   return(
     <Container>
@@ -41,13 +45,13 @@ export const Article = ({ article, isPost }) => {
         [
           <Title key="title">{ PrismicDOM.RichText.asText(article.titol) }</Title>,
           <MetadataContainer key="metadata">
-            <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
+            <ReadingTime text={ PrismicDOM.RichText.asHtml(article.contingut) } />
           </MetadataContainer>
         ]
       }
       
     { article.titol[0] && <TitleArticle dangerouslySetInnerHTML={ { __html: PrismicDOM.RichText.asHtml(article.titol) } } /> }
-    <Content dangerouslySetInnerHTML={ { __html: PrismicDOM.RichText.asHtml(article.contingut) } } />
+    <Content dangerouslySetInnerHTML={ { __html: contentHTML } } />
     </Container>
   )
 };
