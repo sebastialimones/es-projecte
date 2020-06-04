@@ -1,11 +1,10 @@
 import PrismicDOM from 'prismic-dom';
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { ReadingTime } from '../ReadingTime';
 import { grey } from '../../constants';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
-import { annotate } from 'rough-notation';
 
 const Container = styled.div`
   margin-top: 2em;
@@ -30,20 +29,10 @@ const Content = styled.div`
   & > p {
     margin: 1em 0 ;
   }
-  /* .highlight {
-    background-color:#FFFF00;
-  } */
 `;
 
 export const Article = ({ article, isPost }) => {
-  useScrollToTop()
-  const highlight = useRef(null);
-
-  useEffect( () => {
-    const annotation = annotate(highlight.current, { type: 'underline' });
-    annotation.show();
-  },
-  []);
+  useScrollToTop();
 
   return(
     <Container>
@@ -58,7 +47,7 @@ export const Article = ({ article, isPost }) => {
       }
       
     { article.titol[0] && <TitleArticle dangerouslySetInnerHTML={ { __html: PrismicDOM.RichText.asHtml(article.titol) } } /> }
-      <Content dangerouslySetInnerHTML={ { __html: PrismicDOM.RichText.asHtml(article.contingut) } } ref={ highlight } />
+    <Content dangerouslySetInnerHTML={ { __html: PrismicDOM.RichText.asHtml(article.contingut) } } />
     </Container>
   )
 };
