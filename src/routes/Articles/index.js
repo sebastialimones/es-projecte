@@ -9,10 +9,9 @@ import store from '../../store';
 const { dispatch } = store;
 
 export const ArticlesRoute = ({ articles }) => {
-
   useEffect(() => {
     dispatch.articles.getList();
-  },[])
+  })
 
   return [
     <Helmet key="helmet">

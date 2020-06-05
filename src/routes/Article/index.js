@@ -15,7 +15,7 @@ export const ArticleRoute = ({ article }) => {
 
   useEffect(() => {
     fetchArticle(match.params.uid);
-  },[])
+  })
 
   useEffect(() => {
     if (previousProp.current !== match.params.uid) {

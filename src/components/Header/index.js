@@ -25,8 +25,7 @@ export const Header = () => {
 
   useEffect( () => {
     tl.fromTo(redLineRef.current, 1.5, { x: "-100%", opacity: 0}, { x: "0%", ease: Power2.easeInOut, opacity: 1} )    
-  },
-  []);
+  });
 
   return (
     <React.Fragment>

@@ -28,7 +28,7 @@ export const Nav = () => {
         setIsVisible( false );
     }
     setRoute(match)
-  },[match])
+  },[match, route])
 
   const toggleVisibility = () => {
     setIsVisible( !isVisible );

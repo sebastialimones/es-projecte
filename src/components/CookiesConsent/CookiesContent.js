@@ -60,9 +60,12 @@ export const CookiesContent = ({ onAccept }) => {
   
   useEffect( () => {
     tl.fromTo(WrapperRef.current, 1.5, { x: "-100%", opacity: 0}, { x: "0%", ease: Power2.easeInOut, opacity: 1} )    
-  },
-  []);
+  });
   
+  onAccept = () => {
+    console.log('jola')
+  }
+
   return (
     <Wrapper ref={ WrapperRef }>
       <CookieText>

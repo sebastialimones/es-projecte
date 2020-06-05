@@ -8,11 +8,10 @@ export const CookiesConsent = () => {
   const [hasAccepted, setAccepted] = useState(hasAcceptedBefore ? JSON.parse(hasAcceptedBefore) : false)
 
   const handleAccept = () => {
-    console.log('hola')
+    console.log('hola', hasAccepted)
     setAccepted(true);
     localStorage.setItem(COOKIE_CONSENT_PERSISTANCE_KEY, JSON.stringify(true));
   }
-
   return(
     hasAccepted 
     ? null 
