@@ -5,6 +5,7 @@ import { Article } from './Article';
 import { Articles } from './Articles';
 import { Layout } from './Layout';
 import { Subscriute } from './Subscriute';
+import { CookiesPolicy } from './CookiesPolicy';
 
 const renderWithLayout = (Component) => (props) => (
   <Layout { ...props }>
@@ -18,6 +19,7 @@ export const Routes = () => (
       <Route exact path="/" component={ renderWithLayout(Articles) } />
       <Route exact path="/articles/:uid" component={ renderWithLayout(Article) } />
       <Route exact path="/subscriute" component={ renderWithLayout(Subscriute) } />
+      <Route exact path="/cookiesPolicy" component={ renderWithLayout(CookiesPolicy) } />
     </Switch>
   </Router>
 );

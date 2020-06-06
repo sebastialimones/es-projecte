@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@rematch/core": "^0.6.0",
+    "a11y-react-emoji": "1.1.2",
     "gsap": "3.3.0",
     "luxon": "^0.5.3",
     "prismic-dom": "2.1.0",
@@ -12,12 +13,12 @@
     "react-dock": "^0.2.4",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "5.0.7",
     "react-router-dom": "5.1.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.0.1",
     "reading-time": "1.1.0",
     "styled-components": "^5.0.0-beta.3",
-    "vanilla-rough-notation": "^0.2.7"
+    "vanilla-rough-notation": "0.2.7"
   },
   "scripts": {
     "start": "react-scripts start",
