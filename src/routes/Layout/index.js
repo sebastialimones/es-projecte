@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Container } from '../../components/Container';
 import { Footer, height as footerHeight } from '../../components/Footer';
 import { Header, height as headerHeight } from '../../components/Header';
-import { CookiesContent } from '../../components/CookiesConsent/CookiesContent';
+import { CookiesConsent } from '../../components/CookiesConsent';
 
 const InnerContainer = styled.section`
   height: calc(100% - ${headerHeight} - ${footerHeight});
@@ -15,7 +15,7 @@ const InnerContainer = styled.section`
 export const Layout = ({ children }) => (
   <Container>
     <Header />
-    <CookiesContent />
+    <CookiesConsent />
     <InnerContainer>
       { children }
     </InnerContainer>
