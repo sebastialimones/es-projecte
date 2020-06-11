@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { TimelineMax, Power2 } from 'gsap';
+import { TimelineMax, Power2, gsap } from 'gsap';
+import { CSSPlugin } from 'gsap/CSSPlugin'
 
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
@@ -22,6 +23,8 @@ const RedLine = styled.div`
 export const Header = () => {
   const redLineRef = useRef(null);
   const tl = new TimelineMax();
+  // Force CSSPlugin to not get dropped during build. Error only in production.
+  gsap.registerPlugin(CSSPlugin)
 
   useEffect( () => {
     tl.fromTo(redLineRef.current, 1.5, { x: "-100%", opacity: 0}, { x: "0%", ease: Power2.easeInOut, opacity: 1} )    
