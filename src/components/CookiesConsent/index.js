@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CookiesContent } from './CookiesContent'
 
 const COOKIE_CONSENT_PERSISTANCE_KEY = 'showCookieConsent';
