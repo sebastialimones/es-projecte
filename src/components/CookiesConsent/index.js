@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { CookiesContent } from './CookiesContent'
 
 const COOKIE_CONSENT_PERSISTANCE_KEY = 'showCookieConsent';
-const hasAcceptedBefore = localStorage.getItem(COOKIE_CONSENT_PERSISTANCE_KEY);
 
 export const CookiesConsent = () => {
-  const [hasAccepted, setAccepted] = useState(hasAcceptedBefore ? JSON.parse(hasAcceptedBefore) : false)
+  const hasAcceptedBefore = localStorage.getItem(COOKIE_CONSENT_PERSISTANCE_KEY);
+  const [hasAccepted, setAccepted] = useState(hasAcceptedBefore ? JSON.parse(hasAcceptedBefore) : false);
 
   const handleAccept = () => {
     setAccepted(true);
