@@ -11,24 +11,26 @@ const { dispatch } = store;
 
 export const ArticleRoute = ({ article }) => {
   const match = useRouteMatch();
-  const previousProp = useRef(match.params.uid)
+  const previousProp = useRef(match.params.uid);
 
   useEffect(() => {
     fetchArticle(match.params.uid);
-  })
+  }, []);
 
   useEffect(() => {
     if (previousProp.current !== match.params.uid) {
       fetchArticle(match.params.uid);
     }
-  }, [match.params.uid])
+  }, [match.params.uid]);
 
   const fetchArticle = (uid) => {
     dispatch.articles.getOne(uid);
-  }
+  };
+
   if(!article){
     return( false )
-  }
+  };
+
   return (
     <Helmet key="helmet">
       <meta property="og:url" content={ `http://www.esprojecte.io/articles/${article.uid}` } />

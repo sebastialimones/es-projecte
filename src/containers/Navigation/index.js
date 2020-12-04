@@ -20,19 +20,19 @@ const LargeScreen = styled.div`
 
 export const Nav = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [route, setRoute] = useState()
+  const [route, setRoute] = useState();
   const match = useRouteMatch();
   
   useEffect(() => {
     if(route !== match){
         setIsVisible( false );
-    }
+    };
     setRoute(match)
-  },[match, route])
+  },[match, route]);
 
   const toggleVisibility = () => {
     setIsVisible( !isVisible );
-  }
+  };
 
   return (
     [
