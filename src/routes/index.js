@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Article } from './Article';
 import { Articles } from './Articles';
+import { Books } from './Books';
 import { Layout } from './Layout';
 import { Subscriute } from './Subscriute';
 import { CookiesPolicy } from './CookiesPolicy';
@@ -18,6 +19,7 @@ export const Routes = () => (
     <Switch>
       <Route exact path="/" component={ renderWithLayout(Articles) } />
       <Route exact path="/articles/:uid" component={ renderWithLayout(Article) } />
+      <Route exact path="/books" component={ renderWithLayout(Books) } />
       <Route exact path="/subscriute" component={ renderWithLayout(Subscriute) } />
       <Route exact path="/cookiesPolicy" component={ renderWithLayout(CookiesPolicy) } />
     </Switch>

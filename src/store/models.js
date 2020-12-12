@@ -29,8 +29,17 @@ export const articles = {
           ],
           { pageSize : 100 },
         );
+        const booksResponse = await api.query(
+          [
+            Prismic.Predicates.at('document.type', 'article'),
+            Prismic.Predicates.at('document.tags', ['book'])
+          ],
+          { pageSize : 100 },
+        );
         const articles = response.results.map(parseArticle);
-        this.addList(articles);
+        const books = booksResponse.results.map(parseArticle);
+        const allPost = [ ...articles, ...books]
+        this.addList(allPost);
       } catch (error) {
         console.log('in da error');
         console.log(error);
@@ -46,6 +55,6 @@ export const articles = {
         console.log('in da error');
         console.log(error);
       }
-    }
+    },
   }
-}
+};

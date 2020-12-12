@@ -3,4 +3,4 @@ export const parseArticle = (rawArticle) => ({
   id: rawArticle.id,
   tags: rawArticle.tags,
   uid: rawArticle.uid
-})
+});

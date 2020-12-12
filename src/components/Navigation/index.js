@@ -21,6 +21,7 @@ export const Navigation = () => (
     <ListItem><Link to="/">Articles</Link></ListItem>
     <ListItem><Link to="/articles/projecte">Projecte</Link></ListItem>
     <ListItem><Link to="/articles/qui-som">Qui som?</Link></ListItem>
+    <ListItem><Link to="/books">Llibres</Link></ListItem>
     <ListItem><Link to="/subscriute">Subscriu-te</Link></ListItem>
   </List>
 );
