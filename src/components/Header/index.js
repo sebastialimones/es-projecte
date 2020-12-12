@@ -43,26 +43,20 @@ export const Header = () => {
     switch(location) {
       case "/":
         return "/articles"
-        break;
       case "/articles/qui-som":
         return "/qui som?"
-        break;
       case "/articles/projecte":
         return "/què feim?"
-        break;
       case "/books":
         return "/llibres"
-        break;
       case "/subscriute":
         return "/subscriu-te"
-        break;
       case "/cookiesPolicy":
         return "/cookies"
-        break;
       default:
-        return undefined
-    }
-  }
+        return "/"
+      };
+  };
 
   return (
     <React.Fragment>
