@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 export const CookiesPolicy = () => {
   return(
     <Wrapper>
-        Hola
+        Hola, m'ha fet peresa fer-ho... Però ho faré! 
     </Wrapper>
   )
 }

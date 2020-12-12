@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   border: 1px solid ${ red };
   border-radius: 0.1em;
   background-color: #ffffff;
+  z-index: 10;
 
   ${media.smallScreen`
     flex-direction: column;

@@ -41,7 +41,7 @@ export const MobileNavigation = ({ isVisible, toggleVisibility }) => (
     <ContentContainer>
       <NavigationContainer>
         <ItemLink to="/">Articles</ItemLink>
-        <ItemLink to="/articles/projecte">Projecte</ItemLink>
+        <ItemLink to="/articles/projecte">Què feim?</ItemLink>
         <ItemLink to="/articles/qui-som">Qui som?</ItemLink>
         <ItemLink to="/books">Llibres</ItemLink>
         <ItemLink to="/subscriute">Subscriu-te</ItemLink>

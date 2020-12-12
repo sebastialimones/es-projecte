@@ -15,15 +15,15 @@ const CardContainer = styled.div`
   margin-bottom: 1em;
 `;
 const BookBackContainer = styled.div` 
-  margin: 1em;
+  margin: 0.7em;
 `;
 const Title = styled.div`
   font-weight: bold; 
   font-size: 1.5em;
-  margin-bottom: 0.8em;
+  margin-bottom: 0.6em;
 `;
 const Author = styled.div` 
-  margin-bottom: 1em;
+  margin-bottom: 0.7em;
   font-weight: bold; 
 `;
 const Sinopsis = styled.div` 
