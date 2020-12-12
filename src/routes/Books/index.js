@@ -3,25 +3,22 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
-import { ArticleItem } from '../../components/ArticleItem';
+import { ListOfBooks } from '../../components/ListOfBooks';
 import store from '../../store';
 
 const { dispatch } = store;
 
-export const ArticlesRoute = ({ articles }) => {
+export const BooksRoute = ({ articles }) => {
   useEffect(() => {
     dispatch.articles.getList();
   },[]);
-
-  return [
+  
+  return (
     <Helmet key="helmet">
-      <meta name="og:description" content="Articles Es Projecte" />
+      <meta name="og:description" content="Libros Es Projecte" />
     </Helmet>,
-  ].concat(articles
-    .filter((article) => !article.tags.indexOf('post'))
-    .map((article) =>
-    <ArticleItem key={ article.uid } article={ article } />
-  ));
+    <ListOfBooks  books={ articles } />
+  );
 }
 
 const mapStateToPros = (state) => ({
@@ -34,5 +31,4 @@ const mapStateToPros = (state) => ({
   )
 });
 
-export const Articles = connect(mapStateToPros)(ArticlesRoute);
-
+export const Books = connect(mapStateToPros)(BooksRoute);
