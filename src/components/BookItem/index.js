@@ -10,6 +10,7 @@ const MaxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 15em;
+  margin: 1em;
 `;
 const CardContainer = styled.div` 
   margin-bottom: 1em;
