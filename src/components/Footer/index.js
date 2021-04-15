@@ -29,7 +29,7 @@ const Text = styled.p`
 
 export const Footer = () => (
   <Container>
-    <Text>© Es projecte 2020</Text>
+    <Text>© Es projecte 2021</Text>
     <Text>|</Text>
     <Text>Tots els drets reservats</Text>
     <Text>|</Text>
