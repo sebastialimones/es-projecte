@@ -15,12 +15,13 @@ export const ArticleRoute = ({ article }) => {
 
   useEffect(() => {
     fetchArticle(match.params.uid);
-  }, [match.params.uid])
+    console.log(article.imatge_principal.url)
+  }, [match.params.uid]);
 
   useEffect(() => {
     if (previousProp.current !== match.params.uid) {
       fetchArticle(match.params.uid);
-    }
+    };
   }, [match.params.uid]);
 
   const fetchArticle = (uid) => {

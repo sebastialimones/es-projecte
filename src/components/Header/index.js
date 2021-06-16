@@ -46,7 +46,7 @@ export const Header = () => {
       case "/articles/qui-som":
         return "/qui som?"
       case "/articles/projecte":
-        return "/què feim?"
+        return "/què és?"
       case "/books":
         return "/llibres"
       case "/subscriute":
