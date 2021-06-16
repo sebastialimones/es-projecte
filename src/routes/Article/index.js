@@ -15,7 +15,6 @@ export const ArticleRoute = ({ article }) => {
 
   useEffect(() => {
     fetchArticle(match.params.uid);
-    console.log(article.imatge_principal.url)
   }, [match.params.uid]);
 
   useEffect(() => {
