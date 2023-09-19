@@ -36,7 +36,6 @@ export const Subscriute = () => {
         }),
       method: 'POST',
     };
-    console.log(config)
     fetch('https://hooks.zapier.com/hooks/catch/3113594/k0li3h/', config)
       .then(() => {
         clearInputs();

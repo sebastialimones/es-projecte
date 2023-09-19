@@ -64,7 +64,7 @@ const useStyles = makeStyles({
 export const BookItem = ({ book }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const classes = useStyles();
-
+  
   const handleClick = (event) => {
     event.preventDefault();
     setIsFlipped(!isFlipped);

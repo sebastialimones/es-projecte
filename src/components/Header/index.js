@@ -42,17 +42,17 @@ export const Header = () => {
   const subtitleMapper = (location) => {
     switch(location) {
       case "/":
-        return "/articles"
+        return "Terapia gestalt y mediación"
       case "/articles/qui-som":
-        return "/qui som?"
-      case "/articles/projecte":
-        return "/què és?"
+        return "" 
+      case "/articles":
+        return "Artículos"
       case "/books":
-        return "/llibres"
+        return "Biblioteca"
       case "/subscriute":
-        return "/subscriu-te"
+        return "Suscríbete"
       case "/cookiesPolicy":
-        return "/cookies"
+        return "Cookies"
       default:
         return "/"
       };

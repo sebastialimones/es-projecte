@@ -28,10 +28,10 @@ export const Logo = ({ size }) => (
     <tbody>
       <tr>
         <FirstTD size={ size }>
-          <Link to="/"><Title size={ size }>es</Title></Link>
+          <Link to="/"><Title size={ size }>Sebastià</Title></Link>
         </FirstTD>
         <td>
-          <Link to="/"><Title size={ size }>projecte</Title></Link>
+          <Link to="/"><Title size={ size }>Limones</Title></Link>
         </td>
       </tr>
       <tr>
