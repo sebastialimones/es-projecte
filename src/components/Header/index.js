@@ -43,9 +43,9 @@ export const Header = () => {
     switch(location) {
       case "/":
         return "Terapia gestalt y mediación"
-      case "/articles/qui-som":
+      case "/blog/qui-som":
         return "" 
-      case "/articles":
+      case "/blog":
         return "Artículos"
       case "/books":
         return "Biblioteca"

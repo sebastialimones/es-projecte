@@ -41,7 +41,7 @@ export const ArticleRoute = ({ article }) => {
       <meta property="og:image:width" content="375" />
       <meta property="og:image:height" content="224" />
     </Helmet>,
-    <ArticleComponent key="route" article={ article } isPost={ !article.tags.indexOf('projecte') && !article.tags.indexOf('qui-som') } />
+    <ArticleComponent key={ article.id } article={ article } isPost={ !article.tags.indexOf('projecte') && !article.tags.indexOf('qui-som') } />
   );
 };
 

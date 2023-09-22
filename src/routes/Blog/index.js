@@ -57,7 +57,6 @@ export const BlogRoute = ({ articles }) => {
         const articleDate = new Date(article.data_publicacio);
 
         const hasPostTag = article.tags && article.tags.includes('post');
-        // Compare the year and month of the article with the selected date
         return (
           articleDate.getFullYear() === selectedDate.getFullYear() &&
           articleDate.getMonth() === selectedDate.getMonth() &&
@@ -65,10 +64,9 @@ export const BlogRoute = ({ articles }) => {
         );
       });
       
-      setFilteredArticles({ [selectedMonth]: filtered });;
+      setFilteredArticles({ [selectedMonth]: filtered });
     } else {
-      // No month selected, show all articles
-      setFilteredArticles({articles});
+      setFilteredArticles({ ['articles']: articles });
     }
   }, [selectedMonth, articles]);
 
@@ -93,7 +91,6 @@ export const BlogRoute = ({ articles }) => {
   
     // Convert the Map values to an array of archive objects
     const archives = Array.from(archiveMap.values());
-  
     // Sort the archive objects in descending order based on date
     archives.sort((a, b) => {
       const dateA = new Date(a.title);
@@ -103,9 +100,40 @@ export const BlogRoute = ({ articles }) => {
     setArchives(archives);
     return archives;
   };
+  
+  const isArticleFromSelectedMonth = (article, selectedMonth) => {
+    if (!article.data_publicacio) {
+      return false;
+    }
+    
+    const articleDate = new Date(article.data_publicacio);
+    const selectedDate = new Date(selectedMonth);
+  
+    return (
+      articleDate.getFullYear() === selectedDate.getFullYear() &&
+      articleDate.getMonth() === selectedDate.getMonth()
+    );
+  };
 
-  const handleArchiveClick = (month) => {
+  const handleMonthClick = (month) => {
     setSelectedMonth(month);
+    const filteredByMonth = articles.filter((article) => {
+      return isArticleFromSelectedMonth(article, month);
+    });
+    setFilteredArticles({ ['filtered']: filteredByMonth });
+  };
+
+  const handleSeeAllClick = () => {
+    setSelectedMonth(null);
+    setFilteredArticles({ ['articles']: articles });
+  };
+
+  const handleTagClick = (selectedTag) => {  
+    const filtered = articles.filter((article) => {
+      return !selectedTag || article.mytags.some((mytag) => mytag.text === selectedTag);
+    });
+  
+    setFilteredArticles({ ['filtered']: filtered });
   };
 
   return (
@@ -113,22 +141,21 @@ export const BlogRoute = ({ articles }) => {
       <Helmet key="helmet">
         <meta name="og:description" content="Articles Es Projecte" />
       </Helmet>
-      {/* <ArticlesContainer>
-        {filteredArticles
-          .filter((article) => !article.tags.indexOf('post'))
-          .map((article) => (
-            <ArticleItem key={article.uid} article={article} />
-        ))}
-      </ArticlesContainer> */}
       <ArticlesContainer>
-        {Object.keys(filteredArticles).map((month) => (
-          <div key={month}>
-            {Array.isArray(filteredArticles[month])
-              ? filteredArticles[month]
+        {Object.keys(filteredArticles).map((key) => (
+          <div key={key}>
+            {Array.isArray(filteredArticles[key])
+              ? filteredArticles[key]
                   .filter((article) => !article.tags || article.tags.includes('post'))
-                  .map((article) => (
-                    <ArticleItem key={article.uid} article={article} />
-                  ))
+                  .map((article) => {
+                    return (
+                      <ArticleItem 
+                        key={article.uid} 
+                        article={article} 
+                        handleTagClick={handleTagClick}
+                      />
+                    );
+                  })
               : null}
           </div>
         ))}
@@ -141,7 +168,9 @@ export const BlogRoute = ({ articles }) => {
             social={sidebar.social}
             showAllArchives={showAllArchives}
             onShowAllArchives={() => setShowAllArchives(true)}
-            onArchiveClick={handleArchiveClick}
+            onArchiveClick={handleMonthClick}
+            selectedMonthClick={selectedMonth}
+            onSeeAllClick={ handleSeeAllClick}
           />
         :
         undefined

@@ -1,5 +1,5 @@
 import PrismicDOM from 'prismic-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -58,12 +58,11 @@ const MetadataContainer = styled.div`
 `;
 
 const TagContainer = styled.p`
-  font-size: 0.8em;
+  font-size: 1.1em;
 `;
 
-const Tag = styled.span`
-  background-color: ${red};
-  color: white;
+const Tag = styled.a`
+  color: gray;
   font-size: 0.8em;
   padding-right: 0.3em;
   margin-right: 0.3em;
@@ -86,40 +85,53 @@ const ShortContent = styled.p`
   text-overflow: ellipsis;
 `;
 
-function getRandomColorFromPalette() {
-  const colorPalette = ['#ECEE81', '#8DDFCB', '#82A0D8', '#EDB7ED', '#FFB3B3', '#FFDBA4', '#C1EFFF']; 
+const getRandomColorFromPalette = () => {
+  const colorPalette = ['#ECEE81', '#8DDFCB', '#EDB7ED', '#FFB3B3', '#FFDBA4', '#C1EFFF']; 
   const randomIndex = Math.floor(Math.random() * colorPalette.length);
   return colorPalette[randomIndex];
-}
+};
 
-export const ArticleItem = ({ article }) => (
-  <Container>
-    <ImageContainer>
-      <Image imageUrl={ article.imatge_principal.url } />
-    </ImageContainer>
-    <ContentContainer>
-      <Link to={ `/articles/${article.uid}` }>
-      <Title>
-        {PrismicDOM.RichText.asText(article.titol)}
-        {article.mytags.length ? (
-          <TagContainer>
-            {article.mytags.map((tag) => (
-              <Tag 
-                key={tag.text}
-                style={{ backgroundColor: getRandomColorFromPalette() }}
-              >
-                #{tag.text}
-              </Tag>
-            ))}
-          </TagContainer>
-        ) : null}
-      </Title>   
-      </Link>
-      <MetadataContainer>
-        <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
-        <DateContainer><FormattedDate date={ article.data_publicacio } /></DateContainer>
-      </MetadataContainer>
-      <ShortContent>{ PrismicDOM.RichText.asText(article.contingut) }</ShortContent>
-    </ContentContainer>
-  </Container>
-);
+export const ArticleItem = ({ article, handleTagClick }) => {
+  const [tagColors, setTagColors] = useState([]);
+
+  if (tagColors.length === 0) {
+    const newTagColors = article.mytags.map(() => getRandomColorFromPalette());
+    setTagColors(newTagColors);
+  }
+
+  return(
+    <Container>
+      <ImageContainer>
+        <Image imageUrl={ article.imatge_principal.url } />
+      </ImageContainer>
+      <ContentContainer>
+        <Link to={ `/articles/${article.uid}` }>
+          <Title>
+            {PrismicDOM.RichText.asText(article.titol)}
+          </Title>   
+        </Link>
+          {article.mytags.length ? (
+            <TagContainer>
+              {article.mytags.map((tag, index) => (
+                tag.text ? (
+                  <Tag 
+                    key={tag.text}
+                    style={{ backgroundColor: tagColors[index] }}
+                    href="#"
+                    onClick={() => handleTagClick(tag.text)}
+                  >
+                    #{tag.text}
+                  </Tag>
+                ) : null
+              ))}
+            </TagContainer>
+          ) : null}
+        <MetadataContainer>
+          <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
+          <DateContainer><FormattedDate date={ article.data_publicacio } /></DateContainer>
+        </MetadataContainer>
+        <ShortContent>{ PrismicDOM.RichText.asText(article.contingut) }</ShortContent>
+      </ContentContainer>
+    </Container>
+  );
+};

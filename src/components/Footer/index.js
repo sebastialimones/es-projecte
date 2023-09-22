@@ -12,6 +12,7 @@ const Container = styled.footer`
   border-top: 1px solid #eee;
   height: ${height};
   color: ${blueFarnam};
+  padding-bottom: 1em;
 `;
 
 const StyledLink = styled(Link)`
@@ -19,12 +20,14 @@ const StyledLink = styled(Link)`
   font-size: 1em;
   ${media.smallScreen`font-size: 10px;`}
   color: red;
+  padding-top: 1em;
 `;
 
 const Text = styled.p`
   margin-right: 1rem;
   text-align: center;
   ${media.smallScreen`font-size: 10px;`}
+  padding-top: 1em;
 `;
 
 export const Footer = () => (
