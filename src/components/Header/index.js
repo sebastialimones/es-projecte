@@ -1,16 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { TimelineMax, Power2, gsap } from 'gsap';
-import { CSSPlugin } from 'gsap/CSSPlugin'
-import { useLocation } from 'react-router-dom'
-
+import { CSSPlugin } from 'gsap/CSSPlugin';
+import { useTagFilter } from '../../context/tagFilterContext';
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
 import { red, Sizes } from '../../constants';
 
 export const height = '5.5em';
 
-const Container = styled.header`
+const Container = styled.div``;
+
+const LogoContainer = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -18,7 +20,7 @@ const Container = styled.header`
 `;
 
 const Subtitle = styled.div`
-  margin-bottom: 0.5em;
+  /* margin-bottom: 0.5em; */
   font-style: italic;
 `;
 
@@ -26,48 +28,72 @@ const RedLine = styled.div`
   border-top: 2px solid ${red};
 `;
 
+const TagContainer = styled.p`
+  font-size: 1.1em;
+  padding-bottom: 0.4em;
+`;
+
+const Tag = styled.a`
+  color: gray;
+  font-size: 0.8em;
+  padding-right: 0.3em;
+  margin-right: 0.3em;
+  border-radius: 0.1em;
+  background-color: ${(props) => {
+    return props.backgroundColor;
+  }};
+`;
+
 export const Header = () => {
   const redLineRef = useRef(null);
-  const SubtitleRef = useRef(null)
+  const SubtitleRef = useRef(null);
+  const TagRef = useRef(null)
   const location = useLocation();
+  const { tagFilter } = useTagFilter();
+  const [headerContent, setHeaderContent] = useState();
 
   const tl = new TimelineMax();
-  // Force CSSPlugin to not get dropped during build. Error only in production.
-  gsap.registerPlugin(CSSPlugin)
-
+  gsap.registerPlugin(CSSPlugin);
+  
   useEffect( () => {
     tl.fromTo(SubtitleRef.current, 1, { x: "-100%", opacity: 0}, { x: "0%", ease: Power2.easeInOut, opacity: 1} )    
   });
 
-  const subtitleMapper = (location) => {
-    switch(location) {
-      case "/":
-        return "Terapia gestalt y mediación"
-      case "/blog/qui-som":
-        return "" 
-      case "/blog":
-        return "Artículos"
-      case "/books":
-        return "Biblioteca"
-      case "/subscriute":
-        return "Suscríbete"
-      case "/cookiesPolicy":
-        return "Cookies"
+  useEffect(() => {
+    if (location.pathname === '/blog' && tagFilter) {
+      setHeaderContent(<Tag ref={TagRef} backgroundColor={tagFilter.color}>#{tagFilter.text}</Tag>);
+    } else {
+      setHeaderContent(<Subtitle ref={SubtitleRef}>{subtitleMapper(location.pathname)}</Subtitle>);
+    }
+  }, [location.pathname, tagFilter]);
+
+  const subtitleMapper = (pathname) => {
+    switch (pathname) {
+      case '/':
+        return 'Terapia gestalt y mediación';
+      case '/blog/qui-som':
+        return '';
+      case '/blog':
+        return 'Artículos';
+      case '/books':
+        return 'Biblioteca';
+      case '/subscriute':
+        return 'Suscríbete';
+      case '/cookiesPolicy':
+        return 'Cookies';
       default:
-        return "/"
-      };
+        return '/';
+    }
   };
 
   return (
-    <React.Fragment>
-      <Container >
-        <Logo size={ Sizes.S } />
+    <Container>
+      <LogoContainer>
+        <Logo size={Sizes.S} />
         <Navigation />
-      </Container>
-        <Subtitle ref={ SubtitleRef }>
-          { subtitleMapper(location.pathname) }
-        </Subtitle>
-      <RedLine ref={ redLineRef } />
-    </React.Fragment>
-  )
+      </LogoContainer>
+      <TagContainer>{headerContent}</TagContainer>
+      <RedLine ref={redLineRef} />
+    </Container>
+  );
 };

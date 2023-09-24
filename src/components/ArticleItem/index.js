@@ -118,7 +118,7 @@ export const ArticleItem = ({ article, handleTagClick }) => {
                     key={tag.text}
                     style={{ backgroundColor: tagColors[index] }}
                     href="#"
-                    onClick={() => handleTagClick(tag.text)}
+                    onClick={() => handleTagClick({ text: tag.text, color: tagColors[index] })}
                   >
                     #{tag.text}
                   </Tag>

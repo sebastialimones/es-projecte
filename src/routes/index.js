@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Article } from './Article';
-import { Articles } from './Articles';
 import { Home } from './Home';
 import { Books } from './Books';
 import { Layout } from './Layout';

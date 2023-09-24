@@ -5,7 +5,6 @@ import PrismicDOM from 'prismic-dom';
 import { ReadingTime } from '../ReadingTime';
 import { grey, red } from '../../constants';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
-import { useWindowSize } from '../../hooks/getWindowSize';
 
 const Container = styled.div`
   margin-top: 2em;
@@ -46,7 +45,6 @@ const ProgressBar = styled.div`
 
 export const Article = ({ article, isPost }) => {
   useScrollToTop();
-  const size = useWindowSize();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrolledBelowMenu, setScrolledBelowMenu] = useState(false); // New state variable
 

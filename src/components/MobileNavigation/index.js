@@ -1,5 +1,5 @@
 import React from 'react';
-import Dock from 'react-dock';
+import { Dock } from 'react-dock';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -34,7 +34,7 @@ const NavigationContainer = styled.div`
 `;
 
 export const MobileNavigation = ({ isVisible, toggleVisibility }) => (
-  <Dock position="right" isVisible={ isVisible } size={ 1 }>
+  <Dock position="top" isVisible={ isVisible } size={ 1 }>
     <CloseContainer>
       <Icon onClick={ toggleVisibility } type="times" />
     </CloseContainer>

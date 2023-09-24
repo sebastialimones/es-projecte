@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { BookItem } from '../BookItem';
 
@@ -18,7 +18,6 @@ const Container = styled.div`
 `;
 
 export const ListOfBooks = ({ books }) => {
-
   return (
     <Container>
       <BooksContainer>
