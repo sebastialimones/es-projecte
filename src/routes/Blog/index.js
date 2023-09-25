@@ -188,7 +188,7 @@ export const BlogRoute = ({ articles }) => {
               <LoaderContainer key={index}>
                 <LoaderArticleContainer>
                   <ImageContainer>
-                    <Skeleton variant="rectangular" width={210} height={218} />
+                    <Skeleton variant="rectangular" width={300} height={218} />
                   </ImageContainer>
                   <ContentContainer>
                     <Box sx={{ pt: 0.5 }}>
