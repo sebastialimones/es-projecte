@@ -10,10 +10,16 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useTagFilter } from '../../context/tagFilterContext';
+import media from '../../constants/media';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
+  ${media.mediumScreen`
+    flex-direction: column;
+  `}
 `;
 
 const ArticlesContainer = styled.div`
@@ -23,7 +29,36 @@ const ArticlesContainer = styled.div`
 const SidebarContainer = styled.div`
   flex: 1; /* Occupy 20% of available space */
   padding-left: 20px;
-  padding-top: 29px;
+  ${media.mediumScreen`
+    padding-left: 0px;
+  `}
+`;
+
+const ImageContainer = styled.div`
+  float: left;
+  height: 14em;
+  width: 40%;
+  ${media.smallScreen`width: 100%;`}
+`;
+
+const ContentContainer = styled.div`
+  float: left;
+  margin-left: 2em;
+  width: 50%;
+  ${media.smallScreen`
+    margin: 1em 0 0 0;
+    width: 100%;
+  `}
+`;
+
+const LoaderContainer = styled.div`
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+`;
+
+const LoaderArticleContainer = styled.div`
+  
 `;
 
 const { dispatch } = store;
@@ -42,13 +77,17 @@ export const BlogRoute = ({ articles }) => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [filteredArticles, setFilteredArticles] = useState(articles);
   const { setTagFilter } = useTagFilter();
-  
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+  const [isLoadingArchives, setIsLoadingArchives] = useState(true);
+
   useEffect(() => {
+    setIsLoadingPosts(true);
     const archivesMenu = () => {
       const articleFilter = articles.filter((item) => item.tags && item.tags.includes('post'));
       createArchiveList(articleFilter);
+      setIsLoadingArchives(false)
+      setIsLoadingPosts(false);
     };
-  
     if (articles.length > 0) {
       archivesMenu();
     } else {
@@ -57,7 +96,7 @@ export const BlogRoute = ({ articles }) => {
   }, [articles]);
   
   useEffect(() => {
-    if (selectedMonth) {
+    if(selectedMonth){
       const selectedDate = new Date(selectedMonth);
   
       const filtered = articles.filter((article) => {
@@ -143,23 +182,44 @@ export const BlogRoute = ({ articles }) => {
         <meta name="og:description" content="Articles Es Projecte" />
       </Helmet>
       <ArticlesContainer>
-        {Object.keys(filteredArticles).map((key) => (
-          <div key={key}>
-            {Array.isArray(filteredArticles[key])
-              ? filteredArticles[key]
-                  .filter((article) => !article.tags || article.tags.includes('post'))
-                  .map((article) => {
-                    return (
+        {isLoadingPosts ? (
+          <>
+            {Array.from({ length: 3 }, (_, index) => (
+              <LoaderContainer key={index}>
+                <LoaderArticleContainer>
+                  <ImageContainer>
+                    <Skeleton variant="rectangular" width={210} height={218} />
+                  </ImageContainer>
+                  <ContentContainer>
+                    <Box sx={{ pt: 0.5 }}>
+                      <Skeleton />
+                      <Skeleton width="60%" />
+                      <Skeleton />
+                      <Skeleton width="70%" />
+                    </Box>
+                  </ContentContainer>
+                </LoaderArticleContainer>
+              </LoaderContainer>
+            ))}
+          </>
+        ) : (
+          Object.keys(filteredArticles).map((key) => (
+            <div key={key}>
+              {Array.isArray(filteredArticles[key])
+                ? filteredArticles[key]
+                    .filter((article) => !article.tags || article.tags.includes('post'))
+                    .map((article) => (
                       <ArticleItem
                         key={article.uid}
                         article={article}
                         handleTagClick={handleTagClick}
+                        isLoadingPosts={isLoadingPosts}
                       />
-                    );
-                  })
-              : null}
-          </div>
-        ))}
+                    ))
+                : null}
+            </div>
+          ))
+        )}
       </ArticlesContainer>
       <SidebarContainer>
         {archives ? (
@@ -171,11 +231,12 @@ export const BlogRoute = ({ articles }) => {
             onArchiveClick={handleMonthClick}
             selectedMonthClick={selectedMonth}
             onSeeAllClick={handleSeeAllClick}
+            isLoadingArchives={isLoadingArchives}
           />
         ) : undefined}
       </SidebarContainer>
     </Container>
-  );
+  )
 };
 
 const mapStateToProps = (state) => ({

@@ -2,7 +2,6 @@ import PrismicDOM from 'prismic-dom';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { FormattedDate } from '../FormattedDate';
 import { ReadingTime } from '../ReadingTime';
 import { grey, red } from '../../constants';
