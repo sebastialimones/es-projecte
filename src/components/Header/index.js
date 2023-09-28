@@ -20,7 +20,6 @@ const LogoContainer = styled.header`
 `;
 
 const Subtitle = styled.div`
-  /* margin-bottom: 0.5em; */
   font-style: italic;
 `;
 
@@ -28,7 +27,7 @@ const RedLine = styled.div`
   border-top: 2px solid ${red};
 `;
 
-const TagContainer = styled.p`
+const TagContainer = styled.div`
   font-size: 1.1em;
   padding-bottom: 0.4em;
 `;

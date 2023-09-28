@@ -5,9 +5,11 @@ import PrismicDOM from 'prismic-dom';
 import { ReadingTime } from '../ReadingTime';
 import { grey, red } from '../../constants';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import media from '../../constants/media';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 
 const Container = styled.div`
-  margin-top: 2em;
+  /* margin-top: 1em; */
 `;
 
 const Title = styled.h1``;
@@ -16,19 +18,46 @@ const MetadataContainer = styled.div`
   color: ${grey};
   font-size: 0.8em;
   margin: 1em 0 2em 0;
+  `;
+
+const SubHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5em;
+  padding-top: 1em;
 `;
 
 const TitleArticle = styled.div`
-  & > p {
-    margin: 1em 1em;
-  }
-  margin-bottom: 2em;
+ flex: 2;
+`;
+
+const StyledIconContainer = styled.div`
+  padding-top: 2em;
+  padding-bottom: 2em;
+  float: right;
+  padding-left: 1em;
 `;
 
 const Content = styled.div`
   & > p {
     margin: 1em 0;
   }
+`;
+
+const ImageContainer = styled.div`
+  height: 14em;
+  width: 50%;
+  ${media.smallScreen`width: 100%;`}
+  padding-bottom: 1.5;
+`;
+
+const Image = styled.div`
+  background-image: url('${({ imageUrl }) => imageUrl}');
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
 `;
 
 const ProgressBar = styled.div`
@@ -100,8 +129,16 @@ export const Article = ({ article, isPost }) => {
         </MetadataContainer>,
       ]}
       {article.titol[0] && (
-        <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />
+        <SubHeaderContainer>
+          <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />
+          <StyledIconContainer>
+            <ShareOutlinedIcon></ShareOutlinedIcon>
+          </StyledIconContainer>
+        </SubHeaderContainer>
       )}
+      <ImageContainer>
+        <Image imageUrl={ article.imatge_principal.url } />
+      </ImageContainer>
       <Content dangerouslySetInnerHTML={{ __html: contentHTML }} />
     </Container>
   );

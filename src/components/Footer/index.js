@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { blueFarnam } from '../../constants/index'
+import { substackdarkerYellowBackground } from '../../constants/index'
 import media from '../../constants/media'
 
 export const height = '3em';
@@ -9,9 +9,8 @@ export const height = '3em';
 const Container = styled.footer`
   display: flex;
   justify-content: center;
-  border-top: 1px solid #eee;
   height: ${height};
-  color: ${blueFarnam};
+  background-color: ${substackdarkerYellowBackground};
   padding-bottom: 1em;
 `;
 
@@ -19,7 +18,7 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
   font-size: 1em;
   ${media.smallScreen`font-size: 10px;`}
-  color: red;
+  color: #FF0100;
   padding-top: 1em;
 `;
 

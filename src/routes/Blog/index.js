@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Sidebar } from '../../components/Sidebar';
 import { ArticleItem } from '../../components/ArticleItem';
+import ButtonContainer from '../../components/Button';
 import store from '../../store';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -57,9 +58,7 @@ const LoaderContainer = styled.div`
   flex-direction: column;
 `;
 
-const LoaderArticleContainer = styled.div`
-  
-`;
+const LoaderArticleContainer = styled.div``;
 
 const { dispatch } = store;
 
@@ -79,6 +78,7 @@ export const BlogRoute = ({ articles }) => {
   const { setTagFilter } = useTagFilter();
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [isLoadingArchives, setIsLoadingArchives] = useState(true);
+  const [showAllArticles, setShowAllArticles] = useState(false);
 
   useEffect(() => {
     setIsLoadingPosts(true);
@@ -176,6 +176,11 @@ export const BlogRoute = ({ articles }) => {
     setFilteredArticles({ 'filtered':filtered });
   };
 
+  const toggleShowAllArticles = () => {
+    setShowAllArticles(!showAllArticles);
+  };
+  const buttonLabel = showAllArticles ? 'Ver menos' : 'Ver todos';
+
   return (
     <Container>
       <Helmet key="helmet">
@@ -208,6 +213,7 @@ export const BlogRoute = ({ articles }) => {
               {Array.isArray(filteredArticles[key])
                 ? filteredArticles[key]
                     .filter((article) => !article.tags || article.tags.includes('post'))
+                    .slice(0, showAllArticles ? filteredArticles[key].length : 8)
                     .map((article) => (
                       <ArticleItem
                         key={article.uid}
@@ -220,6 +226,7 @@ export const BlogRoute = ({ articles }) => {
             </div>
           ))
         )}
+      <ButtonContainer label={buttonLabel} onClick={toggleShowAllArticles} />
       </ArticlesContainer>
       <SidebarContainer>
         {archives ? (

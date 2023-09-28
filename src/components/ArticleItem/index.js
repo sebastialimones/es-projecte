@@ -53,7 +53,8 @@ const Title = styled.h3`
 const MetadataContainer = styled.div`
   color: ${grey};
   font-size: 0.8em;
-  margin: 2em 0;
+  margin: 0.5em 0;
+  margin-bottom: 1.6em;
 `;
 
 const TagContainer = styled.p`

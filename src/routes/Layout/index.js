@@ -13,12 +13,14 @@ const InnerContainer = styled.section`
 `
 
 export const Layout = ({ children }) => (
+  <React.Fragment>
   <Container>
     <Header />
     <CookiesConsent />
     <InnerContainer>
       { children }
     </InnerContainer>
-    <Footer />
   </Container>
+  <Footer />
+  </React.Fragment>
 );

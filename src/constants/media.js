@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const sizes = {
+export const sizes = {
   mediumScreen: 1000,
   smallScreen: 700,
 };

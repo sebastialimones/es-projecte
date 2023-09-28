@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { red } from '../../constants';
+import { red,substackdarkerYellowBackground } from '../../constants';
 import { monthTranslations } from '../../constants/monthTranslations';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 const ArchiveMonthsContainer = styled.div`
   padding-left: 1em;
   padding-bottom: 1em;
-  background-color: #F9F7F7;
+  background-color: #F6EDDD;
   border-radius: 6px;
   padding-bottom: 0.5em;
   margin-bottom: 1em;
@@ -30,7 +30,7 @@ const StyledLinkOlder = styled.a`
   display: block;
   font-weight: bold;
   &:hover {
-    color: darkgray;
+    color: darkgray ;
   }
 `;
 
