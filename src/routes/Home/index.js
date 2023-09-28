@@ -119,7 +119,7 @@ export const HomeRoute = () => {
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
-  }, []);
+  }, [animationCompleted, svgRef]);
   
   return (
     <Container>

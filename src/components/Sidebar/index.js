@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { red,substackdarkerYellowBackground } from '../../constants';
+import { red } from '../../constants';
 import { monthTranslations } from '../../constants/monthTranslations';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';

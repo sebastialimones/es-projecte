@@ -5,8 +5,6 @@ import { TagFilterProvider } from './context/tagFilterContext';
 import './index.css';
 import { App } from './App';
 
-const backgroundColor = '#fff4e4';
-
   ReactDOM.render(
     <TagFilterProvider> 
       <App/>
