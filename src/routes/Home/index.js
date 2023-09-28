@@ -109,7 +109,7 @@ export const HomeRoute = () => {
       offsetValue = Math.max(0, Math.min(svgLength, offsetValue));
       setStrokeOffset(offsetValue);
     
-      if (offsetValue <= 960) {
+      if (offsetValue <= 970) {
         setAnimationCompleted(true);
         window.removeEventListener("wheel", handleScroll);
       }
