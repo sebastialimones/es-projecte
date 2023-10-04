@@ -94,7 +94,7 @@ const StyledSVG = styled(({ strokeLength, ...rest }, ref) => <MyDrawing ref={ref
 })`
   ${commonSVGStyles}
   path {
-    stroke: black;
+    stroke: #4A4A4A;
     stroke-dasharray: ${props => props.strokeLength};
     stroke-dashoffset: ${props => props.offset};
   }
