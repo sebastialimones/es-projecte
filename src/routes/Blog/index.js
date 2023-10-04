@@ -18,6 +18,7 @@ import Box from '@mui/material/Box';
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
+  padding-top: 6em;
   ${media.mediumScreen`
     flex-direction: column;
   `}

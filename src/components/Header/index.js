@@ -1,98 +1,108 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import { TimelineMax, Power2, gsap } from 'gsap';
-import { CSSPlugin } from 'gsap/CSSPlugin';
-import { useTagFilter } from '../../context/tagFilterContext';
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
-import { red, Sizes } from '../../constants';
+import { substackYellowBackground, Sizes } from '../../constants';
+import { SubscribeButton } from '../../elements/buttonElement';
+import { useSpring, animated } from '@react-spring/web';
+import media, { sizes } from '../../constants/media';
 
-export const height = '5.5em';
+const Container = styled.div`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: ${substackYellowBackground};
+`;
 
-const Container = styled.div``;
-
-const LogoContainer = styled.header`
-  align-items: center;
+const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5em;
+  align-items: center;
+  width: 100%;
+  border-bottom: 0.5px solid rgba(255, 1, 0, ${props => props.borderOpacity || 0}); // Using RGBA for opacity
 `;
 
-const Subtitle = styled.div`
-  font-style: italic;
+const LogoContainer = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: center; // Centers the Logo when there's extra space
+  flex-grow: 1;
 `;
 
-const RedLine = styled.div`
-  border-top: 2px solid ${red};
+const MenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; // Aligns children to the start (left)
+  padding-left: 3em;
+  ${media.smallScreen`
+    padding-left: 1em;
+  `}
 `;
 
-const TagContainer = styled.div`
-  font-size: 1.1em;
-  padding-bottom: 0.4em;
+const NavbarWrapper = styled.div`
+  position: relative;
+  padding-top: calc(${props => props.isScrolled ? '0.5em' : '1em'});  
 `;
 
-const Tag = styled.a`
-  color: gray;
-  font-size: 0.8em;
-  padding-right: 0.3em;
-  margin-right: 0.3em;
-  border-radius: 0.1em;
-  background-color: ${(props) => {
-    return props.backgroundColor;
-  }};
+const SubscribeButtonStyled =  styled.div`
+  padding-right: 3em; // Add padding for some space from the right edge
+  ${media.smallScreen`
+    padding-right: 1em;
+  `}
 `;
 
 export const Header = () => {
-  const redLineRef = useRef(null);
-  const SubtitleRef = useRef(null);
-  const TagRef = useRef(null)
-  const location = useLocation();
-  const { tagFilter } = useTagFilter();
-  const [headerContent, setHeaderContent] = useState();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const AnimatedTopRow = animated(TopRow);
 
-  const tl = new TimelineMax();
-  gsap.registerPlugin(CSSPlugin);
-  
-  useEffect( () => {
-    tl.fromTo(SubtitleRef.current, 1, { x: "-100%", opacity: 0}, { x: "0%", ease: Power2.easeInOut, opacity: 1} )    
+  const logoAnimation = useSpring({
+    transform: typeof window !== 'undefined' && window.innerWidth > sizes.smallScreen
+    ? (isScrolled ? 'translateY(0%) scale(0.8)' : 'translateY(50%) scale(1)')
+    : 'none',
+    opacity: 1,
+    config: { tension: 170, friction: 26 }
   });
 
-  useEffect(() => {
-    if (location.pathname === '/blog' && tagFilter) {
-      setHeaderContent(<Tag ref={TagRef} backgroundColor={tagFilter.color}>#{tagFilter.text}</Tag>);
-    } else {
-      setHeaderContent(<Subtitle ref={SubtitleRef}>{subtitleMapper(location.pathname)}</Subtitle>);
-    }
-  }, [location.pathname, tagFilter]);
+  const headerAnimation = useSpring({
+    height: isScrolled ? '5em' : '6em',
+    borderOpacity: isScrolled ? 0 : 1,
+    config: { tension: 170, friction: 26 }
+});
 
-  const subtitleMapper = (pathname) => {
-    switch (pathname) {
-      case '/':
-        return 'Terapia gestalt y mediación';
-      case '/blog/qui-som':
-        return '';
-      case '/blog':
-        return 'Artículos';
-      case '/books':
-        return 'Biblioteca';
-      case '/subscriute':
-        return 'Suscríbete';
-      case '/cookiesPolicy':
-        return 'Cookies';
-      default:
-        return '/';
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log("Scrolling...");
+        if (window.scrollY > 10) { 
+            setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
+        }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <Container>
-      <LogoContainer>
-        <Logo size={Sizes.S} />
-        <Navigation />
-      </LogoContainer>
-      <TagContainer>{headerContent}</TagContainer>
-      <RedLine ref={redLineRef} />
+    <NavbarWrapper isScrolled={isScrolled}>
+      <Container>
+      <AnimatedTopRow borderOpacity={headerAnimation.borderOpacity} style={headerAnimation}>
+        <MenuContainer>
+          <Navigation />
+        </MenuContainer>
+        <LogoContainer>
+          <animated.div style={logoAnimation}>
+            <Logo size={Sizes.S} />
+          </animated.div>
+        </LogoContainer>
+        <SubscribeButtonStyled>
+          <SubscribeButton />
+        </SubscribeButtonStyled>
+      </AnimatedTopRow>
     </Container>
+    </NavbarWrapper>
   );
 };

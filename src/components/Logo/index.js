@@ -10,7 +10,7 @@ const FirstTD = styled.td`
 `;
 
 const Title = styled.h1`
-  font-family: 'Gravitas One', sans-serif;
+  font-family: 'Lora','Gravitas One', sans-serif;
   font-size: ${({ size }) => size === Sizes.S ? '2em' : '3em'};
   ${({ size }) => size === Sizes.S
     ? media.smallScreen`font-size: 1.5em;`
@@ -28,7 +28,7 @@ export const Logo = ({ size }) => (
     <tbody>
       <tr>
         <FirstTD size={ size }>
-          <Link to="/"><Title size={ size }>Sebastià</Title></Link>
+          <Link to="/"><Title size={ size }>Tià</Title></Link>
         </FirstTD>
         <td>
           <Link to="/"><Title size={ size }>Limones</Title></Link>

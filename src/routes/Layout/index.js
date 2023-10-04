@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Container } from '../../components/Container';
-import { Footer, height as footerHeight } from '../../components/Footer';
-import { Header, height as headerHeight } from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
 import { CookiesConsent } from '../../components/CookiesConsent';
+import { HEADER_HEIGHT, FOOTER_HEIGHT } from '../../constants';
 
 const InnerContainer = styled.section`
-  height: calc(100% - ${headerHeight} - ${footerHeight});
-  min-height: calc(100vh - ${headerHeight} - ${footerHeight});
+  height: calc(100% - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT});
+  min-height: calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT});
   overflow: auto;
 `
 

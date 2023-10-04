@@ -15,6 +15,7 @@ const SmallScreen = styled.div`
 
 const LargeScreen = styled.div`
   display: block;
+  margin-right: 1em;
   ${media.smallScreen`display: none;`}
 `;
 

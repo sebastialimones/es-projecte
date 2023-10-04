@@ -8,6 +8,7 @@ const BooksContainer = styled.div`
   justify-content: space-around;
   overflow: hidden;
   margin-top: 1em;
+  padding-top: 6em;
 `;
 
 const Container = styled.div` 

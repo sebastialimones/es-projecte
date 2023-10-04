@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import media from '../../constants/media';
 import  { red, lightGrey } from '../../constants';
-import Emoji from 'a11y-react-emoji';
 import { TimelineMax, Power2 } from 'gsap';
 
 const Wrapper = styled.div`
@@ -66,7 +65,7 @@ export const CookiesContent = ({ onAccept }) => {
   return (
     <Wrapper ref={ WrapperRef }>
       <CookieText>
-      <Emoji symbol="🍪" label="cookie"/> Per acceptar les cookies, prem Ok. Per saber-ne més: <Link href="./cookiesPolicy">Aquí</Link>
+      {/* <Emoji symbol="🍪" label="cookie"/> Per acceptar les cookies, prem Ok. Per saber-ne més: <Link href="./cookiesPolicy">Aquí</Link> */}
       </CookieText>
       <ButtonContainer>
         <ButtonElement onClick={ onAccept }>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { red } from '../../constants';
 
 const List = styled.ul`
@@ -21,6 +20,5 @@ export const Navigation = () => (
     <ListItem><Link to="/blog">Artículos</Link></ListItem>
     <ListItem><Link to="/articles/qui-som">Bio</Link></ListItem>
     <ListItem><Link to="/books">Biblioteca</Link></ListItem>
-    <ListItem><Link to="/subscriute">Suscríbete</Link></ListItem>
   </List>
 );
