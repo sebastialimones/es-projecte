@@ -5,7 +5,7 @@ import { Navigation } from '../../containers/Navigation';
 import { substackYellowBackground, Sizes } from '../../constants';
 import { SubscribeButton } from '../../elements/buttonElement';
 import { useSpring, animated } from '@react-spring/web';
-import media, { sizes } from '../../constants/media';
+import media, {sizes} from '../../constants/media';
 
 const Container = styled.div`
   display: flex;
@@ -22,20 +22,20 @@ const TopRow = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 0.5px solid rgba(255, 1, 0, ${props => props.borderOpacity || 0}); // Using RGBA for opacity
+  border-bottom: 0.5px solid rgba(255, 1, 0, ${props => props.borderOpacity || 0});
 `;
 
 const LogoContainer = styled.header`
   display: flex;
   align-items: center;
-  justify-content: center; // Centers the Logo when there's extra space
+  justify-content: center;
   flex-grow: 1;
 `;
 
 const MenuContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start; // Aligns children to the start (left)
+  justify-content: flex-start;
   padding-left: 3em;
   ${media.smallScreen`
     padding-left: 1em;
@@ -47,8 +47,8 @@ const NavbarWrapper = styled.div`
   padding-top: calc(${props => props.isScrolled ? '0.5em' : '1em'});  
 `;
 
-const SubscribeButtonStyled =  styled.div`
-  padding-right: 3em; // Add padding for some space from the right edge
+const SubscribeButtonStyled = styled.div`
+  padding-right: 3em;
   ${media.smallScreen`
     padding-right: 1em;
   `}
@@ -70,16 +70,15 @@ export const Header = () => {
     height: isScrolled ? '5em' : '6em',
     borderOpacity: isScrolled ? 0 : 1,
     config: { tension: 170, friction: 26 }
-});
+  });
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("Scrolling...");
-        if (window.scrollY > 10) { 
-            setIsScrolled(true);
-        } else {
-            setIsScrolled(false);
-        }
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -89,20 +88,20 @@ export const Header = () => {
   return (
     <NavbarWrapper isScrolled={isScrolled}>
       <Container>
-      <AnimatedTopRow borderOpacity={headerAnimation.borderOpacity} style={headerAnimation}>
-        <MenuContainer>
-          <Navigation />
-        </MenuContainer>
-        <LogoContainer>
-          <animated.div style={logoAnimation}>
-            <Logo size={Sizes.S} />
-          </animated.div>
-        </LogoContainer>
-        <SubscribeButtonStyled>
-          <SubscribeButton />
-        </SubscribeButtonStyled>
-      </AnimatedTopRow>
-    </Container>
+        <AnimatedTopRow borderOpacity={headerAnimation.borderOpacity} style={headerAnimation}>
+          <MenuContainer>
+            <Navigation />
+          </MenuContainer>
+          <LogoContainer>
+            <animated.div style={logoAnimation}>
+              <Logo size={Sizes.S} />
+            </animated.div>
+          </LogoContainer>
+          <SubscribeButtonStyled>
+            <SubscribeButton />
+          </SubscribeButtonStyled>
+        </AnimatedTopRow>
+      </Container>
     </NavbarWrapper>
   );
 };
