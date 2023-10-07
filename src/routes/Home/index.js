@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ReactComponent as MyDrawing } from '../../assets/Face.svg';
+import React, { useState, useEffect, useRef } from 'react';
 import { ReactComponent as ClaudioDrawing } from '../../assets/Claudio1.svg';
 import media from '../../constants/media';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -11,17 +10,7 @@ const Container = styled.div`
   padding-top: 3em;
 `;
 
-const HeroContainer = styled.div`
-  display: flex;
-  /* align-items: center;  */
-  justify-content: center;
-  gap: 4em; // Adjust this value to change the distance between the SVGs
-  padding-top: 4em;
-`;
-
-
 const ANIMATION_DURATION_SECONDS = 10; // Convert to seconds
-const ANIMATION_START= 5000;
 
 const commonSVGStyles = `
   width: 35%;
@@ -55,157 +44,218 @@ const draw = keyframes`
   }
 `;
 
-const StyledSVG = styled(MyDrawing)`
-  ${commonSVGStyles}
-  path {
-    stroke: #4A4A4A;
-    stroke-dasharray: 1;
-    animation: ${draw} ${ANIMATION_DURATION_SECONDS}s forwards;  }
-`;
-
 const StyledClaudioSVG = styled(ClaudioDrawing)`
   ${commonSVGStyles}
-  width: 28%; // Adjust as needed
   margin: 0; // Remove any margins
   path {
     stroke: #4A4A4A;
     stroke-dasharray: 1;
     animation: ${draw} ${ANIMATION_DURATION_SECONDS}s forwards;
   }
+  ${media.smallScreen`
+    margin-top: 1em; // Add some top margin to separate from the quote
+  `}
+`; 
+
+const StyledClaudioSVGWithStyles = styled(({ animate, ...props }) => <StyledClaudioSVG {...props} />)`
+  width: 60%; // Adjust as needed
+  height: auto;
+  path {
+    stroke-dashoffset: ${props => props.animate ? '0' : '1'};
+    animation: ${props => props.animate ? css`${draw} ${ANIMATION_DURATION_SECONDS}s forwards` : 'none'};
+  }
+  ${media.smallScreen`
+    width: 90%; // Adjust as needed
+  `}
 `;
 
-const FlippedSVG = styled(StyledSVG)`
-  transform: scaleX(-1);
+const StyledClaudioSVGWithStylesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 4em;
+  font-size: 1.5em; 
+  line-height: 1.5; 
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif; // A common sans-serif font
+  & > span {
+    display: block; 
+    border-radius: 10px; 
+    margin-bottom: 0.5em; 
+    max-width: 70%; 
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); // Adding a slight shadow
+  }
+  ${media.smallScreen`
+    font-size: 1.2em; 
+    width: 90%;
+  `}
 `;
 
 const LeftSender = styled.span`
-  background-color: #fff; // White background
-  align-self: flex-start; // Align to the left
-    &::after {
-      content: '12:34'; // Example timestamp
-      font-size: 0.6em;
-      position: absolute;
-      bottom: 5px;
-      right: 10px;
-      color: #888;
-    }
+  background-color: #fff;
+  align-self: flex-start;
+  padding: 1em 1.2em 1em 0.8em; // Increased left padding
+  min-width: 10%;
+
+  &::after {
+    content: '12:35';
+    font-size: 0.6em;
+    position: absolute;
+    bottom: 10px; // Adjusted position
+    right: 15px; // Adjusted position
+    color: #888;
+    bottom: 0.5em; // Adjust as needed
+    right: 0.5em;
+  }
+`;
+
+const RightSenderGifWrapper = styled.div`
+  background-color: #DCF8C6;
+  align-self: flex-end;
+  padding: 1em 1.2em 1em 0.8em;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 70%; // This will make it consistent with the other messages
+
+  &::after {
+    content: '12:35';
+    font-size: 0.6em;
+    position: absolute;
+    bottom: 0.3em;
+    right: 0.5em;
+    color: #888;
+  }
+
+  img {
+    width: 100%; // This will make the gif take up the full width of the RightSenderGifWrapper
+    height: auto;
+    display: block;
+    border-radius: 10px;
+  }
 `;
 
 const RightSender = styled.span`
-  background-color: #DCF8C6; // WhatsApp green
-  align-self: flex-end; // Align to the right
-  margin-left: auto; // Push the message to the right
-    &::after {
-      content: '12:35'; // Example timestamp
-      font-size: 0.6em;
-      position: absolute;
-      bottom: 5px;
-      right: 10px;
-      color: #888;
-    }
-`;
+  background-color: #DCF8C6;
+  align-self: flex-end;
+  margin-left: auto;
+  padding: 1em 1.2em 1em 0.8em; // Increased left padding
+  min-width: 10%;
 
-const Title = styled.div`
-  font-size: 1.5em; 
-  line-height: 1.5; 
-  width: 70%; // Limiting the width for better resemblance
-  margin: 0 auto; // Centering the conversation
-
-  & > span {
-    display: block; 
-    padding: 0.8em 1em; 
-    border-radius: 10px; 
-    margin-bottom: 0.5em; 
-    max-width: 70%; // Messages don't usually span the full width
-    position: relative; // For positioning the timestamp
+  &::after {
+    content: '12:35';
+    font-size: 0.6em;
+    position: absolute;
+    bottom: 10px; // Adjusted position
+    right: 15px; // Adjusted position
+    color: #888;
+    bottom: 0.5em; // Adjust as needed
+    right: 0.5em;
   }
-
-  ${media.smallScreen`
-    font-size: 1.2em; 
-    width: 90%; // More width on smaller screens
-  `}
-`;
-
-const LeftSvg = styled(FlippedSVG)`
-  ${media.smallScreen`
-  `}
-`;
-
-const Quote = styled.div`
-  font-size: 1.5em; // Adjust font size as needed
-  flex: 1; // This will make the quote take up the remaining space in the Box
-  padding-right: 1em; // Add some padding to separate it from the SVG
-  font-style: italic; // Set the font to italics
-  color: gray; // Set the font color to gray
 `;
 
 const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 70%;
   height: 17em;
-  border: 2px solid gray;
-  padding: 1em; // Adjust padding as needed
+  border: 2px solid #FAFAFA;
+  padding: 1em;
   margin-top: 3em;
   margin-bottom: 3em;
   border-radius: 8px;
+  overflow: hidden;
+  background-color: #FAFAFA; 
+
+  ${media.smallScreen`
+    height: auto;
+    padding: 0.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 4px;
+  `}
 `;
 
-const BoxDictionary = styled.div`
-  font-family: 'Merriweather', serif;
-  font-size: 1.2em; // Adjust font size for readability
-  color: #333; // Slightly gray color for softer text
-  flex: 1; 
-  padding-right: 1em; 
-  padding: 1em; // Padding inside the quote for spacing
-  border-left: 3px solid #666; // A left border to signify a quote or entry
-  margin-left: 1em; // Margin to separate the border from the text
-  line-height: 1.5; // Line height for better readability
-  margin-top: 4em;
-  margin-bottom: 4em;
-
-  // If you want to add a citation or source after the quote
+const Quote = styled.div`
+  font-size: 1.5em;
+  padding-right: 1em;
+  font-style: italic;
+  color: gray;
+  max-width: 50%;
   &::after {
-    content: '- Author or Source'; 
+    content: '- Claudio Naranjo'; 
     display: block;
     margin-top: 0.5em;
     font-size: 0.9em;
     font-style: italic;
   }
+  ${media.smallScreen`
+    font-size: 1em;
+    padding-right: 0.5em;
+    max-width: 70%;
+  `}
 `;
 
 const HomeRoute = () => {
-  const [isTitleVisible, setTitleVisibility] = useState(false);
+  const claudioRef = useRef(null);
+  const [isClaudioVisible, setIsClaudioVisible] = useState(false);
+  
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTitleVisibility(true);
-    }, ANIMATION_START);
-
-    return () => clearTimeout(timer); // Clear the timer if the component is unmounted before the timer fires
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsClaudioVisible(true);
+        }
+      },
+      {
+        threshold: 0.4,
+      }
+    );
+  
+    if (claudioRef.current) {
+      observer.observe(claudioRef.current);
+    }
+  
+    return () => {
+      if (claudioRef.current) {
+        observer.unobserve(claudioRef.current);
+      }
+    };
   }, []);
 
   return (
     <Container>
-      <HeroContainer>
-        {/* <LeftSvg /> */}
-        <Title>
-          <LeftSender>- Hola, som en Tià <br></br>i som terapeuta gestlat</LeftSender>
-          <RightSender>- Ges... què?</RightSender>
-          <LeftSender>- Gestalt</LeftSender>
-        </Title>
-      </HeroContainer>
-      <BoxDictionary>
-      gestalt (del alemán "Gestalt", forma, figura) <br></br> 
-      f. Psicol. Teoría que considera que los fenómenos psicológicos, especialmente la percepción, se organizan de manera innata en configuraciones o totalidades, y que estas no pueden reducirse al estudio de sus elementos.
-      </BoxDictionary>
       <Title>
-        <RightSender>- Ejem... <br></br></RightSender>
-        <LeftSender>- Perdó <br></br></LeftSender>
+        <LeftSender>Hola, me llamo Tià y soy terapeuta Gestlat</LeftSender>
+        <RightSender>Ges... qué?</RightSender>
+        <LeftSender>Gestalt</LeftSender>
+        <RightSender>😅</RightSender>
+        <LeftSender> Te explico como es para mi.</LeftSender>
+        <LeftSender> La gestalt es una terapia humanista pero sobre todo una manera de estar en el mundo.</LeftSender>
+        <RightSender>Y cuál es esta manera?</RightSender>
+        <LeftSender> Estar en el aquí y el ahora, es decir, más despierto, más consciente de lo que te pasa. </LeftSender>
+        <LeftSender> Más dispuesto a darte cuenta, a verlo! y después con lo que ves asumir tu responsabilidad, y confiar </LeftSender>
+        <LeftSender> Confiar en tu propia regulación, que es lo mismo que decir, confiar en que sabrás encontrar la manera de seguir adelante con esto </LeftSender>
+        <RightSenderGifWrapper>
+            <img src="https://media.giphy.com/media/XQq8UMo254P16/giphy.gif" alt="GIF Message" />
+        </RightSenderGifWrapper>  
+      <LeftSender>Claudio Naranjo lo explica mejor </LeftSender>
       </Title>
       <Box>
-        <Quote>"Parece que uno va a enriquecerse, para ser más, para ser más grande. Sin embargo, el proceso de transformación es de empobrecimiento; es más de renuncia. Es como ir a por lana y salir trasquilado..."</Quote>
-        <StyledClaudioSVG />
+        <Quote>"La terapia gestáltica no ha surgido como aplicación de un cuerpo teórico sino que más bien es un asunto de estar en el mundo de una cierta manera..."</Quote>
+        {/* <StyledClaudioSVG ref={claudioRef} animate={isClaudioVisible} />   */}
+        <StyledClaudioSVGWithStylesContainer ref={claudioRef}>
+          <StyledClaudioSVGWithStyles animate={isClaudioVisible} />
+        </StyledClaudioSVGWithStylesContainer>   
+      </Box>
+      <Box>
       </Box>
     </Container>
   );
