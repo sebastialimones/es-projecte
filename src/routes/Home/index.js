@@ -124,7 +124,7 @@ const RightSenderGifWrapper = styled.div`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   position: relative;
   max-width: 70%; // This will make it consistent with the other messages
-
+  margin-bottom: 0.7em;
   &::after {
     content: '12:35';
     font-size: 0.6em;
@@ -166,13 +166,13 @@ const Box = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 17em;
-  border: 2px solid #FAFAFA;
+  border: 2px solid #FFD1B3;
   padding: 1em;
   margin-top: 3em;
   margin-bottom: 3em;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #FAFAFA; 
+  background-color: #FFD1B3; 
 
   ${media.smallScreen`
     height: auto;
@@ -187,7 +187,7 @@ const Quote = styled.div`
   font-size: 1.5em;
   padding-right: 1em;
   font-style: italic;
-  color: gray;
+  color: #333333;
   max-width: 50%;
   &::after {
     content: '- Claudio Naranjo'; 
@@ -233,7 +233,8 @@ const HomeRoute = () => {
   return (
     <Container>
       <Title>
-        <LeftSender>Hola, me llamo Tià y soy terapeuta Gestlat</LeftSender>
+        <RightSender>Hola, eres Tià el terapeuta?</RightSender>
+        <LeftSender>Sii, soy yo, terapeuta Gestalt</LeftSender>
         <RightSender>Ges... qué?</RightSender>
         <LeftSender>Gestalt</LeftSender>
         <RightSender>😅</RightSender>
@@ -246,7 +247,7 @@ const HomeRoute = () => {
         <RightSenderGifWrapper>
             <img src="https://media.giphy.com/media/XQq8UMo254P16/giphy.gif" alt="GIF Message" />
         </RightSenderGifWrapper>  
-      <LeftSender>Claudio Naranjo lo explica mejor </LeftSender>
+        <LeftSender>Claudio Naranjo lo explica mejor </LeftSender>
       </Title>
       <Box>
         <Quote>"La terapia gestáltica no ha surgido como aplicación de un cuerpo teórico sino que más bien es un asunto de estar en el mundo de una cierta manera..."</Quote>
