@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { substackdarkerYellowBackground } from '../../constants/index'
 import media from '../../constants/media'
 
-export const height = '3em';
+export const height = '2em';
 
 const Container = styled.footer`
   display: flex;
@@ -12,6 +12,10 @@ const Container = styled.footer`
   height: ${height};
   background-color: ${substackdarkerYellowBackground};
   padding-bottom: 1em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 const StyledLink = styled(Link)`
@@ -37,4 +41,4 @@ export const Footer = () => (
     <Text>|</Text>
     <StyledLink to="/subscriute">Suscríbete</StyledLink>
   </Container>
-)
+);
