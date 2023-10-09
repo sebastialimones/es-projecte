@@ -2,7 +2,7 @@ import React from 'react';
 import { Dock } from 'react-dock';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { substackYellowBackground } from '../../constants';
 import { Icon } from '../Icon';
 
 const ItemLink = styled(Link)`
@@ -22,6 +22,7 @@ const ContentContainer = styled.div`
   height: 100%;
   justify-content: center;
   width: 100%;
+  background-color: ${substackYellowBackground};
 `;
 
 const NavigationContainer = styled.div`
@@ -40,7 +41,7 @@ export const MobileNavigation = ({ isVisible, toggleVisibility }) => (
     </CloseContainer>
     <ContentContainer>
       <NavigationContainer>
-        <ItemLink to="/">Artículos</ItemLink>
+        <ItemLink to="/blog">Artículos</ItemLink>
         <ItemLink to="/articles/qui-som">Bio</ItemLink>
         <ItemLink to="/books">Biblioteca</ItemLink>
       </NavigationContainer>
