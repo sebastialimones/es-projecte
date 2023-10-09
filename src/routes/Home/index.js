@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-top: 3em;
+  padding-bottom: 3em;
 `;
 
 const ANIMATION_DURATION_SECONDS = 10; // Convert to seconds
@@ -58,7 +59,7 @@ const StyledClaudioSVG = styled(ClaudioDrawing)`
 `; 
 
 const StyledClaudioSVGWithStyles = styled(({ animate, ...props }) => <StyledClaudioSVG {...props} />)`
-  width: 60%; // Adjust as needed
+  width: 45%; // Adjust as needed
   height: auto;
   path {
     stroke-dashoffset: ${props => props.animate ? '0' : '1'};
@@ -79,11 +80,12 @@ const Title = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 4em;
+  padding-top: 1em;
   font-size: 1.5em; 
-  line-height: 1.5; 
+  line-height: 1.3; 
   margin: 0 auto;
-  font-family: 'Arial', sans-serif; // A common sans-serif font
+  font-family: sans-serif; 
+  width: 70%;
   & > span {
     display: block; 
     border-radius: 10px; 
@@ -103,7 +105,11 @@ const LeftSender = styled.span`
   align-self: flex-start;
   padding: 1em 1.2em 1em 0.8em; // Increased left padding
   min-width: 10%;
-
+  a { // Targeting the hyperlink
+    color: blue; // Setting the hyperlink color to blue
+    text-decoration: none; // Optional: remove underline from the link
+    word-break: break-all;
+  }
   &::after {
     content: '12:35';
     font-size: 0.6em;
@@ -165,11 +171,10 @@ const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 17em;
   border: 2px solid #FFD1B3;
   padding: 1em;
-  margin-top: 3em;
-  margin-bottom: 3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   border-radius: 8px;
   overflow: hidden;
   background-color: #FFD1B3; 
@@ -184,11 +189,10 @@ const Box = styled.div`
 `;
 
 const Quote = styled.div`
-  font-size: 1.5em;
-  padding-right: 1em;
+  font-size: 0.8em;
+  padding-right: 0.7em;
   font-style: italic;
   color: #333333;
-  max-width: 50%;
   &::after {
     content: '- Claudio Naranjo'; 
     display: block;
@@ -238,26 +242,32 @@ const HomeRoute = () => {
         <RightSender>Ges... qué?</RightSender>
         <LeftSender>Gestalt</LeftSender>
         <RightSender>😅</RightSender>
-        <LeftSender> Te explico como es para mi.</LeftSender>
-        <LeftSender> La gestalt es una terapia humanista pero sobre todo una manera de estar en el mundo.</LeftSender>
+        <LeftSender> hahaha</LeftSender>
+        <LeftSender> Mira, la gestalt es una terapia humanista pero sobre todo una manera de estar en el mundo</LeftSender>
         <RightSender>Y cuál es esta manera?</RightSender>
-        <LeftSender> Estar en el aquí y el ahora, es decir, más despierto, más consciente de lo que te pasa. </LeftSender>
-        <LeftSender> Más dispuesto a darte cuenta, a verlo! y después con lo que ves asumir tu responsabilidad, y confiar </LeftSender>
-        <LeftSender> Confiar en tu propia regulación, que es lo mismo que decir, confiar en que sabrás encontrar la manera de seguir adelante con esto </LeftSender>
+        <LeftSender> Estar en el aquí y el ahora, más despierto y más consciente de lo que te pasa </LeftSender>
+        <LeftSender> Más dispuesto a darte cuenta y después, con lo que vas viendo, asumir tu responsabilidad, y confiar, eso es muy importante </LeftSender>
+        <LeftSender> Confiar en tu propia regulación, es decir, confiar en que sabrás encontrar la manera de seguir adelante con lo que vas viendo </LeftSender>
         <RightSenderGifWrapper>
             <img src="https://media.giphy.com/media/XQq8UMo254P16/giphy.gif" alt="GIF Message" />
         </RightSenderGifWrapper>  
         <LeftSender>Claudio Naranjo lo explica mejor </LeftSender>
+        <Box>
+          <Quote>"La terapia gestáltica no ha surgido como aplicación de un cuerpo teórico sino que más bien es un asunto de estar en el mundo de una cierta manera..."</Quote>
+          {/* <StyledClaudioSVG ref={claudioRef} animate={isClaudioVisible} />   */}
+          <StyledClaudioSVGWithStylesContainer ref={claudioRef}>
+            <StyledClaudioSVGWithStyles animate={isClaudioVisible} />
+          </StyledClaudioSVGWithStylesContainer>   
+        </Box>
+        <RightSender>Y trabajas presencial o también online?</RightSender>
+        <LeftSender>Presencial en Palma de Mallorca o online donde sea... </LeftSender>
+        <RightSender>Puedo saber más de tí?</RightSender>
+        <LeftSender>
+          claro! mira aquí <a href="https://sebastialimones.com/articles/qui-som">https://sebastialimones.com/articles/qui-som</a> o aquí <a href="https://sebastialimones.com/blog">https://sebastialimones.com/blog</a>
+        </LeftSender>
+        <RightSender>Gracias!</RightSender>
+        <LeftSender>A tí! </LeftSender>
       </Title>
-      <Box>
-        <Quote>"La terapia gestáltica no ha surgido como aplicación de un cuerpo teórico sino que más bien es un asunto de estar en el mundo de una cierta manera..."</Quote>
-        {/* <StyledClaudioSVG ref={claudioRef} animate={isClaudioVisible} />   */}
-        <StyledClaudioSVGWithStylesContainer ref={claudioRef}>
-          <StyledClaudioSVGWithStyles animate={isClaudioVisible} />
-        </StyledClaudioSVGWithStylesContainer>   
-      </Box>
-      <Box>
-      </Box>
     </Container>
   );
 };

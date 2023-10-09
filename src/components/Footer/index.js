@@ -38,7 +38,7 @@ export const Footer = () => (
     <Text>© Sebastià Limones, 2023</Text>
     <Text>|</Text>
     <Text>Tots els drets reservats</Text>
-    <Text>|</Text>
-    <StyledLink to="/subscriute">Suscríbete</StyledLink>
+    {/* <Text>|</Text> */}
+    {/* <StyledLink to="/subscriute">Suscríbete</StyledLink> */}
   </Container>
 );

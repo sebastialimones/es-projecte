@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
 import { substackYellowBackground, Sizes } from '../../constants';
-import { SubscribeButton } from '../../elements/buttonElement';
+// import { SubscribeButton } from '../../elements/buttonElement';
 import { useSpring, animated } from '@react-spring/web';
 import media, {sizes} from '../../constants/media';
 
@@ -97,9 +97,9 @@ export const Header = () => {
               <Logo size={Sizes.S} />
             </animated.div>
           </LogoContainer>
-          <SubscribeButtonStyled>
+          {/* <SubscribeButtonStyled>
             <SubscribeButton />
-          </SubscribeButtonStyled>
+          </SubscribeButtonStyled> */}
         </AnimatedTopRow>
       </Container>
     </NavbarWrapper>
