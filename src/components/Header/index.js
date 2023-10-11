@@ -7,7 +7,7 @@ import { substackYellowBackground, Sizes } from '../../constants';
 // import { SubscribeButton } from '../../elements/buttonElement';
 import { useSpring, animated } from '@react-spring/web';
 import media, {sizes} from '../../constants/media';
-import IMG_2685 from '../../../src/assets/IMG_2685.jpeg'
+import IMG_5717 from '../../../src/assets/IMG_5717.png'
 
 const Container = styled.div`
   display: flex;
@@ -102,7 +102,7 @@ export const Header = () => {
       <Container>
         <AnimatedTopRow borderOpacity={headerAnimation.borderOpacity} style={headerAnimation}>
           <LogoContainer isHome={isHomePage}>
-              {location.pathname === '/' && <Avatar src={IMG_2685} alt="Tia" />}
+              {location.pathname === '/' && <Avatar src={IMG_5717} alt="Tia" />}
             {/* <animated.div style={logoAnimation}> */}
               <Logo size={Sizes.S} />
             {/* </animated.div> */}
