@@ -12,7 +12,6 @@ const Container = styled.footer`
   height: ${height};
   background-color: ${substackdarkerYellowBackground};
   padding-bottom: 1em;
-  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -38,7 +37,5 @@ export const Footer = () => (
     <Text>© Sebastià Limones, 2023</Text>
     <Text>|</Text>
     <Text>Tots els drets reservats</Text>
-    {/* <Text>|</Text> */}
-    {/* <StyledLink to="/subscriute">Suscríbete</StyledLink> */}
   </Container>
 );

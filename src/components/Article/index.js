@@ -12,7 +12,8 @@ const Container = styled.div`
   /* margin-top: 1em; */
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+`;
 
 const MetadataContainer = styled.div`
   color: ${grey};
@@ -24,8 +25,8 @@ const SubHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1.5em;
-  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-top: 4em;
 `;
 
 const TitleArticle = styled.div`
@@ -40,6 +41,7 @@ const StyledIconContainer = styled.div`
 `;
 
 const Content = styled.div`
+  margin-top: ${({ hasImage }) => (hasImage ? '3.5em' : '6em')};
   & > p {
     margin: 1em 0;
   }
@@ -62,14 +64,14 @@ const Image = styled.div`
 
 const ProgressBar = styled.div`
   position: fixed;
-  top: 0;
-  left: 10;
-  width: ${props => props.scrollProgress}%; /* Updated to use props */
-  height: 2px; /* Adjust the height as needed */
-  background-color: ${red}; /* Progress bar color */
+  top: 5em;
+  left: 0;  // Corrected this line
+  width: ${props => props.scrollProgress}%;
+  height: 2px;
+  background-color: ${red};
   z-index: 9999;
   transition: width 0.2s ease-in-out;
-  display: ${props => (props.scrolledBelowMenu ? 'block' : 'none')}; /* Conditional rendering */
+  display: ${props => (props.scrolledBelowMenu ? 'block' : 'none')};
 `;
 
 export const Article = ({ article, isPost }) => {
@@ -121,13 +123,13 @@ export const Article = ({ article, isPost }) => {
 
   return (
     <Container>
-      <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu} />
       {isPost && [
         <Title key="title">{PrismicDOM.RichText.asText(article.titol)}</Title>,
         <MetadataContainer key="metadata">
           <ReadingTime text={PrismicDOM.RichText.asHtml(article.contingut)} />
         </MetadataContainer>,
       ]}
+  
       {article.titol[0] && (
         <SubHeaderContainer>
           <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />
@@ -136,10 +138,13 @@ export const Article = ({ article, isPost }) => {
           </StyledIconContainer>
         </SubHeaderContainer>
       )}
-      <ImageContainer>
-        <Image imageUrl={ article.imatge_principal.url } />
-      </ImageContainer>
-      <Content dangerouslySetInnerHTML={{ __html: contentHTML }} />
+      <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu} />
+      {article.imatge_principal?.url && (
+        <ImageContainer>
+          <Image imageUrl={ article.imatge_principal.url } />
+        </ImageContainer>
+      )}
+      <Content hasImage={!!article.imatge_principal?.url} dangerouslySetInnerHTML={{ __html: contentHTML }} />
     </Container>
   );
 };
