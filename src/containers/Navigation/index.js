@@ -19,7 +19,7 @@ const LargeScreen = styled.div`
   ${media.smallScreen`display: none;`}
 `;
 
-export const Nav = () => {
+export const Nav = ({ setIsModalOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [route, setRoute] = useState();
   const match = useRouteMatch();
@@ -49,7 +49,7 @@ export const Nav = () => {
       </div>
     </SmallScreen>,
     <LargeScreen key="large">
-      <DesktopNavigation />
+      <DesktopNavigation onContactClick={() => setIsModalOpen(true)}/>
     </LargeScreen>
   ]);
 };

@@ -34,7 +34,11 @@ const NavigationContainer = styled.div`
   margin: auto 0;
 `;
 
-export const MobileNavigation = ({ isVisible, toggleVisibility }) => (
+const Item = styled.div`
+  font-size: 1.5em;
+`;
+
+export const MobileNavigation = ({ isVisible, toggleVisibility, onContactClick }) => (
   <Dock position="top" isVisible={ isVisible } size={ 1 }>
     <CloseContainer>
       <Icon onClick={ toggleVisibility } type="times" />
@@ -44,6 +48,7 @@ export const MobileNavigation = ({ isVisible, toggleVisibility }) => (
         <ItemLink to="/blog">Artículos</ItemLink>
         <ItemLink to="/articles/qui-som">Bio</ItemLink>
         <ItemLink to="/books">Biblioteca</ItemLink>
+        <Item onClick={ onContactClick } style={{ cursor: 'pointer' }}>Contacto</Item>
       </NavigationContainer>
     </ContentContainer>
   </Dock>

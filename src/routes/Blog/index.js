@@ -3,17 +3,18 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Sidebar } from '../../components/Sidebar';
 import { ArticleItem } from '../../components/ArticleItem';
 import ButtonContainer from '../../components/Button';
 import store from '../../store';
+import { useTagFilter } from '../../context/tagFilterContext';
+import media from '../../constants/media';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { useTagFilter } from '../../context/tagFilterContext';
-import media from '../../constants/media';
-import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 
 const Container = styled.div`
   display: flex;
@@ -80,21 +81,22 @@ export const BlogRoute = ({ articles }) => {
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [isLoadingArchives, setIsLoadingArchives] = useState(true);
   const [showAllArticles, setShowAllArticles] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     setIsLoadingPosts(true);
-    const archivesMenu = () => {
-      const articleFilter = articles.filter((item) => item.tags && item.tags.includes('post'));
-      createArchiveList(articleFilter);
-      setIsLoadingArchives(false)
-      setIsLoadingPosts(false);
-    };
-    if (articles.length > 0) {
-      archivesMenu();
-    } else {
-      dispatch.articles.getList();
-    }
+    dispatch.articles.getList();
+  }, [location.pathname]);
+
+  useEffect(() => {
+      if (articles.length > 0) {
+          const articleFilter = articles.filter((item) => item.tags && item.tags.includes('post'));
+          createArchiveList(articleFilter);
+          setIsLoadingArchives(false);
+          setIsLoadingPosts(false);
+      }
   }, [articles]);
+
   
   useEffect(() => {
     if(selectedMonth){

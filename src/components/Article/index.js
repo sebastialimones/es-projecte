@@ -77,7 +77,23 @@ const ProgressBar = styled.div`
 export const Article = ({ article, isPost }) => {
   useScrollToTop();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [scrolledBelowMenu, setScrolledBelowMenu] = useState(false); // New state variable
+  const [scrolledBelowMenu, setScrolledBelowMenu] = useState(false);
+  const [isContentLong, setIsContentLong] = useState(false);
+  
+  useEffect(() => {
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // Check if content is longer than viewport
+    if (document.documentElement.scrollHeight > window.innerHeight) {
+        setIsContentLong(true);
+    } else {
+        setIsContentLong(false);
+    }
+
+    return () => {
+        window.removeEventListener('scroll', updateScrollProgress);
+    };
+}, []);
 
   const contentHTML = PrismicDOM.RichText.asHtml(article.contingut)
     .replace(/&lt;/g, '<')
@@ -138,7 +154,7 @@ export const Article = ({ article, isPost }) => {
           </StyledIconContainer>
         </SubHeaderContainer>
       )}
-      <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu} />
+      <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu && isContentLong} />
       {article.imatge_principal?.url && (
         <ImageContainer>
           <Image imageUrl={ article.imatge_principal.url } />
