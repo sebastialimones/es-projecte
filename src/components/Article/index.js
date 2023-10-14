@@ -9,7 +9,6 @@ import media from '../../constants/media';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 
 const Container = styled.div`
-  /* margin-top: 1em; */
 `;
 
 const Title = styled.h1`
@@ -74,12 +73,25 @@ const ProgressBar = styled.div`
   display: ${props => (props.scrolledBelowMenu ? 'block' : 'none')};
 `;
 
+const Tooltip = styled.div`
+  background-color: grey;
+  color: white;
+  padding: 5px 10px;
+  position: absolute;
+  top: -30px;  // You might need to adjust these values
+  right: 0;    // You might need to adjust these values
+  border-radius: 5px;
+  font-size: 0.8em;
+  display: ${({ show }) => (show ? 'block' : 'none')};
+`;
+
 export const Article = ({ article, isPost }) => {
   useScrollToTop();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrolledBelowMenu, setScrolledBelowMenu] = useState(false);
   const [isContentLong, setIsContentLong] = useState(false);
-  
+  const [showTooltip, setShowTooltip] = useState(false);
+
   useEffect(() => {
     window.addEventListener('scroll', updateScrollProgress);
 
@@ -137,6 +149,26 @@ export const Article = ({ article, isPost }) => {
   const mainMenuHeight = 89;
   const mobileMainMenuHeight = 77;
 
+  const handleShare = () => {
+    const url = window.location.href;
+
+    if (window.innerWidth <= 768) {  // Mobile
+        window.location.href = `whatsapp://send?text=${url}`;
+    } else {  // Desktop
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+              console.log('ion da dektio')
+                setShowTooltip(true);
+                setTimeout(() => setShowTooltip(false), 2000);  // Hide tooltip after 2 seconds
+            }).catch(err => {
+                console.error('Could not copy the URL', err);
+            });
+        } else {
+            alert(`Copy and share this link: ${url}`);
+        }
+    }
+  };
+
   return (
     <Container>
       {isPost && [
@@ -150,8 +182,11 @@ export const Article = ({ article, isPost }) => {
         <SubHeaderContainer>
           <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />
           <StyledIconContainer>
-            <ShareOutlinedIcon></ShareOutlinedIcon>
-          </StyledIconContainer>
+              <button onClick={handleShare}>
+                  <ShareOutlinedIcon />
+                  <Tooltip show={showTooltip}>Link copiado</Tooltip>
+              </button>
+          </StyledIconContainer>    
         </SubHeaderContainer>
       )}
       <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu && isContentLong} />

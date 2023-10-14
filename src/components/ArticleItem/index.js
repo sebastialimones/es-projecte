@@ -1,5 +1,5 @@
 import PrismicDOM from 'prismic-dom';
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormattedDate } from '../FormattedDate';
@@ -91,46 +91,43 @@ const getRandomColorFromPalette = () => {
   return colorPalette[randomIndex];
 };
 
-export const ArticleItem = ({ article, handleTagClick }) => {
-  const [tagColors, setTagColors] = useState([]);
+const generateTagColors = (tags) => tags.map(() => getRandomColorFromPalette());
 
-  if (tagColors.length === 0) {
-    const newTagColors = article.mytags.map(() => getRandomColorFromPalette());
-    setTagColors(newTagColors);
-  }
+export const ArticleItem = ({ article, handleTagClick }) => {
+  const [tagColors] = useState(() => generateTagColors(article.mytags));
 
   return(
     <Container>
       <ImageContainer>
-        <Image imageUrl={ article.imatge_principal.url } />
+        <Image imageUrl={article.imatge_principal.url} loading="lazy" />
       </ImageContainer>
       <ContentContainer>
-        <Link to={ `/articles/${article.uid}` }>
+        <Link to={`/articles/${article.uid}`}>
           <Title>
             {PrismicDOM.RichText.asText(article.titol)}
-          </Title>   
+          </Title>
         </Link>
-          {article.mytags.length ? (
-            <TagContainer>
-              {article.mytags.map((tag, index) => (
-                tag.text ? (
-                  <Tag 
-                    key={tag.text}
-                    style={{ backgroundColor: tagColors[index] }}
-                    href="#"
-                    onClick={() => handleTagClick({ text: tag.text, color: tagColors[index] })}
-                  >
-                    #{tag.text}
-                  </Tag>
-                ) : null
-              ))}
-            </TagContainer>
-          ) : null}
+        {article.mytags.length ? (
+          <TagContainer>
+            {article.mytags.map((tag, index) => (
+              tag.text ? (
+                <Tag
+                  key={tag.text}
+                  style={{ backgroundColor: tagColors[index] }}
+                  href="#"
+                  onClick={() => handleTagClick({ text: tag.text, color: tagColors[index] })}
+                >
+                  #{tag.text}
+                </Tag>
+              ) : null
+            ))}
+          </TagContainer>
+        ) : null}
         <MetadataContainer>
-          <ReadingTime text={ PrismicDOM.RichText.asText(article.contingut) } />
-          <DateContainer><FormattedDate date={ article.data_publicacio } /></DateContainer>
+          <ReadingTime text={PrismicDOM.RichText.asText(article.contingut)} />
+          <DateContainer><FormattedDate date={article.data_publicacio} /></DateContainer>
         </MetadataContainer>
-        <ShortContent>{ PrismicDOM.RichText.asText(article.contingut) }</ShortContent>
+        <ShortContent>{PrismicDOM.RichText.asText(article.contingut)}</ShortContent>
       </ContentContainer>
     </Container>
   );
