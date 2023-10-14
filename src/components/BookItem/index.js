@@ -156,13 +156,15 @@ export const BookItem = ({ book, isFirst }) => {
         <CardContainer>
           <Card className={classes.root} onClick={handleClick}>
             <ImageContainer key={book.imatge_principal.llibre.url}>
+              <source srcSet={book.imatge_principal.llibre.urlWebP} type="image/webp" />
               <img 
-                src={book.imatge_principal.llibre.url} 
+                src={`${book.imatge_principal.llibre.url}&w=300&h=400&auto=format`} 
                 alt={book.titol[0].text} 
+                loading="lazy"
                 style={{ 
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  borderRadius: '13px',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    borderRadius: '13px',
                 }} 
               />
             </ImageContainer>
