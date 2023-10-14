@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from 'react-modal';
 import IMG_5717 from '../../../src/assets/IMG_5717.png'
 import CloseIcon from '@mui/icons-material/Close';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 
 const ProfileModal = ({ isOpen, onRequestClose, style }) => {
@@ -19,7 +18,6 @@ const ProfileModal = ({ isOpen, onRequestClose, style }) => {
         <h2 style={styles.name}>Tià Limones</h2>
         <p style={styles.phoneNumber}>651 77 66 45</p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-          <InstagramIcon style={{ cursor: 'pointer' }} onClick={() => { /* Link to Instagram profile */ }} />
           <a href="mailto:sebas.limones@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>
             <EmailIcon style={{ cursor: 'pointer' }} />
           </a>

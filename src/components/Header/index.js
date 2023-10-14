@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
@@ -33,7 +32,11 @@ const LogoContainer = styled.header`
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  margin-left: ${props => props.isHome ? '-5em' : '0'};
+  ${media.smallScreen`
+    flex-grow: 0;
+    padding-left: 1em;
+    /* font-size: '44px', */
+  `}
 `;
 
 const MenuContainer = styled.div`
@@ -62,7 +65,6 @@ const Avatar = styled.img`
   height: 40px;
   border-radius: 50%; // Makes the image circular
   margin-right: 10px; // Space between the avatar and the logo or other elements
-  border: 2px solid white; // Optional: Add a border around the avatar
   cursor: pointer;
   text-decoration: none;
 `;
@@ -102,18 +104,19 @@ const mobileStyles = {
   padding: '0.5em',
   borderRadius: '4px',
   minWidth: '80vw', 
-  minHeight: '40vh',
+  minHeight: '50vh',
   zIndex: 1000,
 };
 
+const mobileMenuIconStyles = {
+  fontSize: '44px',
+};
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= sizes.smallScreen);
-  const location = useLocation();
   const AnimatedTopRow = animated(TopRow);
-  const isHomePage = location.pathname === '/';
   
   useEffect(() => {
     const handleResize = () => {
@@ -127,14 +130,6 @@ export const Header = () => {
   const mergedStyles = isSmallScreen 
     ? { ...customStyles, content: { ...customStyles.content, ...mobileStyles } }
     : customStyles;
-
-  const logoAnimation = useSpring({
-    transform: isSmallScreen 
-      ? 'none' 
-      : (isScrolled ? 'translateY(0%) scale(0.8)' : 'translateY(50%) scale(1)'),
-    opacity: 1,
-    config: { tension: 170, friction: 26 }
-  });
 
   const headerAnimation = useSpring({
     height: isScrolled ? '5em' : '6em',
@@ -165,16 +160,12 @@ export const Header = () => {
           style={mergedStyles}
         />
         <AnimatedTopRow borderOpacity={headerAnimation.borderOpacity} style={headerAnimation}>
-          <LogoContainer isHome={isHomePage}>
-              {location.pathname === '/' &&
-                <Avatar src={IMG_5717} alt="Tia" onClick={() => setIsModalOpen(true)}/>
-             }
-            {/* <animated.div style={logoAnimation}> */}
-              <Logo size={Sizes.S} />
-            {/* </animated.div> */}
+          <LogoContainer>
+              <Avatar src={IMG_5717} alt="Tia" onClick={() => setIsModalOpen(true)}/>
+            <Logo size={Sizes.S} />
           </LogoContainer>
           <MenuContainer>
-            <Navigation setIsModalOpen={setIsModalOpen} />
+            <Navigation setIsModalOpen={setIsModalOpen} style={isSmallScreen ? mobileMenuIconStyles : null} />
           </MenuContainer>
           {/* <SubscribeButtonStyled>
             <SubscribeButton />

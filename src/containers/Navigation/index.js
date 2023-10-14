@@ -45,6 +45,7 @@ export const Nav = ({ setIsModalOpen }) => {
         <MobileNavigation
           isVisible={ isVisible }
           toggleVisibility={ toggleVisibility }
+          onContactClick={() => setIsModalOpen(true)}
         />
       </div>
     </SmallScreen>,
