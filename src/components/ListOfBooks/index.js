@@ -25,8 +25,9 @@ export const ListOfBooks = ({ books }) => {
         {
           books
             .filter(book => !book.tags.indexOf('book'))
-            .map((book) =>
-            <BookItem key={ book.uid } book={ book } /> )
+            .map((book, index) =>
+              <BookItem key={book.uid} book={book} isFirst={index === 0} />
+            )
         } 
       </BooksContainer>
     </Container>
