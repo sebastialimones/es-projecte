@@ -3,12 +3,20 @@ import styled from 'styled-components';
 import PrismicDOM from 'prismic-dom';
 
 import { ReadingTime } from '../ReadingTime';
-import { grey, red } from '../../constants';
+import { grey, mainColor } from '../../constants';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
 import media from '../../constants/media';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import EmailIcon from '@mui/icons-material/Email';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const Container = styled.div`
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  ${media.smallScreen`
+    padding-left: 10px;
+  `}
 `;
 
 const Title = styled.h1`
@@ -24,12 +32,17 @@ const SubHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1em;
-  padding-top: 4em;
+  padding-bottom: 3em;
+  padding-top: 5em;
 `;
 
 const TitleArticle = styled.div`
  flex: 2;
+ color: ${mainColor};  
+ font-size: 3em;
+ ${media.smallScreen`
+  font-size: 1.5em;
+  `}
 `;
 
 const StyledIconContainer = styled.div`
@@ -37,6 +50,21 @@ const StyledIconContainer = styled.div`
   padding-bottom: 2em;
   float: right;
   padding-left: 1em;
+  position: relative;
+  ${media.smallScreen`
+    padding-top: 0em;
+    padding-bottom: 0em;
+  `}
+`;
+
+const IconButton = styled.button`
+  border: none;         
+  outline: none;        
+  background: none;
+  padding: 0;
+  margin: 0; 
+  box-shadow: none;
+  padding-top: 0.3em;
 `;
 
 const Content = styled.div`
@@ -63,27 +91,55 @@ const Image = styled.div`
 
 const ProgressBar = styled.div`
   position: fixed;
-  top: 5em;
-  left: 0;  // Corrected this line
-  width: ${props => props.scrollProgress}%;
-  height: 2px;
-  background-color: ${red};
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: ${props => props.scrollProgress}%; // Height will be based on scroll progress
+  background-color: ${mainColor};
   z-index: 9999;
-  transition: width 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
   display: ${props => (props.scrolledBelowMenu ? 'block' : 'none')};
+  ${media.smallScreen`width: 10px;`}
 `;
 
 const Tooltip = styled.div`
-  background-color: grey;
+  background-color: ${mainColor};
   color: white;
   padding: 5px 10px;
   position: absolute;
-  top: -30px;  // You might need to adjust these values
-  right: 0;    // You might need to adjust these values
+  top: -10px;  // You might need to adjust these values
+  left: 10px;    // You might need to adjust these values
   border-radius: 5px;
   font-size: 0.8em;
   display: ${({ show }) => (show ? 'block' : 'none')};
 `;
+
+const FooterContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 2em;
+  padding-bottom: 2em;
+`;
+
+const Separator = styled.div`
+  border-bottom: 1px solid ${grey};
+  height: 1.5em;
+  margin-left: 0.5em;
+  margin-right: 1em;
+`;
+
+const handleEmailClick = () => {
+  const subject = encodeURIComponent('Echalé un vistazo a este post!');
+  const body = encodeURIComponent(`Creo que te puede interesar: ${window.location.href}`);
+  window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+};
+
+const handleFacebookClick = () => {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, 'facebook-share-dialog', 'width=800,height=600');
+};
+
 
 export const Article = ({ article, isPost }) => {
   useScrollToTop();
@@ -180,13 +236,7 @@ export const Article = ({ article, isPost }) => {
   
       {article.titol[0] && (
         <SubHeaderContainer>
-          <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />
-          <StyledIconContainer>
-              <button onClick={handleShare}>
-                  <ShareOutlinedIcon />
-                  <Tooltip show={showTooltip}>Link copiado</Tooltip>
-              </button>
-          </StyledIconContainer>    
+          <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />  
         </SubHeaderContainer>
       )}
       <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu && isContentLong} />
@@ -196,6 +246,22 @@ export const Article = ({ article, isPost }) => {
         </ImageContainer>
       )}
       <Content hasImage={!!article.imatge_principal?.url} dangerouslySetInnerHTML={{ __html: contentHTML }} />
+      <Separator />
+      <FooterContainer>
+        <span>Publicado en {new Date(article.data_publicacio).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</span>
+        <StyledIconContainer>
+          <IconButton onClick={handleEmailClick}>
+              <EmailIcon />
+          </IconButton>
+          <IconButton onClick={handleFacebookClick}>
+              <FacebookIcon />
+          </IconButton>
+          <IconButton onClick={handleShare}>
+              <ShareOutlinedIcon />
+              <Tooltip show={showTooltip}>Link copiado</Tooltip>
+          </IconButton>
+      </StyledIconContainer>
+      </FooterContainer>
     </Container>
   );
 };

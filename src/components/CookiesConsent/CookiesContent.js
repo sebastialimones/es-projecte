@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import media from '../../constants/media';
-import  { red, lightGrey } from '../../constants';
+import  { mainColor, lightGrey } from '../../constants';
 import { TimelineMax, Power2 } from 'gsap';
 
 const Wrapper = styled.div`
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   bottom: 2em;
   padding: 1em;
   max-width: 20em;
-  border: 1px solid ${ red };
+  border: 1px solid ${ mainColor };
   border-radius: 0.1em;
   background-color: #ffffff;
   z-index: 10;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { red } from '../../constants';
+import { mainColor } from '../../constants';
 
 const List = styled.ul`
   padding: 0;
@@ -11,7 +11,7 @@ const ListItem = styled.li`
   display: inline;
   margin: 0.5em;
   &:hover {
-    color: ${red};
+    color: ${mainColor};
   }
 `;
 

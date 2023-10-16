@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { red } from '../../constants';
+import { mainColor } from '../../constants';
 import { monthTranslations } from '../../constants/monthTranslations';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
@@ -19,7 +19,7 @@ const ArchiveMonthsContainer = styled.div`
 const StyledLink = styled.a`
   display: block;
   padding-bottom: 0.2em;
-  color: ${props => (props.isSelected ? red : '#333')};  
+  color: ${props => (props.isSelected ? mainColor : '#333')};  
   &:hover {
     color: darkgray;
   }

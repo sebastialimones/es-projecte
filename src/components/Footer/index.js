@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { substackdarkerYellowBackground } from '../../constants/index'
+import { substackdarkerYellowBackground, mainColor } from '../../constants/index'
 import media from '../../constants/media'
 
 export const height = '2em';
@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
   font-size: 1em;
   ${media.smallScreen`font-size: 10px;`}
-  color: #FF0100;
+  color: ${mainColor};
   padding-top: 1em;
 `;
 

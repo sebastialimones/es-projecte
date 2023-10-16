@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Logo } from '../Logo';
 import { Navigation } from '../../containers/Navigation';
-import { substackYellowBackground, Sizes } from '../../constants';
+import { substackYellowBackground, Sizes, superLightGrey, red } from '../../constants';
 // import { SubscribeButton } from '../../elements/buttonElement';
 import { useSpring, animated } from '@react-spring/web';
 import media, {sizes} from '../../constants/media';
@@ -24,7 +24,6 @@ const TopRow = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 0.5px solid rgba(255, 1, 0, ${props => props.borderOpacity || 0});
 `;
 
 const LogoContainer = styled.header`
@@ -89,7 +88,7 @@ const customStyles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fafafa',
+    backgroundColor: superLightGrey,
 },
   overlay: {
     zIndex: 900,

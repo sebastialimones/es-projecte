@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormattedDate } from '../FormattedDate';
 import { ReadingTime } from '../ReadingTime';
-import { grey, red } from '../../constants';
+import { grey, mainColor } from '../../constants';
 import media from '../../constants/media';
 
 const Container = styled.article`
   padding: 2em 0;
-  border-bottom: 1px solid ${red};
+  border-bottom: 1px solid ${mainColor};
   &::after {
     content: '';
     clear: both;
@@ -46,7 +46,7 @@ const Title = styled.h3`
   font-weight: normal;
   font-size: 1.5em;
   &:hover {
-    color: ${red};
+    color: ${mainColor};
   }
 `;
 

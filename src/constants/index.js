@@ -1,9 +1,9 @@
 export const grey = '#6D6E6F';
 export const lightGrey = '#C0C0C0';
-export const red = '#FF0100';
+export const superLightGrey = '#fafafa';
+export const mainColor = '#FF6F50';
 export const darkRed = '#8c0d0d';
-export const blueFarnam = '#343c50';
-export const substackYellowBackground= '#fff4e4';
+export const substackYellowBackground= '#FAF8F0';
 export const substackdarkerYellowBackground= '#F5EDDD';
 export const Sizes = {
   S: 'small',

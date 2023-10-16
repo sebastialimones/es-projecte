@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import media from '../../constants/media';
-import { darkRed, red } from '../../constants';
+import { darkRed, mainColor } from '../../constants';
 
 const Form = styled.form`
   align-items: center;
@@ -13,7 +13,7 @@ const Form = styled.form`
 const Submit = styled.input.attrs({
   type: 'submit',
 })`
-  background-color: ${({ disabled }) => disabled ? `${darkRed}` : `${red}` };
+  background-color: ${({ disabled }) => disabled ? `${darkRed}` : `${mainColor}` };
   border-radius: 30px;
   color: #fff;
   font-family: inherit;
