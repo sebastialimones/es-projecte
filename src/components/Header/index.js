@@ -89,6 +89,7 @@ const customStyles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fafafa',
 },
   overlay: {
     zIndex: 900,

@@ -33,7 +33,6 @@ const ProfileModal = ({ isOpen, onRequestClose, style }) => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      
     },
     avatar: {
         width: '150px',

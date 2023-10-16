@@ -5,6 +5,7 @@ import ReactCardFlip from 'react-card-flip';
 import Card from '@material-ui/core/Card';
 import StarRatings from 'react-star-ratings';
 import { substackdarkerYellowBackground } from '../../constants';
+import { Helmet } from 'react-helmet';
 
 const MaxContainer = styled.div` 
   display: flex;
@@ -140,7 +141,7 @@ export const BookItem = ({ book, isFirst }) => {
       }, 1500);
   
       return () => clearTimeout(flipBackTimer);  
-    }, 500);
+    }, 1500);
   
     return () => clearTimeout(timer); 
   }, []);
@@ -155,6 +156,11 @@ export const BookItem = ({ book, isFirst }) => {
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <CardContainer>
           <Card className={classes.root} onClick={handleClick}>
+          {isFirst && (
+              <Helmet>
+                <link rel="preload" href={`${book.imatge_principal.llibre.url}&w=300&h=400&auto=format`} as="image" />
+              </Helmet>
+            )}
             <ImageContainer key={book.imatge_principal.llibre.url}>
               <source srcSet={book.imatge_principal.llibre.urlWebP} type="image/webp" />
               <img 

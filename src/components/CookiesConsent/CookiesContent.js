@@ -65,7 +65,7 @@ export const CookiesContent = ({ onAccept }) => {
   return (
     <Wrapper ref={ WrapperRef }>
       <CookieText>
-      {/* <Emoji symbol="🍪" label="cookie"/> Per acceptar les cookies, prem Ok. Per saber-ne més: <Link href="./cookiesPolicy">Aquí</Link> */}
+      <> Per acceptar les cookies, prem Ok. Per saber-ne més: <Link href="./cookiesPolicy">Aquí</Link></>
       </CookieText>
       <ButtonContainer>
         <ButtonElement onClick={ onAccept }>
