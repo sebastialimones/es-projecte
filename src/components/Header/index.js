@@ -1,29 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Logo } from '../Logo';
-import { Navigation } from '../../containers/Navigation';
-import { substackYellowBackground, Sizes, superLightGrey, red } from '../../constants';
+import { Nav } from '../../containers/Navigation';
+import {  Sizes, superLightGrey, red } from '../../constants';
 // import { SubscribeButton } from '../../elements/buttonElement';
 import { useSpring, animated } from '@react-spring/web';
 import media, {sizes} from '../../constants/media';
 import IMG_5717 from '../../../src/assets/IMG_5717.png'
 import ProfileModal from '../../components/ProfileModal';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { mainColor } from '../../constants';
 
 const Container = styled.div`
   display: flex;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: ${substackYellowBackground};
 `;
 
-const TopRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+const DockMenu = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 70vw;
+  background: ${mainColor};  // You can adjust this color
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 200;
+
+  &.open {
+    transform: translateX(0);
+  }
+  .close-icon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100vh;
+    cursor: pointer;
+    color: black; // Adjust color as needed
+    font-size: 3.5em; // Adjust size as needed
+  }
 `;
 
 const LogoContainer = styled.header`
@@ -115,8 +135,11 @@ const mobileMenuIconStyles = {
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDockOpen, setIsDockOpen] = useState(false);
+  const [rotation, setRotation] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= sizes.smallScreen);
-  const AnimatedTopRow = animated(TopRow);
+  const dockMenuRef = useRef(null);
+  const menuIconRef = useRef(null);
   
   useEffect(() => {
     const handleResize = () => {
@@ -131,11 +154,6 @@ export const Header = () => {
     ? { ...customStyles, content: { ...customStyles.content, ...mobileStyles } }
     : customStyles;
 
-  const headerAnimation = useSpring({
-    height: isScrolled ? '5em' : '6em',
-    borderOpacity: isScrolled ? 0 : 1,
-    config: { tension: 170, friction: 26 }
-  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -149,6 +167,32 @@ export const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dockMenuRef.current && menuIconRef.current) {  // Additional check here
+        if (!dockMenuRef.current.contains(event.target) && !menuIconRef.current.contains(event.target)) {
+          setIsDockOpen(false);
+        }
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const rotateAnimation = useSpring({
+    rotation: isDockOpen ? -80 : 0,
+    config: { tension: 170, friction: 26 },
+    onRest: () => {
+        setRotation(isDockOpen ? -180 : 0);
+    }
+  });
+
+  const handleClick = () => {
+    setIsDockOpen(prev => !prev);
+    setRotation(prev => (prev === 0 ? -180 : 0));
+  };
   
   return (
     <NavbarWrapper isScrolled={isScrolled}>
@@ -159,18 +203,31 @@ export const Header = () => {
           contentLabel="Profile Modal"
           style={mergedStyles}
         />
-        <AnimatedTopRow borderOpacity={headerAnimation.borderOpacity} style={headerAnimation}>
-          <LogoContainer>
-              <Avatar src={IMG_5717} alt="Tia" onClick={() => setIsModalOpen(true)}/>
-            <Logo size={Sizes.S} />
-          </LogoContainer>
+        <animated.div style={{ 
+            position: 'fixed', 
+            top: '10px', 
+            right: '10px', 
+            transform: rotateAnimation.rotation.to(r => `rotate(${r}deg)`),
+            fontSize: '40px',
+            zIndex: 201
+        }}>
+            {rotation >= -90 ?
+                <MenuIcon onClick={handleClick} fontSize="inherit" /> :
+                <CloseIcon onClick={handleClick} fontSize="inherit" />
+            }
+        </animated.div>
+        <LogoContainer>
+            <Avatar src={IMG_5717} alt="Tia" onClick={() => setIsModalOpen(true)}/>
+          <Logo size={Sizes.S} />
+        </LogoContainer>
+        <DockMenu ref={dockMenuRef} className={isDockOpen ? 'open' : ''}>
           <MenuContainer>
-            <Navigation setIsModalOpen={setIsModalOpen} style={isSmallScreen ? mobileMenuIconStyles : null} />
-          </MenuContainer>
+              <Nav setIsModalOpen={setIsModalOpen} style={isSmallScreen ? mobileMenuIconStyles : null} />
+          </MenuContainer>          
           {/* <SubscribeButtonStyled>
             <SubscribeButton />
           </SubscribeButtonStyled> */}
-        </AnimatedTopRow>
+        </DockMenu>
       </Container>
     </NavbarWrapper>
   );

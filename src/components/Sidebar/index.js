@@ -44,7 +44,7 @@ export const Sidebar = ({ archives, social, showAllArchives, onShowAllArchives, 
     <Grid item xs={12} md={4}>
       <ArchiveMonthsContainer>
         <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-          Archives
+          Archivo
         </Typography>
         {isLoadingArchives ? (
           <Box sx={{ width: 100 }}>

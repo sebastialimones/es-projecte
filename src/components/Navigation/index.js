@@ -4,15 +4,14 @@ import styled from 'styled-components';
 import { mainColor } from '../../constants';
 
 const List = styled.ul`
+  display: flex;
+  flex-direction: column;
   padding: 0;
 `;
 
 const ListItem = styled.li`
   display: inline;
   margin: 0.5em;
-  &:hover {
-    color: ${mainColor};
-  }
 `;
 
 export const Navigation = ({ onContactClick }) => (

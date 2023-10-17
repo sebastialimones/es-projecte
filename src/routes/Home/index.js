@@ -112,6 +112,27 @@ const Title = styled.div`
   `}
 `;
 
+const LeftMessageGifWrapper = styled.div`
+  background-color: #fff;
+  align-self: flex-start;
+  padding: 1em 10.em 1em 0.8em;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 30%; // This will make it consistent with the other messages
+  margin-bottom: 0.7em;
+  opacity: 0; // Start with opacity 0
+  img {
+    width: 100%; // This will make the gif take up the full width of the RightMessageGifWrapper
+    height: auto;
+    display: block;
+    border-radius: 10px;
+  }
+  &.visible {
+    animation: ${slideUpFadeIn} 0.8s forwards;
+  }
+`;
+
 const LeftMessage = styled.span`
   background-color: #fff;
   align-self: flex-start;
@@ -223,19 +244,20 @@ const formatTime = (date) => {
 
 
 const messages = [
-  { type: 'right', text: 'Hola, eres Tià el terapeuta?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'left', text: 'Sii, soy yo, terapeuta Gestalt', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'right', text: 'Ges... qué?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
-  { type: 'left', text: 'Gestalt', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'right', text: '😅', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
-  { type: 'left', text: 'hahaha', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'left', text: 'Mira, la gestalt es una terapia humanista pero sobre todo una manera de estar en el mundo', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
-  { type: 'right', text: 'Y cuál es esta manera?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'left', text: 'Estar en el aquí y el ahora, más despierto y más consciente de lo que te pasa', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
-  { type: 'left', text: 'Más dispuesto a darte cuenta y después, con lo que vas viendo, asumir tu responsabilidad, y confiar, eso es muy importante', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'left', text: 'Confiar en tu propia regulación, es decir, confiar en que sabrás encontrar la manera de seguir adelante con lo que vas viendo', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
+  { type: 'right', text: 'Hola, eres Tià?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'left', text: 'Sii, soy yo!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'right', text: 'Trabajas como terapeuta verdad? Mi amiga Maria me ha pasado tu contacto', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
+  { type: 'left', text: 'Sii 😄', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'right', text: 'Me ha comentado que trabajas con terapia gestalt?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
+  { type: 'left', text: 'Si, trabajo desde la terapia gestalt, la conoces?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'right', text: 'Me ha contado un poco María pero si me puedes hacer un resumen...', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'left', text: 'Mira, <a href="https://sebastialimones.com/articles/qui-som">aquí</a> escribí sobre como es para mi la gestalt', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
+  { type: 'right', text: 'Perfecto! me lo leo!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'left', text: 'En resumen, la gestalt intenta que aprendamos a estar en el mundo de otra manera. Estar más presentes, más despiertos y más consciente de lo nos pasa', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
+  { type: 'left', text: 'Más dispuestos a darnos cuenta y después, con lo que vamos viendo, asumir nuestra parte, nuestra responsabilidad y', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'left', text: 'Confiar en nuestra regulación, es decir, confiar en que sabremos encontrar la manera de seguir adelante con lo que vamos viendo', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
   { type: 'right', text: 'https://media.giphy.com/media/XQq8UMo254P16/giphy.gif', isGif: true , time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2)))},
-  { type: 'left', text: 'Claudio Naranjo lo explica mejor', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'left', text: 'jajajaaj', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
   { type: 'right', text: 'Y trabajas presencial o también online?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
   { type: 'left', text: 'Presencial en Palma de Mallorca y online donde sea...', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
   { type: 'right', text: 'Puedo saber más de tí?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
@@ -244,8 +266,11 @@ const messages = [
     text: 'claro! mira aquí <a href="https://sebastialimones.com/articles/qui-som">Bio</a> o aquí <a href="https://sebastialimones.com/blog">Blog</a>', 
     time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) 
   },
-  { type: 'right', text: 'Gracias!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'left', text: 'A tí!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) }
+  { type: 'right', text: 'Gracias, te digo cosas!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'left', text: 'A ti, me encanta esta expresión "te digo cosas"', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'right', text: 'Cosas!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 0))) },
+  { type: 'left', text: 'https://media.giphy.com/media/xUA7b2eF4mLdGLBWfK/giphy.gif',isGif: true , time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 0))) },
+
 ];
 
 const Message = ({ message, index }) => {
@@ -301,7 +326,19 @@ const Message = ({ message, index }) => {
         <Time>{message.time}</Time>
       </RightMessage>
     );
-  } else {
+} else {
+    if (message.isGif) {
+      return (
+        <LeftMessageGifWrapper
+          key={index}
+          ref={messageRef}
+          className={isVisible ? 'visible' : ''}
+        >
+          <img src={message.text} alt="GIF Message" />
+          <Time>{message.time}</Time>
+        </LeftMessageGifWrapper>
+      );
+    }
     return (
       <LeftMessage
         key={index}
@@ -312,59 +349,16 @@ const Message = ({ message, index }) => {
         <Time>{message.time}</Time>
       </LeftMessage>
     );
-  }
+  };
 };
   
 const HomeRoute = () => {
-  const claudioRef = useRef(null);
-  const [isClaudioVisible, setIsClaudioVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.target === claudioRef.current && entry.isIntersecting) {
-            setIsClaudioVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.4,
-      }
-    );
-
-    if (claudioRef.current) {
-      observer.observe(claudioRef.current);
-    }
-
-    return () => {
-      if (claudioRef.current) {
-        observer.unobserve(claudioRef.current);
-      }
-    };
-  }, []);
-
-  const splitIndex = 12; 
-  const messagesBeforeBox = messages.slice(0, splitIndex + 1);
-  const messagesAfterBox = messages.slice(splitIndex + 1);
   
   return (
     <Container>
       <Title>
-        {messagesBeforeBox.map((message, index) => (
+        {messages.map((message, index) => (
           <Message key={index} message={message} index={index} />
-        ))}
-        <Box>
-          <Quote>
-            "La terapia gestáltica no ha surgido como aplicación de un cuerpo teórico sino que más bien es un asunto de estar en el mundo de una cierta manera..."
-          </Quote>
-          <StyledClaudioSVGWithStylesContainer ref={claudioRef}>
-            <StyledClaudioSVGWithStyles animate={isClaudioVisible} />
-          </StyledClaudioSVGWithStylesContainer>
-        </Box>
-        {messagesAfterBox.map((message, index) => (
-          <Message key={index + splitIndex + 1} message={message} index={index + splitIndex + 1} />
         ))}
       </Title>
     </Container>
