@@ -1,12 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Icon } from '../../components/Icon';
 import { Navigation } from '../../components/Navigation';
 
-export const Nav = ({ setIsModalOpen }) => {
+export const Nav = ({ setIsModalOpen, setIsDockOpen }) => {
   return (
     <div>
-      <Navigation onContactClick={() => setIsModalOpen(true)} />
+      <Navigation onContactClick={() => {
+        setIsModalOpen(true);
+        setIsDockOpen(false);
+      }} />
     </div>
   );
 };

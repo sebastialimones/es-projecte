@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BookItem } from '../BookItem';
+import media from '../../constants/media';
 
 const BooksContainer = styled.div` 
   display: flex;
@@ -9,6 +10,9 @@ const BooksContainer = styled.div`
   overflow: hidden;
   margin-top: 1em;
   padding-top: 6em;
+  ${media.smallScreen`
+    padding-top: 1.5em;
+  `}
 `;
 
 const Container = styled.div` 

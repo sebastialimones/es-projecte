@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ReactComponent as ClaudioDrawing } from '../../assets/Claudio1.svg';
-import media from '../../constants/media';
 import styled, { keyframes, css } from 'styled-components';
+import AvatarComponent from '../../components/Avatar';
+import ProfileModal from '../../components/ProfileModal';
+import media from '../../constants/media';
 
 const Container = styled.div`
   display: flex;
@@ -9,6 +11,9 @@ const Container = styled.div`
   justify-content: center;
   padding-top: 4em;
   padding-bottom: 3em;
+  ${media.smallScreen`
+    padding-top: 1.5em; 
+  `}
 `;
 
 const ANIMATION_DURATION_SECONDS = 10; // Convert to seconds
@@ -192,47 +197,6 @@ const RightMessage = styled.span`
   }
 `;
 
-const Box = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 2px solid #FFD1B3;
-  padding: 1em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #FFD1B3; 
-
-  ${media.smallScreen`
-    height: auto;
-    padding: 0.5em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-radius: 4px;
-  `}
-`;
-
-const Quote = styled.div`
-  font-size: 0.8em;
-  padding-right: 0.7em;
-  font-style: italic;
-  color: #333333;
-  &::after {
-    content: '- Claudio Naranjo'; 
-    display: block;
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    font-style: italic;
-  }
-  ${media.smallScreen`
-    font-size: 1em;
-    padding-right: 0.5em;
-    max-width: 70%;
-  `}
-`;
-
-
 const initialTime = new Date(); // Set to any initial time you want
 initialTime.setHours(12, 35, 0); // Setting it to 12:35:00
 
@@ -244,7 +208,7 @@ const formatTime = (date) => {
 
 
 const messages = [
-  { type: 'right', text: 'Hola, eres Tià?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
+  { type: 'right', text: 'Hola, eres Sebastià?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
   { type: 'left', text: 'Sii, soy yo!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
   { type: 'right', text: 'Trabajas como terapeuta verdad? Mi amiga Maria me ha pasado tu contacto', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
   { type: 'left', text: 'Sii 😄', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
@@ -351,11 +315,17 @@ const Message = ({ message, index }) => {
     );
   };
 };
-  
+
 const HomeRoute = () => {
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Container>
+      <AvatarComponent setIsModalOpen={setIsModalOpen} />
+      <ProfileModal 
+        isOpen={isModalOpen} 
+        onRequestClose={() => setIsModalOpen(false)}
+      />
       <Title>
         {messages.map((message, index) => (
           <Message key={index} message={message} index={index} />

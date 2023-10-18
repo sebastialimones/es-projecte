@@ -28,7 +28,7 @@ export const Logo = ({ size }) => (
     <tbody>
       <tr>
         <FirstTD size={ size }>
-          <Link to="/"><Title size={ size }>Tià Limones</Title></Link>
+          <Link to="/"><Title size={ size }>Sebastià</Title></Link>
         </FirstTD>
       </tr>
       <tr>

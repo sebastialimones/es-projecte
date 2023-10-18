@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Playfair Display', serif, 'Afrah';
+  font-family: 'Playfair Display', serif, 'Afrah','Noe Display Medium';
   background-color: #FAF8F0;
 }
 
@@ -16,4 +16,19 @@ a {
 @font-face {
   font-family: 'Afrah';
   src: url('./fonts/AfrahLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noe Display Medium';
+  src: url('./fonts/FontsFree-Net-Noe-Display-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'VenturisADFCd-Regular';
+  src: url('./fonts/VenturisADFCd-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Raisonne-demibold';
+  src: url('./fonts/raisonne-demibold.ttf') format('truetype');
 }

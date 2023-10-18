@@ -22,6 +22,10 @@ const Container = styled.div`
   padding-top: 6em;
   ${media.mediumScreen`
     flex-direction: column;
+    padding-top:2em;
+  `}
+  ${media.smallScreen`
+    padding-top: 1.5em;
   `}
 `;
 

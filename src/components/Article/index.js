@@ -34,6 +34,9 @@ const SubHeaderContainer = styled.div`
   align-items: center;
   padding-bottom: 3em;
   padding-top: 5em;
+  ${media.smallScreen`
+    padding-top: 1.5em;
+  `}
 `;
 
 const TitleArticle = styled.div`
