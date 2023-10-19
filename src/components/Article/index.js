@@ -110,8 +110,8 @@ const Tooltip = styled.div`
   color: white;
   padding: 5px 10px;
   position: absolute;
-  top: -10px;  // You might need to adjust these values
-  left: 10px;    // You might need to adjust these values
+  top: -10px;
+  left: 10px;  
   border-radius: 5px;
   font-size: 0.8em;
   display: ${({ show }) => (show ? 'block' : 'none')};

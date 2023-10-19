@@ -52,7 +52,7 @@ export const MobileNavigation = ({ isVisible, toggleVisibility, onContactClick }
       <ContentContainer>
         <NavigationContainer>
           <ItemLink to="/blog">Artículos</ItemLink>
-          <ItemLink to="/articles/qui-som">Bio</ItemLink>
+          <ItemLink to="/bio">Bio</ItemLink>
           <ItemLink to="/books">Biblioteca</ItemLink>
           <Item onClick={handleContactClick} style={{ cursor: 'pointer' }}>
             Contacto

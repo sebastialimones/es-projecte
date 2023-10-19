@@ -24,7 +24,7 @@ const ListItem = styled.li`
 export const Navigation = ({ onContactClick }) => (
   <List>
     <ListItem><Link to="/blog">Artículos</Link></ListItem>
-    <ListItem><Link to="/articles/qui-som">Bio</Link></ListItem>
+    <ListItem><Link to="/bio">Bio</Link></ListItem>
     <ListItem><Link to="/books">Biblioteca</Link></ListItem>
     <ListItem onClick={onContactClick} style={{ cursor: 'pointer' }}>Contacto</ListItem>
     </List>

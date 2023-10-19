@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Nav } from '../../containers/Navigation';
 import {  mainColor } from '../../constants';
 import { useSpring, animated } from '@react-spring/web';
@@ -31,26 +31,32 @@ const Logo = styled.div`
 const DockMenu = styled.div`
   position: fixed;
   top: 0;
-  right: 0;  // Adjust to account for padding
+  right: 0;
   height: 100vh;
-  width: calc(70vw - 30px);
-  background: ${mainColor};  // You can adjust this color
+  width: calc(70vw - 30px); // For larger screens
+  background: ${mainColor};
   transform: translateX(100%);
   transition: transform 0.2s ease-in-out;
   z-index: 200;
   box-sizing: border-box;
+
   &.open {
     transform: translateX(0);
   }
+
   .close-icon {
     position: absolute;
     top: 0px;
     right: 0px;
     height: 100vh;
     cursor: pointer;
-    color: black; // Adjust color as needed
-    font-size: 3.5em; // Adjust size as needed
+    color: black;
+    font-size: 3.5em;
   }
+
+  ${media.smallScreen`
+    width: 100%;
+  `}
 `;
 
 const MenuContainer = styled.div`
@@ -78,14 +84,18 @@ const iconContainerStyles = {
   justifyContent: 'center'
 };
 
-const iconStyles = {
-  position: 'absolute',
-  top: '10px',
-  right: '40px',
-  fontSize: '40px',
-  zIndex: 201,
-  verticalAlign: 'middle'
-};
+const StyledIcon = styled(animated.div)`
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  font-size: 40px;
+  z-index: 201;
+  vertical-align: middle;
+
+  ${media.smallScreen`
+    right: 10px;
+  `}
+`;
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -147,17 +157,18 @@ export const Header = () => {
           <Logo isMenuOpen={isDockOpen}>Limones</Logo>
       </Link>
         <MenuContainer>
-          <animated.div style={{ 
-              ...iconStyles,
-              transform: rotateAnimation.rotation.to(r => `rotate(${r}deg)`)
-          }}>
+          <StyledIcon
+            style={{
+              transform: rotateAnimation.rotation.to(r => `rotate(${r}deg)`),
+            }}
+          >
             <div style={iconContainerStyles}>
               {rotation >= -90 ?
                   <MenuIcon onClick={handleClick} fontSize="inherit" /> :
                   <CloseIcon onClick={handleClick} fontSize="inherit" />
               }
             </div>
-          </animated.div>
+          </StyledIcon>
           <DockMenu ref={dockMenuRef} className={isDockOpen ? 'open' : ''}>
           <Nav 
             setIsModalOpen={setIsModalOpen} 

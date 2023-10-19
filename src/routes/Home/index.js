@@ -215,7 +215,7 @@ const messages = [
   { type: 'right', text: 'Me ha comentado que trabajas con terapia gestalt?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
   { type: 'left', text: 'Si, trabajo desde la terapia gestalt, la conoces?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
   { type: 'right', text: 'Me ha contado un poco María pero si me puedes hacer un resumen...', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
-  { type: 'left', text: 'Mira, <a href="https://sebastialimones.com/articles/qui-som">aquí</a> escribí sobre como es para mi la gestalt', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
+  { type: 'left', text: 'Mira, <a href="https://sebastialimones.com/bio">aquí</a> escribí sobre como es para mi la gestalt', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 3))) },
   { type: 'right', text: 'Perfecto! me lo leo!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
   { type: 'left', text: 'En resumen, la gestalt intenta que aprendamos a estar en el mundo de otra manera. Estar más presentes, más despiertos y más consciente de lo nos pasa', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) },
   { type: 'left', text: 'Más dispuestos a darnos cuenta y después, con lo que vamos viendo, asumir nuestra parte, nuestra responsabilidad y', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
@@ -227,7 +227,7 @@ const messages = [
   { type: 'right', text: 'Puedo saber más de tí?', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },
   { 
     type: 'left', 
-    text: 'claro! mira aquí <a href="https://sebastialimones.com/articles/qui-som">Bio</a> o aquí <a href="https://sebastialimones.com/blog">Blog</a>', 
+    text: 'claro! mira aquí <a href="https://sebastialimones.com/bio">Bio</a> o aquí <a href="https://sebastialimones.com/blog">Blog</a>', 
     time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 2))) 
   },
   { type: 'right', text: 'Gracias, te digo cosas!', time: formatTime(new Date(initialTime.setMinutes(initialTime.getMinutes() + 1))) },

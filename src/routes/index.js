@@ -7,6 +7,7 @@ import { Layout } from './Layout';
 import { Subscriute } from './Subscriute';
 import { CookiesPolicy } from './CookiesPolicy';
 import { Blog } from './Blog';
+import { Bio } from './Bio';
 
 const renderWithLayout = (Component, extraProps = {}) => (props) => (
   <Layout { ...props }>
@@ -26,6 +27,7 @@ export const Routes = () => {
         component={renderWithLayout(Home, { setIsModalOpen })}
       />     
       <Route exact path="/blog" component={ renderWithLayout(Blog) } />
+      <Route exact path="/bio" component={renderWithLayout(Bio)} />
       <Route exact path="/articles/:uid" component={ renderWithLayout(Article) } />
       <Route exact path="/books" component={ renderWithLayout(Books) } />
       <Route exact path="/subscriute" component={ renderWithLayout(Subscriute) } />
