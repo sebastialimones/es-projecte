@@ -7,7 +7,7 @@ import media from '../../constants/media';
 import ProfileModal from '../../components/ProfileModal';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const NavbarWrapper = styled.div`
   padding-top: calc(${props => props.isScrolled ? '0.5em' : '1em'});  
@@ -104,7 +104,8 @@ export const Header = () => {
   const [rotation, setRotation] = useState(0);
   const dockMenuRef = useRef(null);
   const menuIconRef = useRef(null);
-  
+  const location = useLocation();
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -145,6 +146,13 @@ export const Header = () => {
     });
     setRotation(prev => (prev === 0 ? -180 : 0));
   };
+
+  const handleLinkClick = (path) => {
+    if (!path || location.pathname === path) {
+      setIsDockOpen(false);
+    }
+  };
+
   return (
     <NavbarWrapper isScrolled={isScrolled}>
         <ProfileModal 
@@ -154,7 +162,7 @@ export const Header = () => {
         />
       <Container>
       <Link to="/">
-          <Logo isMenuOpen={isDockOpen}>Limones</Logo>
+        <Logo isMenuOpen={isDockOpen}>Limones</Logo>
       </Link>
         <MenuContainer>
           <StyledIcon
@@ -174,6 +182,7 @@ export const Header = () => {
             setIsModalOpen={setIsModalOpen} 
             setIsDockOpen={setIsDockOpen}
             closeDock={() => handleClick(true)} 
+            handleLinkClick={handleLinkClick}
             style={media.smallScreen ? mobileMenuIconStyles : null} 
           />          
         </DockMenu>

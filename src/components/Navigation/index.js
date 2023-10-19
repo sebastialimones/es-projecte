@@ -21,11 +21,12 @@ const ListItem = styled.li`
   margin: 0.5em;
 `;
 
-export const Navigation = ({ onContactClick }) => (
+export const Navigation = ({ onContactClick, handleLinkClick }) => (
   <List>
-    <ListItem><Link to="/blog">Artículos</Link></ListItem>
-    <ListItem><Link to="/bio">Bio</Link></ListItem>
-    <ListItem><Link to="/books">Biblioteca</Link></ListItem>
+    <ListItem><Link to="/" onClick={() => handleLinkClick('/')}>Inicio</Link></ListItem>
+    <ListItem><Link to="/blog" onClick={() => handleLinkClick('/blog')}>Artículos</Link></ListItem>
+    <ListItem><Link to="/bio" onClick={() => handleLinkClick('/bio')}>Bio</Link></ListItem>
+    <ListItem><Link to="/books" onClick={() => handleLinkClick('/books')}>Biblioteca</Link></ListItem>
     <ListItem onClick={onContactClick} style={{ cursor: 'pointer' }}>Contacto</ListItem>
-    </List>
+  </List>
 );
