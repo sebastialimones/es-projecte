@@ -26,6 +26,8 @@ const Logo = styled.div`
   margin-top: -9px;
   border-bottom:  4px solid ${mainColor};
   display: inline-block;
+  position: relative; /* Set position to relative, absolute, or fixed */
+  z-index: 300; /* Set z-index higher than DockMenu's z-index */
 `;
 
 const DockMenu = styled.div`
