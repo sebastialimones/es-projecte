@@ -35,7 +35,8 @@ const DockMenu = styled.div`
   top: 0;
   right: 0;
   height: 100vh;
-  width: calc(70vw - 30px); // For larger screens
+  /* width: calc(70vw - 30px); // For larger screens */
+  width: 100%;
   background: ${mainColor};
   transform: translateX(100%);
   transition: transform 0.2s ease-in-out;

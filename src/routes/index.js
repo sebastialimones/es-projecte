@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Article } from './Article';
 import Home from './Home';
+import HomeDraft from './Home/index2';
 import { Books } from './Books';
 import { Layout } from './Layout';
 import { Subscriute } from './Subscriute';
@@ -25,7 +26,12 @@ export const Routes = () => {
         exact 
         path="/" 
         component={renderWithLayout(Home, { setIsModalOpen })}
-      />     
+      />
+      <Route 
+        exact 
+        path="/homedraft" 
+        component={renderWithLayout(HomeDraft, { setIsModalOpen })}
+      />      
       <Route exact path="/blog" component={ renderWithLayout(Blog) } />
       <Route exact path="/bio" component={renderWithLayout(Bio)} />
       <Route exact path="/articles/:uid" component={ renderWithLayout(Article) } />
