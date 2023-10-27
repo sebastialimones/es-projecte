@@ -9,15 +9,30 @@ import { Subscriute } from './Subscriute';
 import { CookiesPolicy } from './CookiesPolicy';
 import { Blog } from './Blog';
 import { Bio } from './Bio';
-
-const renderWithLayout = (Component, extraProps = {}) => (props) => (
-  <Layout { ...props }>
-    <Component { ...props } {...extraProps} />
-  </Layout>
-);
+import useIsMobile from '../hooks/isMobile';
+import HomeMobile from './HomeMobile';
 
 export const Routes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  const renderWithLayout = (Component, extraProps = {}, route) => (props) => {
+    const isMobile = useIsMobile();
+    
+    if (route === '/homedraft' && isMobile) {
+      return (
+        <Layout {...props}>
+          <HomeMobile {...props} {...extraProps} />
+        </Layout>
+      );
+    } else {
+      return (
+        <Layout {...props}>
+          <Component {...props} {...extraProps} />
+        </Layout>
+      );
+    }
+  };
 
   return (  
     <Router>
@@ -30,8 +45,8 @@ export const Routes = () => {
       <Route 
         exact 
         path="/homedraft" 
-        component={renderWithLayout(HomeDraft, { setIsModalOpen })}
-      />      
+        component={renderWithLayout(HomeDraft, { setIsModalOpen }, '/homedraft')}
+      />     
       <Route exact path="/blog" component={ renderWithLayout(Blog) } />
       <Route exact path="/bio" component={renderWithLayout(Bio)} />
       <Route exact path="/articles/:uid" component={ renderWithLayout(Article) } />

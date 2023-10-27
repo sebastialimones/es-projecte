@@ -21,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Logo = styled.div`
-  font-family: 'Raisonne-demibold';
+  font-family: 'PlaakBold';
   font-size: 2.5em;
   margin-top: -9px;
   border-bottom:  4px solid ${mainColor};

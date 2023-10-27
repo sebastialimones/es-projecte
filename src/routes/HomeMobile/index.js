@@ -9,29 +9,31 @@ import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 
 const Section = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   overflow: hidden;
   position: relative;
   background-color: #FAF8F0;
   padding-top: 2em;
   padding-bottom: 5em;
+  align-items: center;
 `;
 
 const HeroText = styled.h1`
   color: black;
-  font-size: 4em;
+  font-size: 3em;
   line-height: 1.2;
   text-align: left;
+  padding-bottom: 2em;
 `;
 
-const Sections = styled.div`
-  display: flex;
-  flex-direction: column;
+const TextSection = styled.div`
+  padding-left: 1em;
+  padding-right: 1em;
 `;
 
 const TwoColumnSection = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column; 
   justify-content: space-between;
   opacity: 0; 
   transform: translateY(20px);
@@ -159,13 +161,12 @@ const BorderLeft = styled.div`
 
 const ImageContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   z-index: 1;
-  padding-right: 20px;
   position: relative;
   margin-bottom: 0; 
- align-items: center;
-  
+  padding-top: 2em;
+  padding-bottom: 2em;
   &:hover ${Tooltip} {
     display: inline-block;
   }
@@ -197,12 +198,7 @@ const SmallerText = styled.div`
   text-align: left;
   flex-direction: column;
 `;
-
-const LeftColumn = styled.div`
-  flex: 1;
-`;
-
-const RightColumn = styled.div`
+const ColumnSection = styled.div`
   display: flex;
   flex-direction: column; 
   flex: 1;
@@ -282,7 +278,7 @@ const processContent = (text) => {
 };
 
 
-const Home2 = () => {
+const HomeMobile = () => {
   const ref = useRef(null);
   const onScreen = useOnScreen(ref);
 
@@ -300,13 +296,10 @@ const Home2 = () => {
             {homePageContent.heroText}
           </HeroText>
         </FirsSectionTextContainer>
-      </Section>
-
-      <Sections>
-        <TwoColumnSectionComponent>
-          <LeftColumn>
+        <TextSection>
+          <ColumnSection>
             <SmallerText>
-            <StyledParagraph>
+                <StyledParagraph>
                 {processContent(homePageContent.paragraph1)}
               </StyledParagraph>
               <StyledParagraph>
@@ -316,8 +309,8 @@ const Home2 = () => {
                 {processContent(homePageContent.paragraph3)}
               </StyledParagraph>
             </SmallerText>
-          </LeftColumn>
-          <RightColumn>
+          </ColumnSection>
+          <ColumnSection>
             <ImageContainer centered>
               <ImageWrapperComponent>
                 <BorderTop />
@@ -328,31 +321,15 @@ const Home2 = () => {
                 <TherapistImage src={MartinBuber} alt="Martin Buber" />
               </ImageWrapperComponent>
             </ImageContainer>
-          </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
-          <LeftColumn>
+          </ColumnSection>
+          <ColumnSection>
             <SmallerText>
               <StyledParagraph>
                 {processContent(homePageContent.paragraph4)}
               </StyledParagraph>
             </SmallerText>
-          </LeftColumn>
-          <RightColumn>
-          </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
-          <LeftColumn>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph5)}
-              </StyledParagraph>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph6)}
-              </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
-          <RightColumn>
+          </ColumnSection>
+          <ColumnSection>
             <ImageContainer>
               <ImageWrapperComponent>
                 <BorderTop />
@@ -363,28 +340,13 @@ const Home2 = () => {
                 <TherapistImage src={FritzPerlsEssalen} alt="Fritz y Laura Perls en Esalen" />
               </ImageWrapperComponent>
             </ImageContainer>
-          </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
-          <LeftColumn>
+          </ColumnSection>
+          <ColumnSection>
             <SmallerText>
               <StyledParagraph>
-                {processContent(homePageContent.paragraph7)}
+                {processContent(homePageContent.paragraph5)}
               </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
-          <RightColumn>
-          </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
-          <LeftColumn>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph8)}
-              </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
-          <RightColumn>
+          <ColumnSection>
             <ImageContainer>
               <ImageWrapperComponent maxWidth={"60%"}>
                 <BorderTop />
@@ -395,11 +357,33 @@ const Home2 = () => {
                 <TherapistImage src={ClaudioNaranjoJoven} alt="Claudio Naranjo tocando un gong" />
               </ImageWrapperComponent>
             </ImageContainer>
-          </RightColumn>
-        </TwoColumnSectionComponent>
-      </Sections>
+          </ColumnSection>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph6)}
+              </StyledParagraph>
+            </SmallerText>
+          </ColumnSection>
+          
+          <ColumnSection>
+            <SmallerText>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph7)}
+              </StyledParagraph>
+            </SmallerText>
+          </ColumnSection>
+          <ColumnSection>
+          </ColumnSection>
+          <ColumnSection>
+            <SmallerText>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph8)}
+              </StyledParagraph>
+            </SmallerText>
+          </ColumnSection>
+          </TextSection>
+      </Section>
     </>
   );
 }
 
-export default Home2;
+export default HomeMobile;

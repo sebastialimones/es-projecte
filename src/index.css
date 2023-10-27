@@ -19,20 +19,25 @@ a {
 }
 @font-face {
   font-family: 'Afrah';
-  src: url('./fonts/AfrahLight.ttf') format('truetype');
+  src: url('../public/fonts/AfrahLight.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Noe Display Medium';
-  src: url('./fonts/FontsFree-Net-Noe-Display-Medium.ttf') format('truetype');
+  src: url('../public/fonts/FontsFree-Net-Noe-Display-Medium.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'VenturisADFCd-Regular';
-  src: url('./fonts/VenturisADFCd-Regular.otf') format('opentype');
+  src: url('../public/fonts/VenturisADFCd-Regular.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'Raisonne-demibold';
-  src: url('./fonts/raisonne-demibold.ttf') format('truetype');
+  src: url('../public/fonts/raisonne-demibold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PlaakBold';
+  src: url('../public/fonts/PlaakBold.otf') format('opentype');
 }
