@@ -3,9 +3,10 @@ import styled, { keyframes } from 'styled-components';
 import MartinBuber from '../../assets/MartinBuber.jpeg';
 import FritzPerlsEssalen from '../../assets/FritzPerlsEssalen.jpeg';
 import ClaudioNaranjoJoven from '../../assets/ClaudioNaranjoJoven.jpeg';
-import {homePageContent} from '../../constants/content';
+import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
+import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
 
 const Section = styled.div`
   display: flex;
@@ -265,7 +266,7 @@ const ImageWrapperComponent = ({ children, maxWidth }) => {
 const componentMap = {
   BoxedWordCounterClock: BoxedWordCounterClock,
   BoxedWordClockWise: BoxedWordClockWise,
-  // Add future components here
+  BoxedWordClockWise2: BoxedWordClockWise2,
 };
 
 const processContent = (text) => {
@@ -314,6 +315,9 @@ const Home2 = () => {
               </StyledParagraph>
               <StyledParagraph>
                 {processContent(homePageContent.paragraph3)}
+              </StyledParagraph>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph31)}
               </StyledParagraph>
             </SmallerText>
           </LeftColumn>

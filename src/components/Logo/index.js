@@ -1,46 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { mainColor } from '../../constants';
 
-import { Sizes } from '../../constants';
-import media from '../../constants/media';
-
-const FirstTD = styled.td`
-  padding-right: ${({ size }) => size === Sizes.S ? '0.5em' : '1.8em'};
+const StyledLogo = styled.div`
+  font-family: 'PlaakBold';
+  font-size: 2.5em;
+  margin-top: -9px;
+  display: inline-block;
+  position: relative;
+  z-index: 300;
+  border-bottom: 4px solid ${mainColor};
+  overflow: hidden;
 `;
 
-const Title = styled.h1`
-  font-family: 'Lora','Gravitas One', sans-serif;
-  font-size: ${({ size }) => size === Sizes.S ? '2em' : '3em'};
-  ${({ size }) => size === Sizes.S
-    ? media.smallScreen`font-size: 1.5em;`
-    : media.smallScreen`font-size: 2em;`
-  }
-  font-weight: normal;
-`;
-
-const SubTitle = styled.h4`
-  text-transform: uppercase;
-`;
-
-export const Logo = ({ size }) => (
-  <table>
-    <tbody>
-      <tr>
-        <FirstTD size={ size }>
-          <Link to="/"><Title size={ size }>Sebastià</Title></Link>
-        </FirstTD>
-      </tr>
-      <tr>
-        { 
-          size === Sizes.S
-          ? false
-          : <td />
-        }
-        <td colSpan={ Sizes.S === size ? "2" : "1" }>
-          <SubTitle>{ `` }</SubTitle>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+export const Logo = ({ children }) => (
+  <Link to="/">
+    <StyledLogo>{children}</StyledLogo>
+  </Link>
 );

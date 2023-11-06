@@ -14,11 +14,6 @@ const Container = styled.div`
   `}
 `;
 
-const Title = styled.h1`
-  font-size: 2em;
-  margin-bottom: 0.5em;
-`;
-
 const Paragraph = styled.p`
   font-size: 1em;  /* Adjusted to fit the overall font size you provided */
   line-height: 1.6;
@@ -33,10 +28,13 @@ export const Bio = () => {
   return (
     <Container>
       <Paragraph>
-        Hola, soy Sebastià y acompaño procesos personales. Me formé como <Highlight>terapeuta gestalt</Highlight> en el Aula Balear de Gestalt y también en <Highlight>Psicoterapia Integrativa</Highlight> en el Programa SAT (SAT III) de Claudio Naranjo.
+        Hola, soy Sebastià y acompaño procesos personales. Me formé como terapeuta gestalt en el Aula Balear de Gestalt y también en Psicoterapia Integrativa en el Programa SAT (SAT III) de Claudio Naranjo.
       </Paragraph>
       <Paragraph>
-        Además, tengo formación en <Highlight>constelaciones familiares</Highlight> y un <Highlight>Máster en mediación</Highlight>. También me gradué en <Highlight>derecho</Highlight> y ejercí como <Highlight>abogado</Highlight> durante varios años.
+        Además, tengo formación en constelaciones familiares y un Máster en mediación. Me gradué en derecho allá por 2007 y ejercí como abogado durante varios años tanto en Barcelona como en Mallorca.
+      </Paragraph>
+      <Paragraph>
+        
       </Paragraph>
     </Container>
   );

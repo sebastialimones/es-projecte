@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Nav } from '../../containers/Navigation';
 import {  mainColor } from '../../constants';
 import { useSpring, animated } from '@react-spring/web';
@@ -8,6 +8,7 @@ import ProfileModal from '../../components/ProfileModal';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useLocation } from 'react-router-dom';
+import { Logo } from '../Logo';
 
 const NavbarWrapper = styled.div`
   padding-top: calc(${props => props.isScrolled ? '0.5em' : '1em'});  
@@ -18,16 +19,6 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   z-index: 100;
-`;
-
-const Logo = styled.div`
-  font-family: 'PlaakBold';
-  font-size: 2.5em;
-  margin-top: -9px;
-  border-bottom:  4px solid ${mainColor};
-  display: inline-block;
-  position: relative; /* Set position to relative, absolute, or fixed */
-  z-index: 300; /* Set z-index higher than DockMenu's z-index */
 `;
 
 const DockMenu = styled.div`
@@ -165,7 +156,7 @@ export const Header = () => {
         />
       <Container>
       <Link to="/">
-        <Logo isMenuOpen={isDockOpen}>Limones</Logo>
+        <Logo isMenuOpen={isDockOpen}>Tià Limones</Logo>
       </Link>
         <MenuContainer>
           <StyledIcon

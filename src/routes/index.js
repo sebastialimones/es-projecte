@@ -40,11 +40,6 @@ export const Routes = () => {
       <Route 
         exact 
         path="/" 
-        component={renderWithLayout(Home, { setIsModalOpen })}
-      />
-      <Route 
-        exact 
-        path="/homedraft" 
         component={renderWithLayout(HomeDraft, { setIsModalOpen }, '/homedraft')}
       />     
       <Route exact path="/blog" component={ renderWithLayout(Blog) } />
