@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Article } from './Article';
 import Home from './Home';
-import HomeDraft from './Home/index2';
+import HomeDraft from './Home/index';
 import { Books } from './Books';
 import { Layout } from './Layout';
 import { Subscriute } from './Subscriute';

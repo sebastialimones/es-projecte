@@ -16,7 +16,7 @@ const Section = styled.div`
   position: relative;
   background-color: #FAF8F0;
   padding-top: 2em;
-  padding-bottom: 5em;
+  padding-bottom: 2em;
   align-items: center;
 `;
 
@@ -39,9 +39,7 @@ const StyledParagraph = styled.div`
 `;
 
 const FirsSectionTextContainer = styled.div`
-  display: flex;
-  z-index: 1;
-  padding-left: 20px;
+  display: flex;  padding-left: 20px;
 `;
 
 const SmallerText = styled.div`

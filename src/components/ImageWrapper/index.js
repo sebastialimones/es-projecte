@@ -9,7 +9,6 @@ const Tooltip = styled.span`
   border: 2px solid black;
   padding: 2px 6px;
   font-size: 1em;
-  z-index: 2;
   bottom: 10px;
   right: 10px;
   white-space: nowrap;
@@ -30,7 +29,6 @@ const Tooltip = styled.span`
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  z-index: 1;
   padding-right: 20px;
   position: relative;
   margin-bottom: 0; 

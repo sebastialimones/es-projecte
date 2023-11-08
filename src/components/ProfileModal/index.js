@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import media from '../../constants/media';
 import IMG_5717 from '../../../src/assets/IMG_5717.png';
 import CloseIcon from '@mui/icons-material/Close';
-import EmailIcon from '@mui/icons-material/Email';
 import { Logo } from '../Logo';
 
 const StyledModal = styled(Modal)`
@@ -23,6 +22,10 @@ const StyledModal = styled(Modal)`
       padding: 1em;
     `}
   }
+  &:focus {
+    outline: none;
+  }
+
 
   &.ReactModal__Overlay {
     z-index: 21000;
@@ -97,7 +100,7 @@ const ProfileModal = ({ isOpen, onRequestClose }) => {
         <Avatar src={IMG_5717} alt="Tia" />
         <DetailsContainer>
           <StyledCloseIcon onClick={onRequestClose} />
-          <Logo>Tià Limones</Logo>
+          <Logo isLink={false}>Tià Limones</Logo>
           <Name>Gestaltista</Name>
           <PhoneNumber>651 77 66 45</PhoneNumber>
           <EmailContainer onClick={() => window.location = 'mailto:sebas.limones@gmail.com'}>

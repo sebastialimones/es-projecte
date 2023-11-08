@@ -14,8 +14,12 @@ const StyledLogo = styled.div`
   overflow: hidden;
 `;
 
-export const Logo = ({ children }) => (
-  <Link to="/">
-    <StyledLogo>{children}</StyledLogo>
-  </Link>
-);
+export const Logo = ({ children, isLink }) => {
+  const logo = <StyledLogo>{children}</StyledLogo>;
+
+  return isLink ? (
+    <Link to="/">{logo}</Link>
+  ) : (
+    logo
+  );
+};

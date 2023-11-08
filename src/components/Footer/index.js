@@ -9,27 +9,26 @@ export const height = '2em';
 const Container = styled.footer`
   display: flex;
   justify-content: center;
+  align-items: center;
   height: ${height};
   background-color: ${substackdarkerYellowBackground};
   padding-bottom: 1em;
   bottom: 0;
   left: 0;
   right: 0;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: underline;
-  font-size: 1em;
-  ${media.smallScreen`font-size: 10px;`}
-  color: ${mainColor};
-  padding-top: 1em;
+  margin-top: 3em;
+  ${media.smallScreen`
+    margin-top: 0;
+  `}
 `;
 
 const Text = styled.p`
   margin-right: 1rem;
   text-align: center;
-  ${media.smallScreen`font-size: 10px;`}
   padding-top: 1em;
+  ${media.smallScreen`
+  font-size: 10px;
+  `}
 `;
 
 export const Footer = () => (

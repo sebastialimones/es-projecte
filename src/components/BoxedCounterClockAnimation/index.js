@@ -42,7 +42,6 @@ const StyledBoxedWordCounterClock = styled.span`
   vertical-align: baseline;
   padding: 2px 6px;
   margin: -2px 0;
-  z-index: 4;
   position: relative;
 
   & > div:nth-child(1) {
