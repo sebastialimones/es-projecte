@@ -28,7 +28,7 @@ export const Bio = () => {
   return (
     <Container>
       <Paragraph>
-        Hola, soy Sebastià y acompaño procesos personales. Me formé como terapeuta gestalt en el Aula Balear de Gestalt y también en Psicoterapia Integrativa en el Programa SAT (SAT III) de Claudio Naranjo.
+        Hola, me llamo Sebastià y acompaño procesos personales. Me formé como terapeuta gestalt en el Aula Balear de Gestalt y también en Psicoterapia Integrativa en el Programa SAT (SAT III) de Claudio Naranjo.
       </Paragraph>
       <Paragraph>
         Además, tengo formación en constelaciones familiares y un Máster en mediación. Me gradué en derecho allá por 2007 y ejercí como abogado durante varios años tanto en Barcelona como en Mallorca.
