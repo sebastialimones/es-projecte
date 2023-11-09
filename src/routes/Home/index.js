@@ -247,7 +247,7 @@ const HomeRoute = () => {
         <ImageContainerHab ref={imageRef}> 
           <ImageWrapperHab> 
             <HabImage 
-              src={isHabImageOnScreen ? DiseñoCanvaTransformedWithLight : DiseñoCanvaTransformed}
+              src={isHabImageOnScreen ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
               alt="Habitación terapia"
             />
           </ImageWrapperHab>
