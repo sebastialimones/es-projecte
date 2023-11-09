@@ -7,8 +7,8 @@ import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
-import DiseñoCanvaTransformed from '../../assets/DiseñoCanvaTransformed.png';
-import DiseñoCanvaTransformedWithLight from '../../assets/DiseñoCanvaTransformedWithLight.png';
+import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
+import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
 
 const Section = styled.div`
   display: flex;

@@ -8,8 +8,8 @@ import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
 import ImageWrapperComponent from '../../components/ImageWrapper';
-import DiseñoCanvaTransformed from '../../assets/DiseñoCanvaTransformed.png';
-import DiseñoCanvaTransformedWithLight from '../../assets/DiseñoCanvaTransformedWithLight.png';
+import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
+import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
 
 const Section = styled.div`
   display: flex;
@@ -143,7 +143,7 @@ const HomeMobile = () => {
         </FirsSectionTextContainer>
         <ImageContainerHab ref={imageRef}>
           <HabImage 
-            src={isHabImageOnScreen ? DiseñoCanvaTransformedWithLight : DiseñoCanvaTransformed}
+            src={isHabImageOnScreen ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
             alt="Habitación terapia"
           />
         </ImageContainerHab>
