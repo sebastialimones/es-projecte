@@ -217,6 +217,9 @@ const HomeRoute = () => {
           <LeftColumn>
             <SmallerText>
             <StyledParagraph>
+                {processContent(homePageContent.paragraph01)}
+              </StyledParagraph>
+            <StyledParagraph>
                 {processContent(homePageContent.paragraph1)}
               </StyledParagraph>
               <StyledParagraph>
@@ -243,7 +246,7 @@ const HomeRoute = () => {
             </SmallerText>
           </LeftColumn>
           <RightColumn>
-          <ImageContainer centered>
+            <ImageContainer centered>
               <ImageWrapperComponent>
                 <Tooltip>Martin Buber - 1878</Tooltip>
                 <TherapistImage src={MartinBuber} alt="Martin Buber" />
@@ -263,18 +266,6 @@ const HomeRoute = () => {
             </SmallerText>
           </LeftColumn>
           <RightColumn>
-            
-          </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
-          <LeftColumn>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph7)}
-              </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
-          <RightColumn>
           <ImageContainer>
             <ImageWrapperComponent>
               <Tooltip>Fritz y Laura Perls - 1964</Tooltip>
@@ -287,17 +278,29 @@ const HomeRoute = () => {
           <LeftColumn>
             <SmallerText>
               <StyledParagraph>
-                {processContent(homePageContent.paragraph8)}
+                {processContent(homePageContent.paragraph7)}
               </StyledParagraph>
             </SmallerText>
           </LeftColumn>
           <RightColumn>
-            <ImageContainer>
+          <ImageContainer>
               <ImageWrapperComponent maxWidth={"60%"}>
                 <Tooltip>Claudio Naranjo</Tooltip>
                 <TherapistImage src={ClaudioNaranjoJoven} alt="Claudio Naranjo tocando un gong" />
               </ImageWrapperComponent>
             </ImageContainer>
+          </RightColumn>
+        </TwoColumnSectionComponent>
+        <TwoColumnSectionComponent>
+          <LeftColumn>
+            <SmallerText>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph8)}
+              </StyledParagraph>
+            </SmallerText>
+          </LeftColumn>
+          <RightColumn>
+            
           </RightColumn>
         </TwoColumnSectionComponent>
       </Sections>
