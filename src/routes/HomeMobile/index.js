@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import MartinBuber from '../../assets/MartinBuber.jpeg';
 import FritzPerlsEssalen from '../../assets/FritzPerlsEssalen.jpeg';
@@ -8,6 +8,8 @@ import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
 import ImageWrapperComponent from '../../components/ImageWrapper';
+import DiseñoCanvaTransformed from '../../assets/DiseñoCanvaTransformed.png';
+import DiseñoCanvaTransformedWithLight from '../../assets/DiseñoCanvaTransformedWithLight.png';
 
 const Section = styled.div`
   display: flex;
@@ -57,10 +59,60 @@ const ColumnSection = styled.div`
   flex: 1;
 `;
 
+const ImageContainerHab = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding-bottom: 3em;
+`;
+
+const HabImage = styled.img`
+  width: 80%;
+  height: auto;
+  display: block;
+  margin: auto;
+`;
+
 const componentMap = {
   BoxedWordCounterClock: BoxedWordCounterClock,
   BoxedWordClockWise: BoxedWordClockWise,
   BoxedWordClockWise2: BoxedWordClockWise2,
+};
+
+const useOnScreen = (ref, threshold = 0.2, onlyOnce = true) => {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsIntersecting(true);
+          if (onlyOnce) {
+            if (ref.current instanceof Element) {
+              observer.unobserve(ref.current);
+            }
+          }
+        } else if (!onlyOnce) {
+          setIsIntersecting(false);
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current instanceof Element) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current instanceof Element) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref, threshold, onlyOnce]);
+
+  return isIntersecting;
 };
 
 const processContent = (text) => {
@@ -78,7 +130,9 @@ const processContent = (text) => {
 
 
 const HomeMobile = () => {
-  
+  const imageRef = useRef(null);
+  const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
+
   return (
     <>
       <Section>
@@ -87,6 +141,12 @@ const HomeMobile = () => {
             {homePageContent.heroText}
           </HeroText>
         </FirsSectionTextContainer>
+        <ImageContainerHab ref={imageRef}>
+          <HabImage 
+            src={isHabImageOnScreen ? DiseñoCanvaTransformedWithLight : DiseñoCanvaTransformed}
+            alt="Habitación terapia"
+          />
+        </ImageContainerHab>
         <TextSection>
           <ColumnSection>
             <SmallerText>

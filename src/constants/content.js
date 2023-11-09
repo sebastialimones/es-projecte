@@ -1,6 +1,6 @@
 export const homePageContent = {
     heroText: "Me llamo Sebastià y trabajo como terapeuta gestalt en Palma de Mallorca.",
-    paragraph01: "Muchas veces me preguntan qué es esto de la terapia gestalt. Al principio me quedaba un poco bloqueado y no entendía porque me costaba tanto explicar algo que he estudiado y sobre lo que he leído tanto. Un día entendí que el problema surgía porque quería explicar lo que era la gestalt y lo que era la terapia a la vez. Ahora lo hago de otra manera, primero explico que es la terapia y después lo que es la gestalt. Así lo haré aquí:",
+    paragraph01: "Para explicar lo que es la gestalt y lo que era la terapia a la vez. Ahora lo hago de otra manera, primero explico que es la terapia y después lo que es la gestalt. Así lo haré aquí:",
     paragraph1: "Entiendo la terapia como una conversación entre dos personas, un terapeuta y un cliente dentro de un encuadre muy concreto. Es importante el encuadre porque es lo que diferencia la terapia de una conversación en un bar con un amigo. ",
     paragraph2: "{BoxedWordClockWise|Martin Buber} explica magníficamente esta relación yo-tú como un diálogo: “Sin finalidad, sin codicia, sin preconcepto. Donde cada uno tiene la posibilidad de descubrirse a sí mismo sin ser manipulado por el otro”.",
     paragraph3: "Este diálogo se enmarca dentro de la Gestalt. La Gestalt como marco de trabajo, como encuadre.",

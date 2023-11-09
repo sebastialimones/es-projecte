@@ -7,6 +7,8 @@ import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
+import DiseñoCanvaTransformed from '../../assets/DiseñoCanvaTransformed.png';
+import DiseñoCanvaTransformedWithLight from '../../assets/DiseñoCanvaTransformedWithLight.png';
 
 const Section = styled.div`
   display: flex;
@@ -15,7 +17,6 @@ const Section = styled.div`
   position: relative;
   background-color: #FAF8F0;
   padding-top: 2em;
-  padding-bottom: 5em;
 `;
 
 const HeroText = styled.h1`
@@ -46,7 +47,6 @@ const StyledParagraph = styled.div`
 
 const FirsSectionTextContainer = styled.div`
   display: flex;
-  padding-left: 20px;
 `;
 
 const Tooltip = styled.span`
@@ -76,6 +76,32 @@ const ImageContainer = styled.div`
   }
 `;
 
+const ImageContainerHab = styled.div`
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  position: relative;
+  width: 100%; // Ensuring the container takes full width
+  height: 100%; // Optional: If you want to set a specific height for the image container
+  margin-bottom: 0;
+`;
+
+const HabImage = styled.img`
+  max-width: 80%; // Ensuring the image doesn't exceed 80% of its container's width
+  height: auto; // Keeping the image's aspect ratio
+  display: block;
+  margin: auto; // This will also help in centering the image
+`;
+
+const ImageWrapperHab = styled.div`
+  position: relative;
+  max-height: 100%;
+  &:hover ${Tooltip} {
+    display: block;
+    opacity: 1;
+  }
+`;
+
 const ImageWrapper = styled.div`
   position: relative;
   max-height: 100%;
@@ -85,6 +111,7 @@ const ImageWrapper = styled.div`
     opacity: 1;
   }
 `;
+
 
 const TherapistImage = styled.img`
   max-height: 100%;
@@ -113,41 +140,43 @@ const RightColumn = styled.div`
   flex: 1;
 `;
 
-const useOnScreen = (ref, onlyOnce = true) => {
-  const [hasIntersected, setHasIntersected] = useState(false);
+const useOnScreen = (ref, threshold = 0.2, onlyOnce = true) => {
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setHasIntersected(true);
+          setIsIntersecting(true);
           if (onlyOnce) {
-            observer.unobserve(ref.current);
+            if (ref.current instanceof Element) {
+              observer.unobserve(ref.current);
+            }
           }
         } else if (!onlyOnce) {
-          setHasIntersected(false);
+          setIsIntersecting(false);
         }
       },
-      {
-        threshold: 0.2,
-      }
+      { threshold }
     );
 
-    if (ref.current) {
+    if (ref.current instanceof Element) {
       observer.observe(ref.current);
     }
 
     return () => {
-      observer.disconnect();
+      if (ref.current instanceof Element) {
+        observer.unobserve(ref.current);
+      }
     };
-  }, [ref, onlyOnce]);
+  }, [ref, threshold, onlyOnce]);
 
-  return hasIntersected;
+  return isIntersecting;
 };
 
 const TwoColumnSectionComponent = ({ children }) => {
   const ref = useRef(null);
-  const onScreen = useOnScreen(ref, true); // Pass true for onlyOnce
+  const onScreen = useOnScreen(ref, 0.2); 
 
   useEffect(() => {
     if (onScreen) {
@@ -195,12 +224,15 @@ const processContent = (text) => {
 const HomeRoute = () => {
   const ref = useRef(null);
   const onScreen = useOnScreen(ref);
-
+  const imageRef = useRef(null);
+  const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
+  
   useEffect(() => {
     if (onScreen && ref.current) {
       ref.current.style.animationPlayState = 'running';
     }
   }, [onScreen]);
+
   
   return (
     <>
@@ -211,7 +243,16 @@ const HomeRoute = () => {
           </HeroText>
         </FirsSectionTextContainer>
       </Section>
-
+      <Section>
+        <ImageContainerHab ref={imageRef}> 
+          <ImageWrapperHab> 
+            <HabImage 
+              src={isHabImageOnScreen ? DiseñoCanvaTransformedWithLight : DiseñoCanvaTransformed}
+              alt="Habitación terapia"
+            />
+          </ImageWrapperHab>
+        </ImageContainerHab>
+      </Section>
       <Sections>
         <TwoColumnSectionComponent>
           <LeftColumn>
@@ -234,7 +275,6 @@ const HomeRoute = () => {
             </SmallerText>
           </LeftColumn>
           <RightColumn>
-            
           </RightColumn>
         </TwoColumnSectionComponent>
         <TwoColumnSectionComponent>
