@@ -19,18 +19,20 @@ import Skeleton from '@mui/material/Skeleton';
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
-  padding-top: 6em;
+  padding-top: 2em;
   ${media.mediumScreen`
     flex-direction: column;
-    padding-top:2em;
   `}
   ${media.smallScreen`
-    padding-top: 1.5em;
+    padding-top: 1em;
   `}
 `;
 
 const ArticlesContainer = styled.div`
-  flex: 4; /* Occupy 80% of available space */
+  flex: 4; 
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
 `;
 
 const SidebarContainer = styled.div`
@@ -58,6 +60,52 @@ const ContentContainer = styled.div`
   `}
 `;
 
+const TagContainer = styled.p`
+  font-size: 1.1em;
+  position: absolute; // or 'fixed' if you want it to stay in the same place even on scrolling
+  top: 6; // Adjust top, right, bottom, left as per the required position
+  left: 10;
+  z-index: 10;
+  padding-bottom: 3em;
+
+`;
+
+const ParentContainer = styled.div`
+  position: relative; // or use 'position: absolute;' based on your layout
+  // Other styles
+`;
+
+const TagText = styled.span`
+  margin-left: 8px;
+`;
+
+const Tag = styled.a`
+  color: gray;
+  font-size: 0.8em;
+  padding: 0.5em;
+  padding-right: 10px;
+  background-color: ${(props) => props.backgroundColor || 'transparent'};
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px; 
+  cursor: pointer;
+  border: 1px solid gray;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const CloseButton = styled.span`
+  cursor: pointer;
+  &:after {
+    content: '×'; // multiplication sign as close button
+    font-size: 1.1em;
+  }
+  &:hover {
+    color: red; // Change color on hover
+  }
+`;
+  
 const LoaderContainer = styled.div`
   margin-top: 1.5em;
   display: flex;
@@ -85,6 +133,8 @@ export const BlogRoute = ({ articles }) => {
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [isLoadingArchives, setIsLoadingArchives] = useState(true);
   const [showAllArticles, setShowAllArticles] = useState(false);
+  const [activeTag, setActiveTag] = useState(null);
+  const [activeTagColor, setActiveTagColor] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -173,14 +223,22 @@ export const BlogRoute = ({ articles }) => {
   const handleSeeAllClick = () => {
     setSelectedMonth(null);
     setFilteredArticles({ 'articles':articles });
-  };
+    setActiveTag(null); 
+    };
 
   const handleTagClick = (selectedTag) => {
     const filtered = articles.filter((article) => {
       return !selectedTag || article.mytags.some((mytag) => mytag.text === selectedTag.text);
     });
     setTagFilter(selectedTag);
-    setFilteredArticles({ 'filtered':filtered });
+    setActiveTag(selectedTag.text);
+    setFilteredArticles({ 'filtered': filtered });
+    const getRandomColorFromPalette = () => {
+      const colorPalette = ['#ECEE81', '#8DDFCB', '#EDB7ED', '#FFB3B3', '#FFDBA4', '#C1EFFF']; 
+      const randomIndex = Math.floor(Math.random() * colorPalette.length);
+      return colorPalette[randomIndex];
+    };
+    setActiveTagColor(getRandomColorFromPalette());
   };
 
   const toggleShowAllArticles = () => {
@@ -188,12 +246,34 @@ export const BlogRoute = ({ articles }) => {
   };
   const buttonLabel = showAllArticles ? 'Ver menos' : 'Ver todos';
 
+  const handleTagClose = () => {
+    console.log(articles)
+    setActiveTag(null);
+    setActiveTagColor(null);
+    setFilteredArticles({articles}); 
+  };
+
   return (
+
     <Container>
       <Helmet key="helmet">
         <meta name="og:description" content="Articles Es Projecte" />
       </Helmet>
       <ArticlesContainer>
+        {
+          activeTag && (
+            <ParentContainer>
+              <TagContainer>
+              <Tag style={{ backgroundColor: activeTagColor }}>
+                  <CloseButton onClick={handleTagClose} />
+                  <TagText>
+                    {activeTag}
+                  </TagText>
+                </Tag>
+              </TagContainer>
+            </ParentContainer>
+          )
+        }
         {isLoadingPosts ? (
           <>
             {Array.from({ length: 3 }, (_, index) => (
@@ -233,7 +313,12 @@ export const BlogRoute = ({ articles }) => {
             </div>
           ))
         )}
-      <ButtonContainer label={buttonLabel} onClick={toggleShowAllArticles} />
+        {
+          (filteredArticles.articles && filteredArticles.articles.length > 5) ||
+          (filteredArticles.filtered && filteredArticles.filtered.length > 5) ? (
+            <ButtonContainer label={buttonLabel} onClick={toggleShowAllArticles} />
+          ) : null
+        }
       </ArticlesContainer>
       <SidebarContainer>
         {archives ? (
