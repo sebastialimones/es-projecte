@@ -69,7 +69,7 @@ const ImageContainerHab = styled.div`
 `;
 
 const HabImage = styled.img`
-  width: 80%;
+  width: 100%;
   height: auto;
   display: block;
   margin: auto;

@@ -163,6 +163,8 @@ export const BlogRoute = ({ articles }) => {
       });
   
       setFilteredArticles({ [selectedMonth]: filtered });
+      setActiveTag(null);
+      setActiveTagColor(null);
     } else {
       setFilteredArticles({ articles });
     }
@@ -242,7 +244,6 @@ export const BlogRoute = ({ articles }) => {
   const buttonLabel = showAllArticles ? 'Ver menos' : 'Ver todos';
 
   const handleTagClose = () => {
-    console.log(articles)
     setActiveTag(null);
     setActiveTagColor(null);
     setFilteredArticles({articles}); 

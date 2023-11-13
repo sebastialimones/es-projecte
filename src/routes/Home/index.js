@@ -9,6 +9,7 @@ import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
 import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
+import DisenyoCanvaTransformedWith2Lights from '../../assets/DisenyoCanvaTransformedWith2Lights.png';
 
 const Section = styled.div`
   display: flex;
@@ -140,43 +141,19 @@ const RightColumn = styled.div`
   flex: 1;
 `;
 
-const useOnScreen = (ref, threshold = 0.2, onlyOnce = true) => {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+const FullWidthSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+`;
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsIntersecting(true);
-          if (onlyOnce) {
-            if (ref.current instanceof Element) {
-              observer.unobserve(ref.current);
-            }
-          }
-        } else if (!onlyOnce) {
-          setIsIntersecting(false);
-        }
-      },
-      { threshold }
-    );
-
-    if (ref.current instanceof Element) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current instanceof Element) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [ref, threshold, onlyOnce]);
-
-  return isIntersecting;
-};
-
-const TwoColumnSectionComponent = ({ children }) => {
+const FullWidthSectionComponent = ({ children }) => {
   const ref = useRef(null);
-  const onScreen = useOnScreen(ref, 0.2); 
+  const onScreen = useOnScreen(ref, 0.2);
 
   useEffect(() => {
     if (onScreen) {
@@ -186,10 +163,35 @@ const TwoColumnSectionComponent = ({ children }) => {
   }, [onScreen]);
 
   return (
-    <TwoColumnSection ref={ref}>
+    <FullWidthSection ref={ref}>
       {children}
-    </TwoColumnSection>
+    </FullWidthSection>
   );
+};
+
+const useOnScreen = (ref, threshold = 0.2) => {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref, threshold]);
+
+  return isIntersecting;
 };
 
 const ImageWrapperComponent = ({ children, maxWidth }) => {
@@ -226,14 +228,24 @@ const HomeRoute = () => {
   const onScreen = useOnScreen(ref);
   const imageRef = useRef(null);
   const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
-  
-  useEffect(() => {
-    if (onScreen && ref.current) {
-      ref.current.style.animationPlayState = 'running';
-    }
-  }, [onScreen]);
+  const [hasScrolledPast, setHasScrolledPast] = useState(false);
 
-  
+  const handleScroll = () => {
+    if (window.scrollY > 30 && !hasScrolledPast) {
+      setHasScrolledPast(true);
+    } else if (window.scrollY <= 30 && hasScrolledPast) {
+      setHasScrolledPast(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [hasScrolledPast]);
+
   return (
     <>
       <Section>
@@ -247,14 +259,14 @@ const HomeRoute = () => {
         <ImageContainerHab ref={imageRef}> 
           <ImageWrapperHab> 
             <HabImage 
-              src={isHabImageOnScreen ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
+              src={hasScrolledPast ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
               alt="Habitación terapia"
             />
           </ImageWrapperHab>
         </ImageContainerHab>
       </Section>
       <Sections>
-        <TwoColumnSectionComponent>
+        <FullWidthSectionComponent>
           <LeftColumn>
             <SmallerText>
             <StyledParagraph>
@@ -276,8 +288,8 @@ const HomeRoute = () => {
           </LeftColumn>
           <RightColumn>
           </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
+        </FullWidthSectionComponent>
+        <FullWidthSectionComponent>
           <LeftColumn>
             <SmallerText>
               <StyledParagraph>
@@ -293,8 +305,8 @@ const HomeRoute = () => {
               </ImageWrapperComponent>
             </ImageContainer>
           </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
+        </FullWidthSectionComponent>
+        <FullWidthSectionComponent>
           <LeftColumn>
             <SmallerText>
               <StyledParagraph>
@@ -307,14 +319,14 @@ const HomeRoute = () => {
           </LeftColumn>
           <RightColumn>
           <ImageContainer>
-            <ImageWrapperComponent>
+            <ImageWrapperComponent maxWidth={"60%"}>
               <Tooltip>Fritz y Laura Perls - 1964</Tooltip>
               <TherapistImage src={FritzPerlsEssalen} alt="Fritz y Laura Perls en Esalen" />
             </ImageWrapperComponent>
           </ImageContainer>
           </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
+        </FullWidthSectionComponent>
+        <FullWidthSectionComponent>
           <LeftColumn>
             <SmallerText>
               <StyledParagraph>
@@ -324,14 +336,14 @@ const HomeRoute = () => {
           </LeftColumn>
           <RightColumn>
           <ImageContainer>
-              <ImageWrapperComponent maxWidth={"60%"}>
-                <Tooltip>Claudio Naranjo</Tooltip>
-                <TherapistImage src={ClaudioNaranjoJoven} alt="Claudio Naranjo tocando un gong" />
-              </ImageWrapperComponent>
-            </ImageContainer>
+            <ImageWrapperComponent maxWidth={"60%"}>
+              <Tooltip>Claudio Naranjo</Tooltip>
+              <TherapistImage src={ClaudioNaranjoJoven} alt="Claudio Naranjo tocando un gong" />
+            </ImageWrapperComponent>
+          </ImageContainer>
           </RightColumn>
-        </TwoColumnSectionComponent>
-        <TwoColumnSectionComponent>
+        </FullWidthSectionComponent>
+        <FullWidthSectionComponent>
           <LeftColumn>
             <SmallerText>
               <StyledParagraph>
@@ -342,7 +354,7 @@ const HomeRoute = () => {
           <RightColumn>
             
           </RightColumn>
-        </TwoColumnSectionComponent>
+        </FullWidthSectionComponent>
       </Sections>
     </>
   );

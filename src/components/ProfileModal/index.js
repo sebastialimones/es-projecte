@@ -17,7 +17,7 @@ const StyledModal = styled(Modal)`
     padding: 20px;
 
     ${media.smallScreen`
-      width: 90vw;
+      width: 60vw;
       border-radius: 8px;
       padding: 1em;
     `}
@@ -41,7 +41,9 @@ const ModalContent = styled.div`
 
   ${media.smallScreen`
     flex-direction: column;
-    align-items: stretch; // Stretches items to fit the container on small screens
+    align-items: stretch; 
+    gap: 10px; // Adds space between the avatar and the details
+
   `}
 `;
 
