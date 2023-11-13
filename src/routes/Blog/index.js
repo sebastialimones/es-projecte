@@ -30,7 +30,7 @@ const ArticlesContainer = styled.div`
   flex: 4; 
   display: flex;
   flex-direction: column;
-  margin-top: 1em;
+  margin-top: 2em;
 `;
 
 const SidebarContainer = styled.div`
@@ -60,17 +60,14 @@ const ContentContainer = styled.div`
 
 const TagContainer = styled.p`
   font-size: 1.1em;
-  position: absolute; // or 'fixed' if you want it to stay in the same place even on scrolling
-  top: 6; // Adjust top, right, bottom, left as per the required position
-  left: 10;
-  z-index: 10;
-  padding-bottom: 3em;
-
+  position: absolute; // Keeps the element positioned absolutely relative to its parent
+  top: -19px; // Positions the container 10 pixels from the top of its parent
+  left: 0px; // Keeps the original left positioning
+  z-index: 10; // Keeps the z-index to ensure it stays above other elements
 `;
 
 const ParentContainer = styled.div`
   position: relative; // or use 'position: absolute;' based on your layout
-  // Other styles
 `;
 
 const TagText = styled.span`
