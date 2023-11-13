@@ -19,12 +19,10 @@ import Skeleton from '@mui/material/Skeleton';
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
-  padding-top: 2em;
   ${media.mediumScreen`
     flex-direction: column;
   `}
   ${media.smallScreen`
-    padding-top: 1em;
   `}
 `;
 
