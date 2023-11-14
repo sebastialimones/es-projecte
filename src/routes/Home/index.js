@@ -79,8 +79,8 @@ const ImageContainer = styled.div`
 
 const ImageContainerHab = styled.div`
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  /* justify-content: center;  */
+  /* align-items: center;  */
   position: relative;
   width: 100%; // Ensuring the container takes full width
   height: 100%; // Optional: If you want to set a specific height for the image container
@@ -88,7 +88,7 @@ const ImageContainerHab = styled.div`
 `;
 
 const HabImage = styled.img`
-  max-width: 80%; // Ensuring the image doesn't exceed 80% of its container's width
+  max-width: 90%; // Ensuring the image doesn't exceed 80% of its container's width
   height: auto; // Keeping the image's aspect ratio
   display: block;
   margin: auto; // This will also help in centering the image
@@ -101,6 +101,7 @@ const ImageWrapperHab = styled.div`
     display: block;
     opacity: 1;
   }
+  margin-bottom: 1em;
 `;
 
 const ImageWrapper = styled.div`
@@ -297,14 +298,6 @@ const HomeRoute = () => {
               </StyledParagraph>
             </SmallerText>
           </LeftColumn>
-          <RightColumn>
-            <ImageContainer centered>
-              <ImageWrapperComponent>
-                <Tooltip>Martin Buber - 1878</Tooltip>
-                <TherapistImage src={MartinBuber} alt="Martin Buber" />
-              </ImageWrapperComponent>
-            </ImageContainer>
-          </RightColumn>
         </FullWidthSectionComponent>
         <FullWidthSectionComponent>
           <LeftColumn>
@@ -317,6 +310,14 @@ const HomeRoute = () => {
               </StyledParagraph>
             </SmallerText>
           </LeftColumn>
+          {/* <RightColumn>
+            <ImageContainer centered>
+              <ImageWrapperComponent>
+                <Tooltip>Martin Buber - 1878</Tooltip>
+                <TherapistImage src={MartinBuber} alt="Martin Buber" />
+              </ImageWrapperComponent>
+            </ImageContainer>
+          </RightColumn>
           <RightColumn>
           <ImageContainer>
             <ImageWrapperComponent maxWidth={"60%"}>
@@ -327,13 +328,6 @@ const HomeRoute = () => {
           </RightColumn>
         </FullWidthSectionComponent>
         <FullWidthSectionComponent>
-          <LeftColumn>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph7)}
-              </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
           <RightColumn>
           <ImageContainer>
             <ImageWrapperComponent maxWidth={"60%"}>
@@ -341,19 +335,7 @@ const HomeRoute = () => {
               <TherapistImage src={ClaudioNaranjoJoven} alt="Claudio Naranjo tocando un gong" />
             </ImageWrapperComponent>
           </ImageContainer>
-          </RightColumn>
-        </FullWidthSectionComponent>
-        <FullWidthSectionComponent>
-          <LeftColumn>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph8)}
-              </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
-          <RightColumn>
-            
-          </RightColumn>
+          </RightColumn> */}
         </FullWidthSectionComponent>
       </Sections>
     </>

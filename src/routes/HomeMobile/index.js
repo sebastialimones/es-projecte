@@ -153,14 +153,19 @@ const HomeMobile = () => {
               <StyledParagraph>
                 {processContent(homePageContent.paragraph1)}
               </StyledParagraph>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph2)}
-              </StyledParagraph>
               <ImageWrapperComponent 
                 src={MartinBuber} 
                 alt="Martin Buber"
                 tooltipText="Martin Buber - 1878"
               />
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph2)}
+              </StyledParagraph>
+              <ImageWrapperComponent 
+                src={FritzPerlsEssalen} 
+                alt="Fritz y Laura Perls en Esalen"
+                tooltipText="Fritz y Laura Perls - 1964"
+            />
               <StyledParagraph>
                 {processContent(homePageContent.paragraph3)}
               </StyledParagraph>
@@ -173,10 +178,11 @@ const HomeMobile = () => {
             </SmallerText>
           </ColumnSection>
           <ColumnSection>
-            <ImageWrapperComponent 
-                src={FritzPerlsEssalen} 
-                alt="Fritz y Laura Perls en Esalen"
-                tooltipText="Fritz y Laura Perls - 1964"
+          <ImageWrapperComponent 
+              src={ClaudioNaranjoJoven} 
+              alt="Claudio Naranjo tocando un gong"
+              tooltipText="Claudio Naranjo"
+              maxWidth={"60%"}
             />
           </ColumnSection>
           <ColumnSection>
@@ -185,32 +191,11 @@ const HomeMobile = () => {
                 {processContent(homePageContent.paragraph5)}
               </StyledParagraph>
           <ColumnSection>
-            <ImageWrapperComponent 
-              src={ClaudioNaranjoJoven} 
-              alt="Claudio Naranjo tocando un gong"
-              tooltipText="Claudio Naranjo"
-              maxWidth={"60%"}
-            />
+            
+          
           </ColumnSection>
               <StyledParagraph>
                 {processContent(homePageContent.paragraph6)}
-              </StyledParagraph>
-            </SmallerText>
-          </ColumnSection>
-          
-          <ColumnSection>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph7)}
-              </StyledParagraph>
-            </SmallerText>
-          </ColumnSection>
-          <ColumnSection>
-          </ColumnSection>
-          <ColumnSection>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph8)}
               </StyledParagraph>
             </SmallerText>
           </ColumnSection>
