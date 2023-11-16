@@ -170,9 +170,6 @@ const HomeMobile = () => {
                 {processContent(homePageContent.paragraph3)}
               </StyledParagraph>
               <StyledParagraph>
-                {processContent(homePageContent.paragraph31)}
-              </StyledParagraph>
-              <StyledParagraph>
                 {processContent(homePageContent.paragraph4)}
               </StyledParagraph>
             </SmallerText>

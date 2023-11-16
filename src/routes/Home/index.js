@@ -282,9 +282,6 @@ const HomeRoute = () => {
               <StyledParagraph>
                 {processContent(homePageContent.paragraph3)}
               </StyledParagraph>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph31)}
-              </StyledParagraph>
             </SmallerText>
           </LeftColumn>
           <RightColumn>
@@ -308,34 +305,11 @@ const HomeRoute = () => {
               <StyledParagraph>
                 {processContent(homePageContent.paragraph6)}
               </StyledParagraph>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph7)}
+              </StyledParagraph>
             </SmallerText>
           </LeftColumn>
-          {/* <RightColumn>
-            <ImageContainer centered>
-              <ImageWrapperComponent>
-                <Tooltip>Martin Buber - 1878</Tooltip>
-                <TherapistImage src={MartinBuber} alt="Martin Buber" />
-              </ImageWrapperComponent>
-            </ImageContainer>
-          </RightColumn>
-          <RightColumn>
-          <ImageContainer>
-            <ImageWrapperComponent maxWidth={"60%"}>
-              <Tooltip>Fritz y Laura Perls - 1964</Tooltip>
-              <TherapistImage src={FritzPerlsEssalen} alt="Fritz y Laura Perls en Esalen" />
-            </ImageWrapperComponent>
-          </ImageContainer>
-          </RightColumn>
-        </FullWidthSectionComponent>
-        <FullWidthSectionComponent>
-          <RightColumn>
-          <ImageContainer>
-            <ImageWrapperComponent maxWidth={"60%"}>
-              <Tooltip>Claudio Naranjo</Tooltip>
-              <TherapistImage src={ClaudioNaranjoJoven} alt="Claudio Naranjo tocando un gong" />
-            </ImageWrapperComponent>
-          </ImageContainer>
-          </RightColumn> */}
         </FullWidthSectionComponent>
       </Sections>
     </>
