@@ -150,6 +150,9 @@ const HomeMobile = () => {
         <TextSection>
           <ColumnSection>
             <SmallerText>
+            <StyledParagraph>
+                {processContent(homePageContent.paragraph01)}
+              </StyledParagraph>
               <StyledParagraph>
                 {processContent(homePageContent.paragraph1)}
               </StyledParagraph>
