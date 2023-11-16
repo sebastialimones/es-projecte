@@ -187,12 +187,11 @@ const HomeMobile = () => {
               <StyledParagraph>
                 {processContent(homePageContent.paragraph5)}
               </StyledParagraph>
-          <ColumnSection>
-            
-          
-          </ColumnSection>
               <StyledParagraph>
                 {processContent(homePageContent.paragraph6)}
+              </StyledParagraph>
+              <StyledParagraph>
+                {processContent(homePageContent.paragraph7)}
               </StyledParagraph>
             </SmallerText>
           </ColumnSection>
