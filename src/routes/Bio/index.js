@@ -7,9 +7,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 2em;
-  font-family: 'Playfair Display', serif;  /* Set the font to Playfair Display */
-  font-size: 16px;  /* Set the font size */
-  line-height: 13.3px;  /* Set the line height */
+  font-size: 1.5em;  /* Set the font size */
+  line-height: 0.2em;  /* Set the line height */
   ${media.smallScreen`
     
   `}
@@ -17,7 +16,7 @@ const Container = styled.div`
 
 const Paragraph = styled.p`
   font-size: 1em;  /* Adjusted to fit the overall font size you provided */
-  line-height: 1.6;
+  line-height: 1.2;
   margin-bottom: 1em;
 `;
 
@@ -27,7 +26,6 @@ const Avatar = styled.img`
   height: 180px;
   border-radius: 50%; // Makes the image circular
   margin-right: 10px; // Space between the avatar and the logo or other elements
-  cursor: pointer;
   text-decoration: none;
   margin-bottom: 1em;
 `;

@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import media from '../../constants/media';
 
 const Tooltip = styled.span`
@@ -33,9 +33,9 @@ const ImageContainer = styled.div`
   position: relative;
   margin-bottom: 0; 
   align-items: center;
+  padding-bottom: 1em;
+  padding-top: 1em;
   ${media.smallScreen`
-    padding-bottom: 1em;
-    padding-top: 1em;
   `}
   &:hover ${Tooltip} {
     display: inline-block;
@@ -43,7 +43,6 @@ const ImageContainer = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  position: relative;
   max-height: 100%;
  
   &:hover ${Tooltip} {
@@ -52,84 +51,27 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const borderTopAnimation = keyframes`
-  0% {
-    width: 0;
+const slideInAnimation = keyframes`
+  from {
+    transform: translateX(100%);
+    opacity: 1
   }
-  100% {
-    width: 100%;
-  }
-`;
-
-const borderRightAnimation = keyframes`
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 100%;
+  to {
+    transform: translateX(0);
+    opacity: 1
   }
 `;
 
-const borderBottomAnimation = keyframes`
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
-`;
-
-const borderLeftAnimation = keyframes`
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 100%;
-  }
-`;
-
-const BorderTop = styled.div`
+const Avatar = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0; // Initial value
-  background-color: black;
-  animation: ${borderTopAnimation} 0.7s forwards 1s;
+  left: 0%;
+  top: 30%; 
+  transform-origin: center;
+  height: 244px;
+  z-index: 10;
+  transform: translateX(100%); // Start off-screen
 `;
 
-const BorderRight = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 3px;
-  height: 0; // Initial value
-  background-color: black;
-  animation: ${borderRightAnimation} 0.7s forwards;
-  animation-delay: 1.7s;  // Delay this animation
-`;
-
-const BorderBottom = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 3px;
-  width: 0; // Initial value
-  background-color: black;
-  animation: ${borderBottomAnimation} 0.7s forwards;
-  animation-delay: 2.4s;  // Delay this animation
-`;
-
-const BorderLeft = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  height: 0; // Initial value
-  background-color: black;
-  animation: ${borderLeftAnimation} 0.7s forwards;
-  animation-delay: 3.1s;  // Delay this animation
-`;
 
 const TherapistImage = styled.img`
   max-height: 100%;
@@ -138,21 +80,49 @@ const TherapistImage = styled.img`
   height: auto;
 `;
 
-const ImageWrapperComponent = forwardRef(({ src, alt, tooltipText, maxWidth }, ref) => {
+const ImageWrapperComponent = forwardRef(({ src, alt, maxWidth, avatarSrc }, ref) => {
+  const avatarRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (avatarRef.current) {
+        const scrollY = window.scrollY;
+    
+        // Start animation earlier and end it later
+        const startScroll = 650; // Adjust as needed
+        const endScroll = 1100; // Adjust as needed
+    
+        let translateX = 100; // Start with avatar fully off-screen
+    
+        if (scrollY > startScroll && scrollY < endScroll) {
+          console.log('startScroll',scrollY)
+          const progress = (scrollY - startScroll) / (endScroll - startScroll);
+          translateX = 100 - (100 * progress);
+        } else if (scrollY >= endScroll) {
+          translateX = 0;
+        }
+    
+        avatarRef.current.style.transform = `translateX(${translateX}%)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+
   return (
     <ImageContainer>
-      <ImageWrapper 
-        ref={ref}
-        style={{
-          maxWidth: maxWidth || '70%',
-        }} 
-      >
-        <BorderTop />
-        <BorderRight />
-        <BorderBottom />
-        <BorderLeft />
-          <Tooltip>{tooltipText}</Tooltip>
-          <TherapistImage src={src} alt={alt} />
+      <ImageWrapper ref={ref} style={{ maxWidth: maxWidth || '70%' }}>
+        {avatarSrc && (
+          <Avatar 
+            ref={avatarRef} 
+            src={avatarSrc} 
+            alt="Avatar" 
+          />
+        )}
+        <TherapistImage src={src} alt={alt} />
       </ImageWrapper>
     </ImageContainer>
   );

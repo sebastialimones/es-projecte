@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 import { Nav } from '../../containers/Navigation';
 import {  mainColor } from '../../constants';
 import { useSpring, animated } from '@react-spring/web';
@@ -9,16 +10,28 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from '../Logo';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import FreudTransparent48x48 from '../../assets/FreudTransparent48x48.png';
+import useIsMobile from '../../hooks/isMobile';
 
 const NavbarWrapper = styled.div`
   padding-top: calc(${props => props.isScrolled ? '0.5em' : '1em'});  
 `;
 
 const Container = styled.div`
+  display: flex;
+  align-items: center; // Align items vertically
+  justify-content: space-between; // Space out the logo and the menu
+  z-index: 100;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 100;
+
+  ${media.smallScreen`
+    flex-direction: column; // Stack elements on small screens
+  `}
 `;
 
 const DockMenu = styled.div`
@@ -26,7 +39,6 @@ const DockMenu = styled.div`
   top: 0;
   right: 0;
   height: 100vh;
-  /* width: calc(70vw - 30px); // For larger screens */
   width: 100%;
   background: ${mainColor};
   transform: translateX(100%);
@@ -53,7 +65,7 @@ const DockMenu = styled.div`
   `}
 `;
 
-const MenuContainer = styled.div`
+const MobileMenuContainer = styled.div`
   ${media.smallScreen`
     
   `}
@@ -64,6 +76,21 @@ const SubscribeButtonStyled = styled.div`
   ${media.smallScreen`
     padding-right: 1em;
   `}
+`;
+
+const StyledNavLink = styled(NavLink)`
+  margin: 0 15px;
+  text-decoration: none;
+  color: inherit; // Or any default color you prefer
+
+  &:hover {
+    color: ${props => props.theme.mainColor}; // Assuming mainColor is in your theme
+  }
+
+  &.active {
+    text-decoration: underline;
+    text-decoration-color: ${mainColor}; // Underline color
+  }
 `;
 
 const mobileMenuIconStyles = {
@@ -91,14 +118,37 @@ const StyledIcon = styled(animated.div)`
   `}
 `;
 
+const DesktopMenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  a {
+    margin: 0 15px; // Adjust spacing between links
+    text-decoration: none; // Optional: style as needed
+    color: inherit; // Optional: style as needed
+    &:hover {
+      color: ${mainColor}; // Change color on hover
+    }
+  }
+
+  // Add more styles as needed
+`;
+const DesktopMenuItem = styled.div`
+  margin: 0 15px; 
+  cursor: pointer;
+  // Add more styling as needed
+`;
+
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDockOpen, setIsDockOpen] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [isFreudifyActive, setIsFreudifyActive] = useState(false);
   const dockMenuRef = useRef(null);
   const menuIconRef = useRef(null);
   const location = useLocation();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,6 +184,10 @@ export const Header = () => {
     }
   });
 
+  useEffect(() => {
+    document.body.style.cursor = isFreudifyActive ? `url(${FreudTransparent48x48}), auto` : 'default';
+  }, [isFreudifyActive]);
+
   const handleClick = () => {
     setIsDockOpen(prev => {
       return !prev;
@@ -147,41 +201,85 @@ export const Header = () => {
     }
   };
 
+  const handleChange = (event) => {
+    setIsFreudifyActive(event.target.checked);
+  };
+
   return (
     <NavbarWrapper isScrolled={isScrolled}>
-        <ProfileModal 
-          isOpen={isModalOpen} 
-          onRequestClose={() => setIsModalOpen(false)} 
-          contentLabel="Profile Modal"
-        />
+      <ProfileModal 
+        isOpen={isModalOpen} 
+        onRequestClose={() => setIsModalOpen(false)} 
+        contentLabel="Profile Modal"
+      />
       <Container>
-      <Link to="/">
-        <Logo isMenuOpen={isDockOpen}>Tià Limones</Logo>
-      </Link>
-        <MenuContainer>
-          <StyledIcon
-            style={{
-              transform: rotateAnimation.rotation.to(r => `rotate(${r}deg)`),
-            }}
-          >
-            <div style={iconContainerStyles}>
-              {rotation >= -90 ?
-                  <MenuIcon onClick={handleClick} fontSize="inherit" /> :
-                  <CloseIcon onClick={handleClick} fontSize="inherit" />
-              }
-            </div>
-          </StyledIcon>
-          <DockMenu ref={dockMenuRef} className={isDockOpen ? 'open' : ''}>
-          <Nav 
-            setIsModalOpen={setIsModalOpen} 
-            setIsDockOpen={setIsDockOpen}
-            closeDock={() => handleClick(true)} 
-            handleLinkClick={handleLinkClick}
-            style={media.smallScreen ? mobileMenuIconStyles : null} 
-          />          
-        </DockMenu>
-        </MenuContainer>          
+        <Link to="/">
+          <Logo isMenuOpen={isDockOpen}>Tià Limones</Logo>
+        </Link>
+        {
+          isMobile ?
+          <MobileMenuContainer>
+            <StyledIcon
+              style={{
+                transform: rotateAnimation.rotation.to(r => `rotate(${r}deg)`),
+              }}
+              >
+              <div style={iconContainerStyles}>
+                {rotation >= -90 ?
+                    <MenuIcon onClick={handleClick} fontSize="inherit" /> :
+                    <CloseIcon onClick={handleClick} fontSize="inherit" />
+                }
+              </div>
+            </StyledIcon>
+            <DockMenu ref={dockMenuRef} className={isDockOpen ? 'open' : ''}>
+            <Nav 
+              setIsModalOpen={setIsModalOpen} 
+              setIsDockOpen={setIsDockOpen}
+              closeDock={() => handleClick(true)} 
+              handleLinkClick={handleLinkClick}
+              style={media.smallScreen ? mobileMenuIconStyles : null} 
+              />          
+          </DockMenu>
+          </MobileMenuContainer>
+          :
+          <DesktopMenuContainer>
+            <StyledNavLink exact to="/" activeClassName="active">
+              inicio
+            </StyledNavLink>
+            <StyledNavLink to="/blog" activeClassName="active">
+              artículos
+            </StyledNavLink>
+            <StyledNavLink to="/books" activeClassName="active">
+              libros
+            </StyledNavLink>
+            <StyledNavLink to="/bio" activeClassName="active">
+              bio
+            </StyledNavLink>
+            {/* DesktopMenuItem for contacto, assuming it's not a NavLink */}
+            <DesktopMenuItem>
+              contacto
+            </DesktopMenuItem>
+          </DesktopMenuContainer>
+        }
+        {!isMobile && 
+          <FormControl component="fieldset" variant="standard">
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isFreudifyActive}
+                    onChange={handleChange}
+                    name="Freudify"
+                    style={{ color: mainColor }}
+                  />           
+                }
+                label="Freudify"
+              />
+            </FormGroup>
+          </FormControl>
+        }
       </Container>
     </NavbarWrapper>
   );
 };
+

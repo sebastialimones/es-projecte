@@ -1,24 +1,37 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import MartinBuber from '../../assets/MartinBuber.jpeg';
-import FritzPerlsEssalen from '../../assets/FritzPerlsEssalen.jpeg';
-import ClaudioNaranjoJoven from '../../assets/ClaudioNaranjoJoven.jpeg';
+import backgroundCactus1 from '../../assets/backgroundCactus1.png';
+import backgroundCactus2 from '../../assets/backgroundCactus2.png';
+import BuberAvatar from '../../assets/BuberAvatar.png';
+import FritzAvatar from '../../assets/FritzAvatar.png';
+import los3 from '../../assets/los3.png';
 import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
 import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/index2';
 import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
-import DisenyoCanvaTransformedWith2Lights from '../../assets/DisenyoCanvaTransformedWith2Lights.png';
+import ImageWrapperComponent from '../../components/ImageWrapper';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centers content horizontally in a column flex container
+  justify-content: center; // Centers content vertically
+  width: 100%; // Ensures the container takes the full width
+  min-height: 100vh; // Optionally, makes the container take at least the full height of the viewport
+`;
 
 const Section = styled.div`
   display: flex;
-  flex-direction: row;
   overflow: hidden;
-  position: relative;
-  background-color: #FAF8F0;
+  flex-direction: row;
   padding-top: 2em;
+  justify-content: center; // Center children horizontally
+  align-items: center; // Center children vertically (if needed)
+  width: 80%; /
 `;
+
 
 const HeroText = styled.h1`
   color: black;
@@ -30,15 +43,8 @@ const HeroText = styled.h1`
 const Sections = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const TwoColumnSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  opacity: 0; 
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  align-items: center;
+  width: 80%; 
 `;
 
 const StyledParagraph = styled.div`
@@ -47,14 +53,13 @@ const StyledParagraph = styled.div`
 `;
 
 const FirsSectionTextContainer = styled.div`
-  display: flex;
 `;
 
 const Tooltip = styled.span`
   position: absolute;
   background-color: #FAF8F0;
   border: 2px solid black;
-  padding: 2px 6px;
+  padding: 4px 6px;
   font-size: 1em;
   z-index: 2;
   bottom: 10px;
@@ -63,24 +68,8 @@ const Tooltip = styled.span`
   transition: opacity 0.3s ease-in-out;
 `;
 
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
-  position: relative;
-  margin-bottom: 0; 
-  align-items: center;
-
-  &:hover ${Tooltip} {
-    display: inline-block;
-    opacity: 1;
-  }
-`;
-
 const ImageContainerHab = styled.div`
   display: flex;
-  /* justify-content: center;  */
-  /* align-items: center;  */
   position: relative;
   width: 100%; // Ensuring the container takes full width
   height: 100%; // Optional: If you want to set a specific height for the image container
@@ -104,24 +93,6 @@ const ImageWrapperHab = styled.div`
   margin-bottom: 1em;
 `;
 
-const ImageWrapper = styled.div`
-  position: relative;
-  max-height: 100%;
-  border: 3px solid black;
-  &:hover ${Tooltip} {
-    display: block;
-    opacity: 1;
-  }
-`;
-
-
-const TherapistImage = styled.img`
-  max-height: 100%;
-  max-width: 100%;
-  display: block;
-  height: auto;
-`;
-
 const SmallerText = styled.div`
   font-size: 1.5em;
   flex: 0.5; 
@@ -143,9 +114,6 @@ const RightColumn = styled.div`
 `;
 
 const FullWidthSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
   opacity: 0;
   transform: translateY(20px);
@@ -195,15 +163,6 @@ const useOnScreen = (ref, threshold = 0.2) => {
   return isIntersecting;
 };
 
-const ImageWrapperComponent = ({ children, maxWidth }) => {
-
-  return (
-    <ImageWrapper style={{ maxWidth: maxWidth || '70%' }}>
-      {children}
-    </ImageWrapper>
-  );
-};
-
 const componentMap = {
   BoxedWordCounterClock: BoxedWordCounterClock,
   BoxedWordClockWise: BoxedWordClockWise,
@@ -223,13 +182,14 @@ const processContent = (text) => {
   });
 };
 
-
 const HomeRoute = () => {
   const ref = useRef(null);
   const onScreen = useOnScreen(ref);
   const imageRef = useRef(null);
   const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
   const [hasScrolledPast, setHasScrolledPast] = useState(false);
+  const buberRef = useRef(null);
+  const fritzRef = useRef(null);
 
   const handleScroll = () => {
     if (window.scrollY > 30 && !hasScrolledPast) {
@@ -248,7 +208,7 @@ const HomeRoute = () => {
   }, [hasScrolledPast]);
 
   return (
-    <>
+    <Container>
       <Section>
         <FirsSectionTextContainer>
           <HeroText>
@@ -276,6 +236,14 @@ const HomeRoute = () => {
             <StyledParagraph>
                 {processContent(homePageContent.paragraph1)}
               </StyledParagraph>
+              <ImageWrapperComponent 
+                src={backgroundCactus1} 
+                maxWidth={'100%'}
+                alt="backgroundCactus2" 
+                tooltipText="Martin Buber - 187" 
+                avatarSrc={BuberAvatar}
+                ref={buberRef}
+              />
               <StyledParagraph>
                 {processContent(homePageContent.paragraph2)}
               </StyledParagraph>
@@ -288,13 +256,18 @@ const HomeRoute = () => {
           </RightColumn>
         </FullWidthSectionComponent>
         <FullWidthSectionComponent>
-          <LeftColumn>
-            <SmallerText>
-              <StyledParagraph>
-                {processContent(homePageContent.paragraph4)}
-              </StyledParagraph>
-            </SmallerText>
-          </LeftColumn>
+          <SmallerText>
+            <StyledParagraph>
+              {processContent(homePageContent.paragraph4)}
+            </StyledParagraph>
+          </SmallerText>
+          <ImageWrapperComponent 
+              src={los3} 
+              alt="Martin Buber"
+              tooltipText="Martin Buber - 1878"
+              maxWidth={'100%'}
+
+          />
         </FullWidthSectionComponent>
         <FullWidthSectionComponent>
           <LeftColumn>
@@ -312,7 +285,7 @@ const HomeRoute = () => {
           </LeftColumn>
         </FullWidthSectionComponent>
       </Sections>
-    </>
+    </Container>
   );
 }
 
