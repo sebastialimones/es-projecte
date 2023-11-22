@@ -91,7 +91,6 @@ const ImageWrapperComponentForCactus = forwardRef(({ src, alt, maxWidth, avatarS
         const scrollY = window.scrollY;
   
         // Calculate the scroll progress within the animation range
-        console.log(scrollY)
         let progress = (scrollY - startScroll) / (endScroll - startScroll);
   
         // Clamp the progress to the range of 0 to 1

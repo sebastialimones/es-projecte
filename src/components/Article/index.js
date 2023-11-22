@@ -216,7 +216,6 @@ export const Article = ({ article, isPost }) => {
     } else {  // Desktop
         if (navigator.clipboard) {
             navigator.clipboard.writeText(url).then(() => {
-              console.log('ion da dektio')
                 setShowTooltip(true);
                 setTimeout(() => setShowTooltip(false), 2000);  // Hide tooltip after 2 seconds
             }).catch(err => {
