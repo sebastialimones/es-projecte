@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import MartinBuber from '../../assets/MartinBuber.jpeg';
-import FritzPerlsEssalen from '../../assets/FritzPerlsEssalen.jpeg';
+import backgroundCactus1Mobile from '../../assets/backgroundCactus1Mobile.png';
+import backgroundCactus2Mobile from '../../assets/backgroundCactus2Mobile.png';
+import BuberAvatar from '../../assets/BuberAvatar.png';
+import PerlsTransparent from '../../assets/PerlsTransparent.png';
 import ClaudioNaranjoJoven from '../../assets/ClaudioNaranjoJoven.jpeg';
 import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
@@ -10,6 +12,7 @@ import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/ind
 import ImageWrapperComponent from '../../components/ImageWrapper';
 import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
+import ImageWrapperComponentForCactus from '../../components/ImageWrapperForCactus';
 
 const Section = styled.div`
   display: flex;
@@ -132,6 +135,7 @@ const processContent = (text) => {
 const HomeMobile = () => {
   const imageRef = useRef(null);
   const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
+  const buberRef = useRef(null);
 
   return (
     <>
@@ -157,18 +161,25 @@ const HomeMobile = () => {
                 {processContent(homePageContent.paragraph1)}
               </StyledParagraph>
               <ImageWrapperComponent 
-                src={MartinBuber} 
-                alt="Martin Buber"
-                tooltipText="Martin Buber - 1878"
+                src={backgroundCactus1Mobile} 
+                maxWidth={'100%'}
+                alt="backgroundCactus2" 
+                tooltipText="Martin Buber - 187" 
+                avatarSrc={BuberAvatar}
+                ref={buberRef}
+                isMobile={'isMobile'}
               />
               <StyledParagraph>
                 {processContent(homePageContent.paragraph2)}
               </StyledParagraph>
-              <ImageWrapperComponent 
-                src={FritzPerlsEssalen} 
-                alt="Fritz y Laura Perls en Esalen"
-                tooltipText="Fritz y Laura Perls - 1964"
-            />
+              <ImageWrapperComponentForCactus
+                  src={backgroundCactus2Mobile} 
+                  alt="Martin Buber"
+                  tooltipText="Martin Buber - 1878"
+                  maxWidth={'100%'}
+                  avatarSrc={PerlsTransparent}
+                  isMobile={'isMobile'}
+              />
               <StyledParagraph>
                 {processContent(homePageContent.paragraph3)}
               </StyledParagraph>

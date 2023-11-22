@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import media from '../../constants/media';
 import cactus from '../../assets/cactus.png';
 
@@ -28,12 +28,14 @@ const Tooltip = styled.span`
   `;
 
 const BackgroundImage = styled.div`
-  background-image: url('imageWithCactus');
   background-size: cover;
   background-position: center;
   position: relative;
   max-width: 100%;
   height: auto;
+  ${media.smallScreen`
+    width: 200%;
+  `}
 `;
 
 const CactusImage = styled.img`
@@ -42,7 +44,10 @@ const CactusImage = styled.img`
   bottom: 5%;  // Cactus is at the bottom of the container
   z-index: 2; // Cactus image is above the avatar
   max-width: 390px;
-  // Set specific dimensions or use max-width/max-height as needed
+  ${media.smallScreen`
+    max-width: 300px;
+    left: 4%;
+  `}
 `;
 
 const Avatar = styled.img`
@@ -54,6 +59,9 @@ const Avatar = styled.img`
   z-index: 1; // Ensure the avatar is behind the cactus
   opacity: 1; // Start invisible
   transition: transform 0.5s ease-out; // Smooth transitions for movement and fading
+  ${media.smallScreen`
+    height: 114px; // Set the size of your avatar
+  `}
 `;
 
 const ImageContainer = styled.div`
@@ -79,13 +87,18 @@ const TherapistImage = styled.img`
   height: auto;
 `;
 
-const ImageWrapperComponentForCactus = forwardRef(({ src, alt, maxWidth, avatarSrc }, ref) => {
+const ImageWrapperComponentForCactus = forwardRef(({ src, alt, maxWidth, avatarSrc, isMobile }, ref) => {
   const avatarRef = useRef(null);
 
   useEffect(() => {
-    const startScroll = 1600; // Scroll value where the animation starts
-    const endScroll = 1780; // Scroll value where the animation ends
-  
+    const startScrollMobile = 1300; // Adjust as needed for mobile
+    const startScrollDesktop = 1600; // Adjust as needed for desktop
+    const endScrollMobile = 1780; // Adjust as needed for mobile
+    const endScrollDesktop = 1780; // Adjust as needed for desktop
+    // Choose values based on isMobile
+    const startScroll = isMobile ? startScrollMobile : startScrollDesktop;
+    const endScroll = isMobile ? endScrollMobile : endScrollDesktop;
+
     const handleScroll = () => {
       if (avatarRef.current) {
         const scrollY = window.scrollY;

@@ -51,25 +51,18 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const slideInAnimation = keyframes`
-  from {
-    transform: translateX(100%);
-    opacity: 1
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1
-  }
-`;
-
 const Avatar = styled.img`
   position: absolute;
-  left: 0%;
+  left: 0%; // Position off-screen to the right
   top: 30%; 
   transform-origin: center;
   height: 244px;
   z-index: 10;
-  transform: translateX(100%); // Start off-screen
+  transform: translateX(100%); // Start off-screen for desktop
+  ${media.smallScreen`
+    height: 144px;
+    top: 35%; 
+  `}
 `;
 
 
@@ -80,22 +73,26 @@ const TherapistImage = styled.img`
   height: auto;
 `;
 
-const ImageWrapperComponent = forwardRef(({ src, alt, maxWidth, avatarSrc }, ref) => {
+const ImageWrapperComponent = forwardRef(({ src, alt, maxWidth, avatarSrc, isMobile }, ref) => {
   const avatarRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (avatarRef.current) {
         const scrollY = window.scrollY;
-    
-        // Start animation earlier and end it later
-        const startScroll = 650; // Adjust as needed
-        const endScroll = 1100; // Adjust as needed
-    
+        console.log(scrollY)
+        const startScrollMobile = 600; // Adjust as needed for mobile
+        const startScrollDesktop = 650; // Adjust as needed for desktop
+        const endScrollMobile = 1200; // Adjust as needed for mobile
+        const endScrollDesktop = 1100; // Adjust as needed for desktop
+
+        // Choose values based on isMobile
+        const startScroll = isMobile ? startScrollMobile : startScrollDesktop;
+        const endScroll = isMobile ? endScrollMobile : endScrollDesktop;
+
         let translateX = 100; // Start with avatar fully off-screen
     
         if (scrollY > startScroll && scrollY < endScroll) {
-          console.log('startScroll',scrollY)
           const progress = (scrollY - startScroll) / (endScroll - startScroll);
           translateX = 100 - (100 * progress);
         } else if (scrollY >= endScroll) {

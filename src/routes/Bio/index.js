@@ -1,14 +1,18 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import media from '../../constants/media';
 import IMG_5717 from '../../../src/assets/IMG_5717.png'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center; // Center horizontally in a column container
+  justify-content: center; // Center vertically
   padding-top: 2em;
-  font-size: 1.5em;  /* Set the font size */
-  line-height: 0.2em;  /* Set the line height */
+  font-size: 1.5em;
+  line-height: 0.2em;
+  max-width: 80%;
+  margin: 0 auto; // Center the container itself horizontally
   ${media.smallScreen`
     
   `}
@@ -42,10 +46,7 @@ export const Bio = () => {
       </Paragraph>
       <Avatar src={IMG_5717} alt="Sebastià"/>
       <Paragraph>
-        Ahora, la terapia es mi oficio.
-      </Paragraph>
-      <Paragraph>
-        Como he llegado hasta aquí es de esas cosas que sólo con la perspectiva que da el paso de los años podré llegar a entender. Lo que tengo claro es que estoy comprometido con este oficio y intento ejercerlo de una manera honesta y transparente.
+      Ahora, la terapia es mi oficio. <br></br><br></br>Como he llegado hasta aquí es de esas cosas que sólo con la perspectiva que da el paso de los años podré llegar a entender. Lo que tengo claro es que estoy comprometido con este oficio y intento ejercerlo de una manera honesta y transparente.
       </Paragraph>
       <Paragraph>
         Te invito a contactarme si necesitas más información, estoy abierto a conversar sobre todo lo que envuelva el proceso terapéutico y las dudas que puedas tener sobre ello. También te invito a leer algún artículo, allí quizás me transparento más en mi forma de ver el mundo y la terapia.

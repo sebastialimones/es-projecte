@@ -1,13 +1,17 @@
 import React from 'react';
 import { Navigation } from '../../components/Navigation';
 
-export const Nav = ({ setIsModalOpen, setIsDockOpen, handleLinkClick }) => {
+export const Nav = ({ setIsModalOpen, setIsDockOpen, handleLinkClick, onNonDockContactClick }) => {
   return (
     <div>
       <Navigation 
         onContactClick={() => {
-          setIsModalOpen(true);
-          setIsDockOpen(false);
+          if (onNonDockContactClick) {
+            onNonDockContactClick();
+          } else {
+            setIsModalOpen(true);
+            setIsDockOpen(false);
+          }
         }}
         handleLinkClick={handleLinkClick} 
       />

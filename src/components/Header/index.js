@@ -30,7 +30,9 @@ const Container = styled.div`
   left: 0;
 
   ${media.smallScreen`
-    flex-direction: column; // Stack elements on small screens
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 1.2em;
   `}
 `;
 
@@ -205,6 +207,10 @@ export const Header = () => {
     setIsFreudifyActive(event.target.checked);
   };
 
+  const handleNonDockContactClick = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <NavbarWrapper isScrolled={isScrolled}>
       <ProfileModal 
@@ -232,14 +238,14 @@ export const Header = () => {
               </div>
             </StyledIcon>
             <DockMenu ref={dockMenuRef} className={isDockOpen ? 'open' : ''}>
-            <Nav 
-              setIsModalOpen={setIsModalOpen} 
-              setIsDockOpen={setIsDockOpen}
-              closeDock={() => handleClick(true)} 
-              handleLinkClick={handleLinkClick}
-              style={media.smallScreen ? mobileMenuIconStyles : null} 
+              <Nav 
+                setIsModalOpen={setIsModalOpen} 
+                setIsDockOpen={setIsDockOpen}
+                closeDock={() => handleClick(true)} 
+                handleLinkClick={handleLinkClick}
+                style={media.smallScreen ? mobileMenuIconStyles : null} 
               />          
-          </DockMenu>
+            </DockMenu>
           </MobileMenuContainer>
           :
           <DesktopMenuContainer>
@@ -255,8 +261,7 @@ export const Header = () => {
             <StyledNavLink to="/bio" activeClassName="active">
               bio
             </StyledNavLink>
-            {/* DesktopMenuItem for contacto, assuming it's not a NavLink */}
-            <DesktopMenuItem>
+            <DesktopMenuItem onClick={handleNonDockContactClick}>
               contacto
             </DesktopMenuItem>
           </DesktopMenuContainer>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import backgroundCactus1 from '../../assets/backgroundCactus1.png';
 import imageWithCactus from '../../assets/imageWithCactus.png';
 import BuberAvatar from '../../assets/BuberAvatar.png';
-import FreudTransparent from '../../assets/FreudTransparent.png';
 import PerlsTransparent from '../../assets/PerlsTransparent.png';
 import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
@@ -184,13 +183,9 @@ const processContent = (text) => {
 };
 
 const HomeRoute = () => {
-  const ref = useRef(null);
-  const onScreen = useOnScreen(ref);
   const imageRef = useRef(null);
-  const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
   const [hasScrolledPast, setHasScrolledPast] = useState(false);
   const buberRef = useRef(null);
-  const fritzRef = useRef(null);
 
   const handleScroll = () => {
     if (window.scrollY > 240 && !hasScrolledPast) {
