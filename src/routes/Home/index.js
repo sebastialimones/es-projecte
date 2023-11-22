@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import backgroundCactus1 from '../../assets/backgroundCactus1.png';
-import backgroundCactus2 from '../../assets/backgroundCactus2.png';
+import imageWithCactus from '../../assets/imageWithCactus.png';
 import BuberAvatar from '../../assets/BuberAvatar.png';
-import FritzAvatar from '../../assets/FritzAvatar.png';
-import los3 from '../../assets/los3.png';
+import FreudTransparent from '../../assets/FreudTransparent.png';
+import PerlsTransparent from '../../assets/PerlsTransparent.png';
 import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
@@ -12,6 +12,7 @@ import BoxedWordClockWise2 from '../../components/BoxedCounterClockAnimation/ind
 import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
 import ImageWrapperComponent from '../../components/ImageWrapper';
+import ImageWrapperComponentForCactus from '../../components/ImageWrapperForCactus';
 
 const Container = styled.div`
   display: flex;
@@ -192,9 +193,9 @@ const HomeRoute = () => {
   const fritzRef = useRef(null);
 
   const handleScroll = () => {
-    if (window.scrollY > 30 && !hasScrolledPast) {
+    if (window.scrollY > 240 && !hasScrolledPast) {
       setHasScrolledPast(true);
-    } else if (window.scrollY <= 30 && hasScrolledPast) {
+    } else if (window.scrollY <= 240 && hasScrolledPast) {
       setHasScrolledPast(false);
     }
   };
@@ -250,6 +251,13 @@ const HomeRoute = () => {
               <StyledParagraph>
                 {processContent(homePageContent.paragraph3)}
               </StyledParagraph>
+              <ImageWrapperComponentForCactus
+                  src={imageWithCactus} 
+                  alt="Martin Buber"
+                  tooltipText="Martin Buber - 1878"
+                  maxWidth={'100%'}
+                  avatarSrc={PerlsTransparent}
+              />
             </SmallerText>
           </LeftColumn>
           <RightColumn>
@@ -261,13 +269,6 @@ const HomeRoute = () => {
               {processContent(homePageContent.paragraph4)}
             </StyledParagraph>
           </SmallerText>
-          <ImageWrapperComponent 
-              src={los3} 
-              alt="Martin Buber"
-              tooltipText="Martin Buber - 1878"
-              maxWidth={'100%'}
-
-          />
         </FullWidthSectionComponent>
         <FullWidthSectionComponent>
           <LeftColumn>
