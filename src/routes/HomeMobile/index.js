@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import backgroundCactus1Mobile from '../../assets/backgroundCactus1Mobile.png';
 import backgroundCactus2Mobile from '../../assets/backgroundCactus2Mobile.png';
 import BuberAvatar from '../../assets/BuberAvatar.png';
+import PalmTreesMobile from '../../assets/PalmTreesMobile.png';
+import ClaudioCuerpo from '../../assets/ClaudioCuerpo.png';
 import PerlsTransparent from '../../assets/PerlsTransparent.png';
-import ClaudioNaranjoJoven from '../../assets/ClaudioNaranjoJoven.jpeg';
 import { homePageContent } from '../../constants/content';
 import BoxedWordCounterClock from '../../components/BoxedCounterClockAnimation';
 import BoxedWordClockWise from '../../components/BoxedWordClockwise';
@@ -13,6 +14,7 @@ import ImageWrapperComponent from '../../components/ImageWrapper';
 import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
 import ImageWrapperComponentForCactus from '../../components/ImageWrapperForCactus';
+import ImageWrapperForBeardComponent from '../../components/ImageWrapperForBeard';
 
 const Section = styled.div`
   display: flex;
@@ -189,12 +191,14 @@ const HomeMobile = () => {
             </SmallerText>
           </ColumnSection>
           <ColumnSection>
-          <ImageWrapperComponent 
-              src={ClaudioNaranjoJoven} 
-              alt="Claudio Naranjo tocando un gong"
+          <ImageWrapperForBeardComponent
+              src={PalmTreesMobile} 
+              alt="Claudio Naranjo"
               tooltipText="Claudio Naranjo"
-              maxWidth={"60%"}
-            />
+              maxWidth={'100%'}
+              avatarSrc={ClaudioCuerpo}
+              isMobile={'isMobile'}
+          />
           </ColumnSection>
           <ColumnSection>
             <SmallerText>

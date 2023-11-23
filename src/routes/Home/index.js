@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import backgroundCactus1 from '../../assets/backgroundCactus1.png';
 import imageWithCactus from '../../assets/imageWithCactus.png';
+import palmTrees from '../../assets/palmTrees.png';
+import ClaudioCuerpo from '../../assets/ClaudioCuerpo.png';
 import BuberAvatar from '../../assets/BuberAvatar.png';
 import PerlsTransparent from '../../assets/PerlsTransparent.png';
 import { homePageContent } from '../../constants/content';
@@ -12,6 +14,7 @@ import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
 import ImageWrapperComponent from '../../components/ImageWrapper';
 import ImageWrapperComponentForCactus from '../../components/ImageWrapperForCactus';
+import ImageWrapperForBeardComponent from '../../components/ImageWrapperForBeard';
 
 const Container = styled.div`
   display: flex;
@@ -271,6 +274,13 @@ const HomeRoute = () => {
               <StyledParagraph>
                 {processContent(homePageContent.paragraph5)}
               </StyledParagraph>
+              <ImageWrapperForBeardComponent
+                  src={palmTrees} 
+                  alt="Martin Buber"
+                  tooltipText="Martin Buber - 1878"
+                  maxWidth={'100%'}
+                  avatarSrc={ClaudioCuerpo}
+              />
               <StyledParagraph>
                 {processContent(homePageContent.paragraph6)}
               </StyledParagraph>
