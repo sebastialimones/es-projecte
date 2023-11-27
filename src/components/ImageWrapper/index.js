@@ -1,18 +1,16 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import React, { forwardRef, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import media from '../../constants/media';
 
 const Tooltip = styled.span`
-  display: none;
   position: absolute;
   background-color: #FAF8F0;
   border: 2px solid black;
-  padding: 2px 6px;
+  padding: 8px 10px;
   font-size: 1em;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0; 
+  right: 0;
   white-space: nowrap;
-  opacity: 0;
   transition: opacity 0.3s ease-in-out;
   ${media.smallScreen`
     display: block;
@@ -29,11 +27,11 @@ const Tooltip = styled.span`
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding-right: 20px;
   position: relative;
   margin-bottom: 0; 
   align-items: center;
   padding-bottom: 1em;
+  padding-right: 20px;
   padding-top: 1em;
   ${media.smallScreen`
   `}
@@ -44,7 +42,7 @@ const ImageContainer = styled.div`
 
 const ImageWrapper = styled.div`
   max-height: 100%;
- 
+  position: relative;
   &:hover ${Tooltip} {
     display: block;
     opacity: 1;
@@ -119,6 +117,7 @@ const ImageWrapperComponent = forwardRef(({ src, alt, maxWidth, avatarSrc, isMob
           />
         )}
         <TherapistImage src={src} alt={alt} />
+        <Tooltip>Martin Buber</Tooltip>
       </ImageWrapper>
     </ImageContainer>
   );

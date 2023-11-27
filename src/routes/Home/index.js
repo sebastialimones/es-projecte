@@ -23,6 +23,7 @@ const Container = styled.div`
   justify-content: center; // Centers content vertically
   width: 100%; // Ensures the container takes the full width
   min-height: 100vh; // Optionally, makes the container take at least the full height of the viewport
+  padding-top: 2em;
 `;
 
 const Section = styled.div`
@@ -125,7 +126,7 @@ const FullWidthSection = styled.div`
 
 const FullWidthSectionComponent = ({ children }) => {
   const ref = useRef(null);
-  const onScreen = useOnScreen(ref, 0.2);
+  const onScreen = useOnScreen(ref, 0.15);
 
   useEffect(() => {
     if (onScreen) {

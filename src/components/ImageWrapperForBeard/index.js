@@ -3,16 +3,14 @@ import styled from 'styled-components';
 import media from '../../constants/media';
 
 const Tooltip = styled.span`
-  display: none;
   position: absolute;
   background-color: #FAF8F0;
   border: 2px solid black;
-  padding: 2px 6px;
+  padding: 8px 10px;
   font-size: 1em;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0; 
+  right: 0;
   white-space: nowrap;
-  opacity: 0;
   transition: opacity 0.3s ease-in-out;
   ${media.smallScreen`
     display: block;
@@ -37,30 +35,22 @@ const ImageContainer = styled.div`
   padding-top: 1em;
   ${media.smallScreen`
   `}
-  &:hover ${Tooltip} {
-    display: inline-block;
-  }
 `;
 
 const ImageWrapper = styled.div`
   max-height: 100%;
- 
-  &:hover ${Tooltip} {
-    display: block;
-    opacity: 1;
-  }
+  position: relative;
 `;
 
 const Avatar = styled.img`
   position: absolute;
-  left: 0%; // Position off-screen to the right
-  top: -7%; 
+  left: 10%; // Position off-screen to the right
+  top: -17%; 
   transform-origin: center;
   height: 394px;
   z-index: 10;
-  transform: translateX(100%); // Start off-screen for desktop
-  transform: scale(0.5); // Initial scale, adjust as needed
-  /* transition: transform 0.3s ease-in-out; */
+  transform: translateX(100%); 
+  transform: scale(0.5); 
   ${media.smallScreen`
     height: 244px;
     top: -4%; 
@@ -77,7 +67,6 @@ const TherapistImage = styled.img`
 
 const ImageWrapperForBeardComponent = forwardRef(({ src, alt, maxWidth, avatarSrc, isMobile }, ref) => {
   const avatarRef = useRef(null);
-  const secondAvatarRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,6 +104,7 @@ const ImageWrapperForBeardComponent = forwardRef(({ src, alt, maxWidth, avatarSr
           />
         )}
         <TherapistImage src={src} alt={alt} />
+        <Tooltip>Claudio Naranjo</Tooltip>
       </ImageWrapper>
     </ImageContainer>
   );

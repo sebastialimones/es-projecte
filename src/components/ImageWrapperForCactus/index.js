@@ -4,16 +4,14 @@ import media from '../../constants/media';
 import cactus from '../../assets/cactus.png';
 
 const Tooltip = styled.span`
-  display: none;
   position: absolute;
   background-color: #FAF8F0;
   border: 2px solid black;
-  padding: 2px 6px;
+  padding: 8px 10px;
   font-size: 1em;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0; 
+  right: 0;
   white-space: nowrap;
-  opacity: 0;
   transition: opacity 0.3s ease-in-out;
   ${media.smallScreen`
     display: block;
@@ -24,8 +22,9 @@ const Tooltip = styled.span`
     white-space: normal; // Allow text wrapping
     line-height: 1.2; // Adjust line height to ensure readability
     overflow: hidden; // Hide overflow
+    z-index: 10;
   `}
-  `;
+`;
 
 const BackgroundImage = styled.div`
   background-size: cover;
@@ -139,6 +138,7 @@ const ImageWrapperComponentForCactus = forwardRef(({ src, alt, maxWidth, avatarS
           />
         )}
         <TherapistImage src={src} alt={alt} />
+        <Tooltip>Fritz Perls</Tooltip>
       </BackgroundImage>
     </ImageContainer>
   );

@@ -36,6 +36,7 @@ const ArticlesContainer = styled.div`
 const SidebarContainer = styled.div`
   flex: 1; /* Occupy 20% of available space */
   padding-left: 20px;
+  padding-top: 38px;
   ${media.mediumScreen`
     padding-left: 0px;
   `}

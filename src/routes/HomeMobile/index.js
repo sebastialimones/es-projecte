@@ -136,7 +136,7 @@ const processContent = (text) => {
 
 const HomeMobile = () => {
   const imageRef = useRef(null);
-  const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
+  const isHabImageOnScreen = useOnScreen(imageRef, 1, true);
   const buberRef = useRef(null);
 
   return (

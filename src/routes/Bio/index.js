@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from '../../constants/media';
-import IMG_5717 from '../../../src/assets/IMG_5717.png'
+import IMG_5717 from '../../../src/assets/IMG_5717.webp'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center; // Center horizontally in a column container
   justify-content: center; // Center vertically
-  padding-top: 2em;
+  padding-top: 3em;
   font-size: 1.5em;
   line-height: 0.2em;
   max-width: 80%;

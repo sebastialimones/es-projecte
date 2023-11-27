@@ -9,7 +9,7 @@ const BooksContainer = styled.div`
   justify-content: space-around;
   overflow: hidden;
   margin-top: 1em;
-  padding-top: 6em;
+  padding-top: 3em;
   ${media.smallScreen`
     padding-top: 1.5em;
   `}

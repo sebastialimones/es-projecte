@@ -99,7 +99,9 @@ export const ArticleItem = ({ article, handleTagClick }) => {
   return(
     <Container>
       <ImageContainer>
-        <Image imageUrl={article.imatge_principal.url} loading="lazy" />
+        <Link to={`/articles/${article.uid}`}>
+          <Image imageUrl={article.imatge_principal.url} loading="lazy" />
+        </Link>
       </ImageContainer>
       <ContentContainer>
         <Link to={`/articles/${article.uid}`}>

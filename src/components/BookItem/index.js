@@ -187,7 +187,7 @@ export const BookItem = ({ book, isFirst }) => {
                 <Sinopsis>{book.contingut[0].text}</Sinopsis>
                 <Quote>{book.quote[0] ? book.quote[0].text : null}</Quote>
               </MiddleContent>
-              <Rating>
+              {/* <Rating>
                 <StarRatings
                   rating={book.rating ? book.rating : 0}
                   starRatedColor='rgb(255, 234, 0)'
@@ -195,7 +195,7 @@ export const BookItem = ({ book, isFirst }) => {
                   name='rating'
                   starDimension='25px'
                 />
-              </Rating>
+              </Rating> */}
             </BookBackContainer>
           </Card>
         </CardContainer>

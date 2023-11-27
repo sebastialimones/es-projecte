@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import media from '../../constants/media';
-import IMG_5717 from '../../../src/assets/IMG_5717.png';
+import IMG_5717 from '../../../src/assets/IMG_5717.webp';
 import CloseIcon from '@mui/icons-material/Close';
 import { Logo } from '../Logo';
 
