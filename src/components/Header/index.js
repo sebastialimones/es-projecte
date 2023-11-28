@@ -80,18 +80,71 @@ const SubscribeButtonStyled = styled.div`
   `}
 `;
 
-const StyledNavLink = styled(NavLink)`
-  margin: 0 15px;
-  text-decoration: none;
-  color: inherit; // Or any default color you prefer
+const NavContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center; // Centers the flex items
+  align-items: center;
+  padding: 0;
+  gap: 30px;
+  // Shared pseudo-element for the hover background
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%; // Equal to the width of a single nav link
+    background-color: #F6EDDD;
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
+    border-radius: 20px;
+    z-index: -1;
+  }
+`;
 
-  &:hover {
-    color: ${props => props.theme.mainColor}; // Assuming mainColor is in your theme
+const StyledNavLink = styled(NavLink)`
+  display: inline-flex; // Allows the element to fit its content
+  justify-content: center;
+  align-items: center;
+  margin: 0; // If using gap, you might not need margins
+  padding: 12px 20px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0; // Adjust as needed
+    left: 50%; // Center the pseudo-element
+    transform: translateX(-50%) scaleX(0); // Initially scaled to 0
+    transform-origin: center bottom;
+    width: calc(100% - 40px); // Adjusted width to prevent overflow
+    // Subtracting total horizontal padding from 100% width
+    // Ensure this matches the horizontal padding of the NavLink
+    height: 2px;
+    background-color: transparent; // Initially transparent
+    transition: transform 0.3s, background-color 0.3s;
+    z-index: 1;
   }
 
+  &:hover::after {
+    transform: translateX(-50%) scaleX(1);
+    background-color: ${props => props.theme.mainColor || mainColor}; // Color on hover
+  }
+
+  // Change text color on hover
+  &:hover {
+    color: ${props => props.theme.mainColor || mainColor};
+  }
+
+  // Active state styles
   &.active {
-    text-decoration: underline;
-    text-decoration-color: ${mainColor}; // Underline color
+    color: ${props => props.theme.mainColor || mainColor};
   }
 `;
 
@@ -122,23 +175,51 @@ const StyledIcon = styled(animated.div)`
 
 const DesktopMenuContainer = styled.div`
   display: flex;
-  align-items: center;
+`;
 
-  a {
-    margin: 0 15px; // Adjust spacing between links
-    text-decoration: none; // Optional: style as needed
-    color: inherit; // Optional: style as needed
-    &:hover {
-      color: ${mainColor}; // Change color on hover
-    }
+const DesktopMenuItem = styled.div`
+  display: inline-flex; // Allows the element to fit its content
+  justify-content: center;
+  align-items: center;
+  margin: 0; // If using gap, you might not need margins
+  padding: 12px 20px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0; // Adjust as needed
+    left: 50%; // Center the pseudo-element
+    transform: translateX(-50%) scaleX(0); // Initially scaled to 0
+    transform-origin: center bottom;
+    width: calc(100% - 40px); // Adjusted width to prevent overflow
+    // Subtracting total horizontal padding from 100% width
+    // Ensure this matches the horizontal padding of the NavLink
+    height: 2px;
+    background-color: transparent; // Initially transparent
+    transition: transform 0.3s, background-color 0.3s;
+    z-index: 1;
   }
 
-  // Add more styles as needed
-`;
-const DesktopMenuItem = styled.div`
-  margin: 0 15px; 
-  cursor: pointer;
-  // Add more styling as needed
+  &:hover::after {
+    transform: translateX(-50%) scaleX(1);
+    background-color: ${props => props.theme.mainColor || mainColor}; // Color on hover
+  }
+
+  // Change text color on hover
+  &:hover {
+    color: ${props => props.theme.mainColor || mainColor};
+  }
+
+  // Active state styles
+  &.active {
+    color: ${props => props.theme.mainColor || mainColor};
+  }
 `;
 
 export const Header = () => {
@@ -249,21 +330,24 @@ export const Header = () => {
           </MobileMenuContainer>
           :
           <DesktopMenuContainer>
-            <StyledNavLink exact to="/" activeClassName="active">
-              inicio
-            </StyledNavLink>
-            <StyledNavLink to="/blog" activeClassName="active">
-              artículos
-            </StyledNavLink>
-            <StyledNavLink to="/books" activeClassName="active">
-              libros
-            </StyledNavLink>
-            <StyledNavLink to="/bio" activeClassName="active">
-              bio
-            </StyledNavLink>
-            <DesktopMenuItem onClick={handleNonDockContactClick}>
-              contacto
-            </DesktopMenuItem>
+            <NavContainer>
+              <StyledNavLink exact to="/" activeClassName="active">
+                <span>inicio</span>
+              </StyledNavLink>
+              <StyledNavLink to="/blog" activeClassName="active">
+                <span>artículos</span>
+              </StyledNavLink>
+              <StyledNavLink to="/bio" activeClassName="active">
+                <span>bio</span>
+              </StyledNavLink>
+              <StyledNavLink to="/books" activeClassName="active">
+                <span>libros</span>
+              </StyledNavLink>
+              {/* If DesktopMenuItem is intended to look like StyledNavLink, wrap its text in a span as well */}
+              <DesktopMenuItem onClick={handleNonDockContactClick}>
+                <span>contacto</span>
+              </DesktopMenuItem>
+            </NavContainer>
           </DesktopMenuContainer>
         }
         {!isMobile && 
