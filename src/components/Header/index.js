@@ -16,6 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import FreudTransparent48x48 from '../../assets/FreudTransparent48x48.png';
 import useIsMobile from '../../hooks/isMobile';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const NavbarWrapper = styled.div`
   padding-top: calc(${props => props.isScrolled ? '0.5em' : '1em'});  
@@ -70,13 +71,6 @@ const DockMenu = styled.div`
 const MobileMenuContainer = styled.div`
   ${media.smallScreen`
     
-  `}
-`;
-
-const SubscribeButtonStyled = styled.div`
-  padding-right: 3em;
-  ${media.smallScreen`
-    padding-right: 1em;
   `}
 `;
 
@@ -222,6 +216,27 @@ const DesktopMenuItem = styled.div`
   }
 `;
 
+const theme = createTheme({
+  components: {
+    MuiSwitch: {
+      styleOverrides: {
+        switchBase: {
+          // Styles applied to the internal `SwitchBase` component's `root` class.
+          '&.Mui-checked': {
+            // Styles when the switch is checked (on)
+            color: '#FF6F50', // Handle color when on
+            '& + .MuiSwitch-track': {
+              backgroundColor: '#FF6F50', // Track color when on
+            },
+          },
+  
+        },
+      },
+    },
+  },
+});
+
+
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -351,6 +366,7 @@ export const Header = () => {
           </DesktopMenuContainer>
         }
         {!isMobile && 
+        <ThemeProvider theme={theme}>
           <FormControl component="fieldset" variant="standard">
             <FormGroup>
               <FormControlLabel
@@ -366,6 +382,7 @@ export const Header = () => {
               />
             </FormGroup>
           </FormControl>
+        </ThemeProvider>
         }
       </Container>
     </NavbarWrapper>
