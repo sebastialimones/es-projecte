@@ -72,8 +72,8 @@ const ImageWrapperForBeardComponent = forwardRef(({ src, alt, maxWidth, avatarSr
     const handleScroll = () => {
       if (avatarRef.current) {
         const scrollY = window.scrollY;
-        const startScroll = isMobile ? 2600 : 2000;
-        const endScroll = isMobile ? 3000 : 2300;
+        const startScroll = isMobile ? 2150 : 2000;
+        const endScroll = isMobile ? 2700 : 2300;
   
         let scale = 0.5; // Start from the initial scale
   

@@ -136,8 +136,20 @@ const processContent = (text) => {
 
 const HomeMobile = () => {
   const imageRef = useRef(null);
-  const isHabImageOnScreen = useOnScreen(imageRef, 1, true);
+  const isHabImageOnScreen = useOnScreen(imageRef, 0.9, true);
   const buberRef = useRef(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!hasScrolled) setHasScrolled(true);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrolled]);
 
   return (
     <>
@@ -149,7 +161,7 @@ const HomeMobile = () => {
         </FirsSectionTextContainer>
         <ImageContainerHab ref={imageRef}>
           <HabImage 
-            src={isHabImageOnScreen ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
+            src={(isHabImageOnScreen && hasScrolled) ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
             alt="Habitación terapia"
           />
         </ImageContainerHab>

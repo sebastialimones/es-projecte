@@ -78,7 +78,7 @@ const ImageWrapperComponent = forwardRef(({ src, alt, maxWidth, avatarSrc, isMob
     const handleScroll = () => {
       if (avatarRef.current) {
         const scrollY = window.scrollY;
-        const startScrollMobile = 600; // Adjust as needed for mobile
+        const startScrollMobile = 530; // Adjust as needed for mobile
         const startScrollDesktop = 650; // Adjust as needed for desktop
         const endScrollMobile = 1200; // Adjust as needed for mobile
         const endScrollDesktop = 1100; // Adjust as needed for desktop
