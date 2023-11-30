@@ -20,6 +20,7 @@ const Container = styled.div`
   justify-content: center;
   ${media.smallScreen`
     padding-left: 10px;
+    align-items: start;
   `}
 `;
 
@@ -77,6 +78,7 @@ const IconButton = styled.button`
 
 const Content = styled.div`
   width: 50%;
+  ${media.smallScreen`width: 90%;`}
   margin-top: ${({ hasImage }) => (hasImage ? '3.5em' : '6em')};
   & > p {
     margin: 1em 0;

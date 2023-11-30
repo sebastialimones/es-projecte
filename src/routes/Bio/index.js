@@ -14,7 +14,7 @@ const Container = styled.div`
   max-width: 60%;
   margin: 0 auto; // Center the container itself horizontally
   ${media.smallScreen`
-    
+  max-width: 90%;
   `}
 `;
 
