@@ -14,6 +14,10 @@ const Container = styled.div`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center horizontally in a column container
+  justify-content: center;
   ${media.smallScreen`
     padding-left: 10px;
   `}
@@ -68,9 +72,11 @@ const IconButton = styled.button`
   margin: 0; 
   box-shadow: none;
   padding-top: 0.3em;
+  cursor: pointer;
 `;
 
 const Content = styled.div`
+  width: 50%;
   margin-top: ${({ hasImage }) => (hasImage ? '3.5em' : '6em')};
   & > p {
     margin: 1em 0;
@@ -92,17 +98,20 @@ const Image = styled.div`
   border-radius: 6px;
 `;
 
-const ProgressBar = styled.div`
+const ProgressBar = styled.div.attrs(props => ({
+  style: {
+    height: `${props.scrollProgress}%`,
+  },
+}))`
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   width: 32px;
-  height: ${props => props.scrollProgress}%; // Height will be based on scroll progress
-  background-color: ${mainColor};
+  background-color: ${mainColor}; // Ensure mainColor is defined and imported
   z-index: 9999;
   transition: height 0.2s ease-in-out;
-  display: ${props => (props.scrolledBelowMenu ? 'block' : 'none')};
-  ${media.smallScreen`width: 10px;`}
+  ${media.smallScreen`width: 10px;`} // Ensure media.smallScreen is defined and imported
 `;
 
 const Tooltip = styled.div`
@@ -147,7 +156,6 @@ const handleFacebookClick = () => {
 export const Article = ({ article, isPost }) => {
   useScrollToTop();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [scrolledBelowMenu, setScrolledBelowMenu] = useState(false);
   const [isContentLong, setIsContentLong] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -166,47 +174,26 @@ export const Article = ({ article, isPost }) => {
     };
 }, []);
 
-  const contentHTML = PrismicDOM.RichText.asHtml(article.contingut)
+const contentHTML = PrismicDOM.RichText.asHtml(article.contingut)
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"');
 
-    const updateScrollProgress = () => {
-      const scrollTop = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-    
-      const scrolled = (scrollTop / (documentHeight - windowHeight)) * 100;
-      setScrollProgress(scrolled);
-    
-      // Check if the user scrolled below the main menu
-      if (window.innerWidth <= 768) {
-        // Use mobileMainMenuHeight for screens with width less than or equal to 768px (adjust as needed)
-        if (scrollTop > mobileMainMenuHeight) {
-          setScrolledBelowMenu(true);
-        } else {
-          setScrolledBelowMenu(false);
-        }
-      } else {
-        // Use the default mainMenuHeight for larger screens
-        if (scrollTop > mainMenuHeight) {
-          setScrolledBelowMenu(true);
-        } else {
-          setScrolledBelowMenu(false);
-        }
-      }
-    };
+const updateScrollProgress = () => {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
 
-  useEffect(() => {
+    const scrolled = (scrollTop / (documentHeight - windowHeight)) * 100;
+    setScrollProgress(scrolled);
+};
+
+useEffect(() => {
     window.addEventListener('scroll', updateScrollProgress);
     return () => {
-      window.removeEventListener('scroll', updateScrollProgress);
+        window.removeEventListener('scroll', updateScrollProgress);
     };
-  }, []);
-
-  // Replace 'mainMenuHeight' with the actual height of your main menu
-  const mainMenuHeight = 89;
-  const mobileMainMenuHeight = 77;
+}, []);
 
   const handleShare = () => {
     const url = window.location.href;
@@ -241,7 +228,7 @@ export const Article = ({ article, isPost }) => {
           <TitleArticle dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(article.titol) }} />  
         </SubHeaderContainer>
       )}
-      <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={scrolledBelowMenu && isContentLong} />
+      <ProgressBar scrollProgress={scrollProgress} scrolledBelowMenu={ isContentLong} />
       {article.imatge_principal?.url && (
         <ImageContainer>
           <Image imageUrl={ article.imatge_principal.url } />

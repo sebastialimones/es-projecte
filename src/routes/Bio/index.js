@@ -11,7 +11,7 @@ const Container = styled.div`
   padding-top: 3em;
   font-size: 1.5em;
   line-height: 0.2em;
-  max-width: 80%;
+  max-width: 60%;
   margin: 0 auto; // Center the container itself horizontally
   ${media.smallScreen`
     

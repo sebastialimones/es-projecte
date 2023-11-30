@@ -16,7 +16,7 @@ export const Layout = ({ children }) => (
   <React.Fragment>
   <Container>
     <Header />
-    <CookiesConsent />
+    {/* <CookiesConsent /> */}
     <InnerContainer>
       { children }
     </InnerContainer>
