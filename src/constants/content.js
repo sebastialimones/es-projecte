@@ -1,5 +1,6 @@
 export const homePageContent = {
-  heroText: "Hola, me llamo Sebastià y trabajo como terapeuta gestalt en Palma de Mallorca.",
+  heroText: "Hola, me llamo Sebastià y trabajo como terapeuta gestalt en  ",
+  heroTextMobile: "Hola, me llamo Sebastià y trabajo como terapeuta gestalt en Palma de Mallorca ",
   paragraph01: "Entiendo la terapia como un encuentro entre dos personas donde la presencia, la transparencia y responsabilidad son los pilares que sostienen lo que va sucediendo.",
   paragraph1: "{BoxedWordClockWise|Martin Buber} explica magníficamente esta relación yo-tú como un diálogo: “Sin finalidad, sin codicia, ni preconcepto. Donde cada uno tiene la posibilidad de descubrirse a sí mismo sin ser manipulado por el otro”.",
   paragraph2: "Este diálogo se enmarca dentro del contexto de la Gestalt que actúa como marco de trabajo, como encuadre. Según {BoxedWordClockWise| Fritz Perls} todo lo que buscamos ya existe en el momento presente. Hay por tanto un compromiso profundo con el estar presentes en el aquí y ahora, considerándolo como el ámbito principal para nuestra labor.",

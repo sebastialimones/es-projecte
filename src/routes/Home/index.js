@@ -15,6 +15,8 @@ import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransform
 import ImageWrapperComponent from '../../components/ImageWrapper';
 import ImageWrapperComponentForCactus from '../../components/ImageWrapperForCactus';
 import ImageWrapperForBeardComponent from '../../components/ImageWrapperForBeard';
+import useTypingEffect from '../../hooks/useTypingEffect';
+import media from '../../constants/media';
 
 const Container = styled.div`
   display: flex;
@@ -56,7 +58,15 @@ const StyledParagraph = styled.div`
   line-height: 1.2;
 `;
 
-const FirsSectionTextContainer = styled.div`
+const FirstSectionTextContainer = styled.div`
+  height: 310px;
+  overflow: hidden;
+  ${media.mediumScreen`
+    height: 430px;
+  `}
+  ${media.smallScreen`
+    height: 420px;
+  `}
 `;
 
 const Tooltip = styled.span`
@@ -207,14 +217,17 @@ const HomeRoute = () => {
     };
   }, [hasScrolledPast]);
 
+  const typingText = useTypingEffect(["Palma de Malorca", 4,"lorca ","y onlain", 3, "ine."], 70, 100);
+
   return (
     <Container>
       <Section>
-        <FirsSectionTextContainer>
+        <FirstSectionTextContainer>
           <HeroText>
             {homePageContent.heroText}
+            {typingText}
           </HeroText>
-        </FirsSectionTextContainer>
+        </FirstSectionTextContainer>
       </Section>
       <Section>
         <ImageContainerHab ref={imageRef}> 

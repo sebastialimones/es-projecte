@@ -15,6 +15,7 @@ import DisenyoCanvaTransformed from '../../assets/DisenyoCanvaTransformed.png';
 import DisenyoCanvaTransformedWithLight from '../../assets/DisenyoCanvaTransformedWithLight.png';
 import ImageWrapperComponentForCactus from '../../components/ImageWrapperForCactus';
 import ImageWrapperForBeardComponent from '../../components/ImageWrapperForBeard';
+import useTypingEffect from '../../hooks/useTypingEffect';
 
 const Section = styled.div`
   display: flex;
@@ -45,8 +46,9 @@ const StyledParagraph = styled.div`
   line-height: 1.2;
 `;
 
-const FirsSectionTextContainer = styled.div`
-  display: flex;  padding-left: 20px;
+const FirstSectionTextContainer = styled.div`
+  display: flex;  
+  padding-left: 20px;
 `;
 
 const SmallerText = styled.div`
@@ -154,11 +156,11 @@ const HomeMobile = () => {
   return (
     <>
       <Section>
-        <FirsSectionTextContainer>
+        <FirstSectionTextContainer>
           <HeroText>
-            {homePageContent.heroText}
+            {homePageContent.heroTextMobile}
           </HeroText>
-        </FirsSectionTextContainer>
+        </FirstSectionTextContainer>
         <ImageContainerHab ref={imageRef}>
           <HabImage 
             src={(isHabImageOnScreen && hasScrolled) ? DisenyoCanvaTransformedWithLight : DisenyoCanvaTransformed}
