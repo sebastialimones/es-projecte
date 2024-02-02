@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from '../../constants/media';
-import IMG_5717 from '../../../src/assets/IMG_5717.webp'
+import IMG_5717 from '../../../src/assets/IMG_5717.png'
 
 const Container = styled.div`
   display: flex;

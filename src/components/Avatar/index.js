@@ -1,6 +1,6 @@
 import React from 'react';
 import { Logo } from '../../components/Logo';
-import IMG_5717 from '../../../src/assets/IMG_5717.webp'
+import IMG_5717 from '../../../src/assets/IMG_5717.png'
 import styled from 'styled-components';
 import media from '../../constants/media';
 import {  Sizes } from '../../constants';
