@@ -33,7 +33,7 @@ const Text = styled.p`
 
 export const Footer = () => (
   <Container>
-    <Text>© Sebastià Limones, 2023</Text>
+    <Text>© Sebastià Limones, 2024</Text>
     <Text>|</Text>
     <Text>Tots els drets reservats</Text>
   </Container>

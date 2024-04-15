@@ -52,9 +52,6 @@ export const Bio = () => {
       <Paragraph>
         Te invito a contactarme si necesitas más información, estoy abierto a conversar sobre todo lo que envuelva el proceso terapéutico y las dudas que puedas tener sobre ello. También te invito a leer algún artículo, allí quizás me transparento más en mi forma de ver el mundo y la terapia.
       </Paragraph>
-      <Paragraph>
-        No soy psicológo. 
-      </Paragraph>
     </Container>
   );
 };
