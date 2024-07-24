@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Container } from '../../components/Container';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
+import { SEO } from '../../components/Seo';
 import { CookiesConsent } from '../../components/CookiesConsent';
 import { HEADER_HEIGHT, FOOTER_HEIGHT } from '../../constants';
 
@@ -14,6 +15,7 @@ const InnerContainer = styled.section`
 
 export const Layout = ({ children }) => (
   <React.Fragment>
+  <SEO/>
   <Container>
     <Header />
     {/* <CookiesConsent /> */}
